@@ -70,3 +70,14 @@ npm run dev
   page mais pas encore créées.
 - Aucun moyen de paiement n'est branché : les CTA renvoient vers `/pricing`,
   pas vers Stripe — à faire quand les liens de paiement existeront.
+
+## Version fusionnée
+
+La home combine désormais les deux versions : le visuel exact de la page
+RADAR de Strawberry-Prod (scope animé, grille à cases, FAQ à accordéon,
+bandeau plein rouge, carte d'abonnement) ET le contenu produit plus étoffé
+proposé initialement (section problème, score détaillé par domaine + alerte
++ brief hebdo, aperçu des 3 formules payantes en grille). `/pricing` et
+`/dashboard` restent les pages dédiées, restylées avec les mêmes classes
+utilitaires (`card`, `kicker`, `eyebrow`, `h-section`) pour rester cohérentes
+avec le reste du site.
