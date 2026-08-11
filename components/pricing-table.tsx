@@ -10,17 +10,14 @@ export function PricingTable({ compact = false }: { compact?: boolean }) {
         <div
           key={t.id}
           id={t.id}
-          className={[
-            "flex flex-col rounded-lg border p-6",
-            t.featured ? "border-brand bg-brand/[0.06]" : "border-hair bg-white/[0.02]",
-          ].join(" ")}
+          className={`flex flex-col ${t.featured ? "card-featured" : "card"}`}
         >
           {t.featured && (
             <div className="mb-3 inline-flex w-fit rounded-full bg-brand px-3 py-1 font-sans text-[10px] font-bold uppercase tracking-[0.1em] text-white">
               Recommandé
             </div>
           )}
-          <div className="mb-1 font-sans text-[11px] uppercase tracking-[0.16em] text-chalk-40">{t.target}</div>
+          <div className="mb-1 eyebrow">{t.target}</div>
           <h3 className="mb-3 font-serif text-lg font-bold text-white">{t.name}</h3>
           <div className="mb-5 flex items-baseline gap-1">
             <span className="font-serif text-[2rem] font-bold leading-none text-white">{t.price}</span>
@@ -34,10 +31,7 @@ export function PricingTable({ compact = false }: { compact?: boolean }) {
               </li>
             ))}
           </ul>
-          <Link
-            href="/pricing"
-            className={t.featured ? "btn-primary" : "btn-quiet"}
-          >
+          <Link href="/pricing" className={t.featured ? "btn-primary" : "btn-ghost"}>
             {t.id === "free" ? "Commencer" : t.id === "enterprise" ? "Nous contacter" : "Choisir"}
           </Link>
         </div>

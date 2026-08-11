@@ -52,7 +52,7 @@ export default function DashboardPage() {
             <div className="flex flex-col gap-6">
               <ScoreGauge overall={72} />
 
-              <GlassCard className="p-6">
+              <GlassCard className="">
                 <div className="mb-4 font-sans text-[11px] uppercase tracking-[0.18em] text-chalk-40">
                   Répartition par sévérité
                 </div>
@@ -70,7 +70,7 @@ export default function DashboardPage() {
               </GlassCard>
             </div>
 
-            <GlassCard className="p-6">
+            <GlassCard className="">
               <div className="mb-5 font-sans text-[11px] uppercase tracking-[0.18em] text-brand">
                 🔥 TOP 5 CHANGES
               </div>
@@ -97,7 +97,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="mt-6">
-            <GlassCard className="p-6">
+            <GlassCard className="">
               <div className="mb-6 font-sans text-[11px] uppercase tracking-[0.18em] text-brand">
                 YOUR NEXT 36 MONTHS
               </div>

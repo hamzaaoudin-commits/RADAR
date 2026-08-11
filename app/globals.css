@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -53,27 +54,24 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
+  /* Brand tokens — use these instead of hardcoding hex values in components. */
   --color-brand: #e63946;
   --color-brand-bright: #ff1a1a;
   --color-brand-deep: #dc2626;
   --color-ink: #0a0a0a;
   --color-ink-soft: #0d0d0d;
 
+  /* Text-on-dark opacity ramp */
   --color-chalk-90: rgba(255,255,255,0.9);
   --color-chalk-75: rgba(255,255,255,0.75);
   --color-chalk-65: rgba(255,255,255,0.65);
   --color-chalk-55: rgba(255,255,255,0.55);
   --color-chalk-40: rgba(255,255,255,0.4);
 
+  /* Hairline borders */
   --color-hair: rgba(255,255,255,0.07);
   --color-hair-strong: rgba(255,255,255,0.12);
   --color-brand-hair: rgba(230,57,70,0.25);
-
-  /* Severity — used only for alert/score chips, never for brand elements. */
-  --color-sev-critical: #ff1a1a;
-  --color-sev-important: #f59e0b;
-  --color-sev-watch: #eab308;
-  --color-sev-low: #22c55e;
 }
 
 @layer base {
@@ -102,6 +100,22 @@
   }
 }
 
+/* L'ancien motif de blobs génériques est remplacé par le champ de points de
+   l'extraction, en SVG, directement dans hero-section.tsx. */
+
+
+/* ---------------------------------------------------------------------------
+   Component utilities.
+
+   Declared with @utility (Tailwind v4) so they can be composed with @apply and
+   used with variants. Defining them once here means the rules are emitted a
+   single time, instead of React rebuilding identical inline style objects on
+   every render.
+   --------------------------------------------------------------------------- */
+
+/* --- Layout scaffolding --- */
+
+/* Standard horizontal page gutter used by every section. */
 @utility pl-gutter { padding-left: clamp(1.5rem, 4vw, 4rem); }
 @utility pr-gutter { padding-right: clamp(1.5rem, 4vw, 4rem); }
 
@@ -132,60 +146,379 @@
 @utility shell-md { margin-inline: auto; width: 100%; max-width: 900px; }
 @utility shell-sm { margin-inline: auto; width: 100%; max-width: 760px; }
 
-@utility text-gradient {
-  background: linear-gradient(135deg, #e63946 20%, #ff1a1a 60%, #dc2626);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+/* --- Typography --- */
 
-@utility pill {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 100px;
-  border: 1px solid var(--color-brand-hair);
-  background: rgba(230,57,70,0.1);
-  padding: 0.35rem 0.9rem;
+@utility kicker {
   font-family: var(--font-sans);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
+  letter-spacing: 0.3em;
   color: var(--color-brand);
 }
 
-@utility glass-card {
-  border: 1px solid var(--color-hair);
-  background: var(--color-card);
-  backdrop-filter: blur(12px);
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-chalk-55);
+}
+
+@utility h-display {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-size: clamp(2.25rem, 6vw, 4.25rem);
+}
+
+@utility h-section {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+@utility h-card {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+}
+
+@utility lede {
+  font-family: var(--font-sans);
+  color: var(--color-chalk-65);
+  line-height: 1.65;
+  font-size: clamp(1rem, 1.5vw, 1.175rem);
+}
+
+@utility body-sm {
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--color-chalk-65);
+}
+
+@utility text-gradient {
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-bright));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* background-clip: text rogne au ras de la boîte de ligne : sans cette marge,
+     les jambages (g, y, p) sont tranchés sur les titres à interlignage serré. */
+  padding-bottom: 0.14em;
+}
+
+/* --- Surfaces --- */
+
+@utility card {
+  border: 1px solid var(--color-hair-strong);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 2rem;
+}
+
+@utility card-featured {
+  position: relative;
+  border: 1px solid rgba(230, 57, 70, 0.4);
+  padding: 2rem;
+  background: linear-gradient(180deg, rgba(230, 57, 70, 0.08) 0%, rgba(10, 10, 10, 0.6) 100%);
+}
+
+/* Corner brackets used on featured cards and document blocks. */
+@utility bracket-tl {
+  position: absolute;
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--color-brand);
+  border-left: 2px solid var(--color-brand);
+}
+
+@utility bracket-br {
+  position: absolute;
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--color-brand);
+  border-right: 2px solid var(--color-brand);
+}
+
+@utility glow-top {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(230, 57, 70, 0.35) 0%, transparent 60%);
+  opacity: 0.3;
+}
+
+@utility glow-center {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(230, 57, 70, 0.35) 0%, transparent 62%);
+  opacity: 0.25;
+}
+
+/* --- Controls --- */
+
+@utility btn {
+  display: inline-block;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 15px 32px;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
 }
 
 @utility btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  background: linear-gradient(135deg, #e63946, #dc2626);
-  padding: 0.9rem 1.9rem;
+  display: inline-block;
+  border-radius: 9999px;
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  color: white;
-  transition: opacity 200ms ease;
-  &:hover { opacity: 0.88; }
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 15px 32px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-bright));
+  box-shadow: 0 0 0 rgba(230, 57, 70, 0);
+  transition: transform 300ms cubic-bezier(.22,.68,0,1.2), box-shadow 300ms cubic-bezier(.22,.68,0,1.2), opacity 300ms cubic-bezier(.22,.68,0,1.2);
+}
+@utility btn-primary {
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(230, 57, 70, 0.38);
+  }
+  &:active { transform: translateY(0); }
+}
+
+@utility btn-ghost {
+  display: inline-block;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 15px 32px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: border-color 300ms cubic-bezier(.22,.68,0,1.2), transform 300ms cubic-bezier(.22,.68,0,1.2), background-color 300ms cubic-bezier(.22,.68,0,1.2);
+}
+@utility btn-ghost {
+  &:hover {
+    border-color: rgba(230, 57, 70, 0.5);
+    background-color: rgba(230, 57, 70, 0.06);
+    transform: translateY(-2px);
+  }
+  &:active { transform: translateY(0); }
 }
 
 @utility btn-quiet {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  border: 1px solid var(--color-hair-strong);
-  padding: 0.9rem 1.9rem;
+  display: inline-block;
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 600;
-  color: white;
-  transition: border-color 200ms ease, background 200ms ease;
-  &:hover { border-color: var(--color-brand-hair); background: rgba(230,57,70,0.06); }
+  color: var(--color-brand);
+  text-decoration: none;
+}
+
+@utility pill {
+  display: inline-block;
+  border-radius: 9999px;
+  border: 1px solid var(--color-brand);
+  padding: 8px 20px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-brand);
+}
+
+@utility tag {
+  display: inline-block;
+  border-radius: 9999px;
+  border: 1px solid var(--color-hair-strong);
+  padding: 4px 10px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-chalk-55);
+}
+
+/* --- Grids --- */
+
+@utility grid-auto {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+@utility grid-auto-wide {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* --- Forms --- */
+
+@utility field {
+  width: 100%;
+  border: 1px solid var(--color-input);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 14px 16px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: #fff;
+  transition: border-color 0.2s ease;
+}
+@utility field {
+  &:focus {
+    outline: none;
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 1px rgba(230, 57, 70, 0.4);
+  }
+}
+
+@utility field-label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-chalk-55);
+}
+
+@media (min-width: 768px) {
+  .section { padding-top: 7rem; padding-bottom: 7rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Bandeau des marques disséquées. La bande contient la liste deux fois :
+   translater de -50% ramène exactement au point de départ, sans saut. */
+@keyframes sp-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Animation de logo au chargement (LoadingIntro). Le calque et ses lettres
+   partent visibles/masquées par défaut dans le HTML ; ce sont ces deux règles
+   qui font l'animation, pilotées par un script en ligne qui ajoute/retire des
+   classes et des styles au bon moment. */
+#sp-intro {
+  transition: opacity 400ms ease-out;
+}
+.sp-intro-letter {
+  transition: opacity 450ms ease-out, transform 450ms ease-out;
+}
+.sp-intro-letter.sp-intro-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Grain de fond.
+   ============================================================
+   Le noir plat (#0a0a0a) partout donnait au site une texture d'écran
+   d'ordinateur plutôt que de matière. Ce grain est un bruit SVG encodé en
+   data URI — aucune image à charger, aucun poids réseau — posé en calque fixe
+   par-dessus tout le contenu avec mix-blend-mode: overlay, pour qu'il
+   affecte uniformément le fond ET les cartes plutôt que de rester confiné
+   à l'arrière-plan. Volontairement discret : on doit sentir une matière,
+   pas remarquer un filtre.
+   ============================================================ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { display: none; }
+}
+
+/* ============================================================
+   La signature de mouvement du site.
+   ============================================================
+   cubic-bezier(.22,.68,0,1.2), 900ms — le léger rebond en fin de course qui
+   distingue une apparition d'un simple fondu. C'était déjà la courbe la plus
+   utilisée sur le site (hero, à propos, bandeau final, Atlas, contact) ;
+   elle est maintenant la seule pour toute apparition déclenchée au scroll,
+   au lieu de plusieurs variantes proches codées séparément selon la session.
+
+   Exception assumée : l'animation des lettres de l'intro de chargement garde
+   sa propre cadence, plus rapide et plus staccato — c'est un flourish de
+   marque ponctuel, pas un motif de révélation de contenu répété.
+   ============================================================ */
+
+/* ============================================================
+   Lettrine.
+   ============================================================
+   Pour le premier paragraphe d'une page de lecture longue — la marque d'un
+   vrai travail éditorial, pas d'une page web composée en blocs plats.
+   ::first-letter est la bonne technique : natif, aucun JS, le texte se
+   réenroule normalement autour.
+   ============================================================ */
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 3.4em;
+  line-height: 0.82;
+  padding-right: 0.09em;
+  padding-top: 0.02em;
+  color: var(--color-brand);
+}
+
+/* L'anneau qui respire autour du bouton de la navbar. */
+@keyframes sp-navpulse {
+  0% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.18); }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes sp-navpulse { 0%, 100% { opacity: 0; transform: scale(1); } }
+}
+
+/* La coche de confirmation (SuccessCheck) : le cercle se trace, la coche
+   suit avec un léger retard. Désactivé sous mouvement réduit — le résultat
+   final s'affiche directement, sans animation. */
+@keyframes sp-check-circle {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes sp-check-mark {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes sp-check-circle { from, to { stroke-dashoffset: 0; } }
+  @keyframes sp-check-mark { from, to { stroke-dashoffset: 0; } }
 }

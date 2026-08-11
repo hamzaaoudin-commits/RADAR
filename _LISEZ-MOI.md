@@ -18,16 +18,29 @@ ou fusionner les deux offres sous un même nom avec des paliers cohérents.
 ## Stack
 
 Identique à Strawberry-Prod : Next.js 16 (App Router), React 19, Tailwind v4,
-TypeScript. Polices Playfair Display (titres) + DM Sans (corps), chargées
-via next/font/google — se chargent normalement sur Vercel/GitHub ; seul
+TypeScript. `app/globals.css` est une copie conforme du fichier de
+Strawberry-Prod (mêmes tokens, mêmes utilitaires `@utility`, même grain de
+fond, même signature de mouvement). Polices Playfair Display + DM Sans via
+next/font/google — se chargent normalement sur Vercel/GitHub ; seul
 l'environnement de build utilisé pour vérifier ce projet bloque l'accès à
 fonts.googleapis.com, donc le `next build` a été validé une fois sans les
 polices Google (structure/CSS/TS), puis les imports ont été restaurés tels
 quels.
 
-Couleurs, espacements, boutons, cartes en verre : copiés à l'identique des
-tokens de `app/globals.css` de Strawberry-Prod (rouge #e63946, fond ink
-#0a0a0a). Rien n'a été changé sur ce plan.
+Le composant `components/radar-scope.tsx` — le scope animé avec balayage et
+blips — est copié à l'identique de `RadarScope` sur `/radar` de
+Strawberry-Prod (mêmes anneaux, même conic-gradient, même timing d'animation
+et de ping). Seuls les libellés des quatre blips changent : au lieu de noms
+de marques lues (Sézane, Qonto...), ce sont les domaines que RADAR
+surveille (IA, Concurrents, Réglementation, Marché).
+
+La home suit la même structure de page que `/radar` : pill → h-display →
+lede → CTA → scope, puis grille de 4 cartes (kicker "Ce que RADAR
+construit"), puis liste à icônes façon "les cinq instruments" (ici les sept
+radars), puis la grille à cases numérotées ("la grille" → devenue le
+pipeline en 7 étapes), le bandeau plein rouge (SectionDivider), la carte
+d'abonnement centrée, la citation de transition, puis la FAQ à accordéon —
+composant `FaqSection` copié à l'identique, icônes comprises.
 
 ## Pages
 

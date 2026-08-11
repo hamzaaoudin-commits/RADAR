@@ -15,12 +15,12 @@ function barColor(score: number) {
   return "#22c55e"
 }
 
-export function ScoreGauge({ overall = 72, compact = false }: { overall?: number; compact?: boolean }) {
+export function ScoreGauge({ overall = 72 }: { overall?: number }) {
   return (
-    <GlassCard className={compact ? "p-6" : "p-8"}>
+    <GlassCard className="p-8">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <div className="font-sans text-[11px] uppercase tracking-[0.18em] text-chalk-40">RADAR SCORE</div>
+          <div className="eyebrow">RADAR SCORE</div>
           <div className="mt-1 font-sans text-[13px] text-chalk-55">Company readiness</div>
         </div>
         <div className="font-serif text-[clamp(2.2rem,5vw,3.2rem)] font-bold leading-none text-gradient">
