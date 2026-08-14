@@ -74,7 +74,7 @@ export function NavBar() {
               className="relative rounded-full px-5 py-2.5 font-sans text-[13px] font-semibold tracking-[0.04em] text-white no-underline"
               style={{ background: "linear-gradient(135deg,#e63946,#ff1a1a)" }}
             >
-              Essai gratuit →
+              Voir les tarifs →
             </Link>
           </div>
         </div>
@@ -99,7 +99,7 @@ export function NavBar() {
               className="rounded-full px-6 py-3 text-center font-sans text-sm font-semibold text-white no-underline"
               style={{ background: "linear-gradient(135deg,#e63946,#ff1a1a)" }}
             >
-              Essai gratuit →
+              Voir les tarifs →
             </Link>
           </div>
         </div>

@@ -40,7 +40,7 @@ export default function PricingPage() {
             Une formule pour chaque niveau de risque que vous êtes prêt à ignorer.
           </h1>
           <p className="mx-auto max-w-[560px] font-sans text-[16px] leading-relaxed text-white/60">
-            Du radar gratuit à l&apos;intelligence sur-mesure pour grands groupes. Pas d&apos;engagement sur RADAR et RADAR PRO.
+            De la surveillance ciblée à l&apos;intelligence sur-mesure pour grands groupes. Pas d&apos;engagement sur RADAR et RADAR PRO.
           </p>
         </div>
       </section>
@@ -65,7 +65,6 @@ export default function PricingPage() {
               <thead>
                 <tr className="border-b border-hair-strong text-left text-chalk-40">
                   <th className="py-3 pr-4 font-sans text-[11px] font-semibold uppercase tracking-[0.12em]">Domaine surveillé</th>
-                  <th className="py-3 px-4 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.12em]">Free</th>
                   <th className="py-3 px-4 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.12em]">RADAR</th>
                   <th className="py-3 px-4 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-brand">PRO</th>
                   <th className="py-3 px-4 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.12em]">Advisory</th>
@@ -74,18 +73,17 @@ export default function PricingPage() {
               </thead>
               <tbody>
                 {[
-                  ["RADAR AI", "—", "✓", "✓", "✓", "✓"],
-                  ["RADAR TECH", "—", "—", "✓", "✓", "✓"],
-                  ["RADAR REGULATION", "—", "✓", "✓", "✓", "✓"],
-                  ["RADAR MARKET", "1 domaine au choix", "✓", "✓", "✓", "✓"],
-                  ["RADAR COMPETITION", "—", "—", "✓", "✓", "✓"],
-                  ["RADAR OPPORTUNITY", "—", "—", "✓", "✓", "✓"],
-                  ["RADAR RISK", "—", "—", "✓", "✓", "✓"],
-                  ["Briefing hebdomadaire", "—", "✓", "✓", "✓", "✓"],
-                  ["Score de préparation", "—", "✓", "✓", "✓", "✓"],
-                  ["Scénarios & roadmap 36 mois", "—", "—", "✓", "✓", "✓"],
-                  ["Analyste humain dédié", "—", "—", "—", "✓", "✓"],
-                  ["API & intégrations", "—", "—", "—", "—", "✓"],
+                  ["RADAR AI", "✓", "✓", "✓", "✓"],
+                  ["RADAR TECH", "—", "✓", "✓", "✓"],
+                  ["RADAR REGULATION", "✓", "✓", "✓", "✓"],
+                  ["RADAR MARKET", "✓", "✓", "✓", "✓"],
+                  ["RADAR COMPETITION", "—", "✓", "✓", "✓"],
+                  ["RADAR OPPORTUNITY", "—", "✓", "✓", "✓"],
+                  ["RADAR RISK", "—", "✓", "✓", "✓"],
+                  ["Briefing hebdomadaire", "✓", "✓", "✓", "✓"],
+                  ["Scénarios & roadmap 36 mois", "—", "✓", "✓", "✓"],
+                  ["Analyste humain dédié", "—", "—", "✓", "✓"],
+                  ["API & intégrations", "—", "—", "—", "✓"],
                 ].map((row) => (
                   <tr key={row[0]} className="border-b border-hair">
                     <td className="py-3 pr-4 text-chalk-75">{row[0]}</td>

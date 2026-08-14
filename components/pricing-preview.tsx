@@ -7,7 +7,7 @@ export function PricingPreview() {
       <div className="shell">
         <div className="mb-12 text-center">
           <div className="kicker mb-5">L&apos;investissement</div>
-          <h2 className="h-section mb-6">Commencez gratuitement. Montez en puissance quand ça compte.</h2>
+          <h2 className="h-section mb-6">L&apos;investissement, pas l&apos;essai.</h2>
           <p className="lede mx-auto max-w-[600px]">
             Trois formules pour les entreprises qui veulent voir venir plutôt que subir.
           </p>

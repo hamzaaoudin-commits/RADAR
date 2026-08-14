@@ -10,18 +10,6 @@ export type Tier = {
 
 export const TIERS: Tier[] = [
   {
-    id: "free",
-    name: "RADAR FREE",
-    price: "0€",
-    cadence: "gratuit",
-    target: "Pour découvrir",
-    features: [
-      "Radar d'entreprise, version limitée",
-      "1 domaine surveillé",
-      "Brief mensuel",
-    ],
-  },
-  {
     id: "radar",
     name: "RADAR",
     price: "49€",
@@ -33,7 +21,6 @@ export const TIERS: Tier[] = [
       "Briefing hebdomadaire — 5 minutes",
       "Rapport mensuel",
       "Recommandations basiques",
-      "Score de préparation",
     ],
   },
   {

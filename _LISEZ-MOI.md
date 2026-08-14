@@ -81,3 +81,23 @@ proposé initialement (section problème, score détaillé par domaine + alerte
 `/dashboard` restent les pages dédiées, restylées avec les mêmes classes
 utilitaires (`card`, `kicker`, `eyebrow`, `h-section`) pour rester cohérentes
 avec le reste du site.
+
+## Dernière passe
+
+- Favicon ajouté (`app/icon.svg`, détecté automatiquement par Next.js) — un
+  scope radar simplifié en rouge de marque sur fond ink.
+- Offre RADAR FREE supprimée partout : `lib/pricing-data.ts`, aperçu tarifs
+  de la home, tableau comparatif de `/pricing`.
+- "Intelligence stratégique continue, pour entreprises" → "Intelligence
+  stratégique continue" dans le hero.
+- Ligne d'essai ("14 jours offerts...") retirée du hero et de la carte
+  d'abonnement — il n'y a plus d'offre gratuite à teaser.
+- CTA "Essai gratuit" / "Démarrer gratuitement" remplacés par "Voir les
+  tarifs" (navbar, hero). Le bouton "Commencer" du tier FREE dans
+  PricingTable a disparu avec le tier.
+- Le concept de score par entreprise est entièrement retiré : composant
+  `score-gauge.tsx` supprimé, section score de la home réduite à
+  alerte + brief hebdo, ligne "Score de préparation" retirée du comparatif
+  tarifs, colonne score retirée du dashboard (qui garde la répartition par
+  sévérité des alertes et le top 5 changements, qui ne notent pas
+  l'entreprise elle-même).

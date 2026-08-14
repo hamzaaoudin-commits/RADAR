@@ -5,7 +5,7 @@ export function HeroSection() {
     <section className="section-hero pb-16 pt-40">
       <div className="glow-top" aria-hidden />
       <div className="shell-md relative">
-        <div className="pill mb-8">Intelligence stratégique continue, pour entreprises</div>
+        <div className="pill mb-8">Intelligence stratégique continue</div>
 
         <h1 className="h-display mb-6">
           Ne réagissez plus.
@@ -18,8 +18,7 @@ export function HeroSection() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-3.5">
-          <a href="/pricing" className="btn-primary">Démarrer gratuitement</a>
-          <p className="mt-3 w-full text-center font-sans text-[13px] text-chalk-40">14 jours offerts sur RADAR PRO. Résiliable en un clic.</p>
+          <a href="/pricing" className="btn-primary">Voir les tarifs</a>
           <a href="/dashboard" className="btn-ghost">Voir le dashboard</a>
         </div>
 

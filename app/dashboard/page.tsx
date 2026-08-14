@@ -1,7 +1,6 @@
 import { NavBar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { GlassCard } from "@/components/glass-card"
-import { ScoreGauge } from "@/components/score-gauge"
 
 const TOP_CHANGES = [
   { n: "01", label: "Nouvelle capacité d'agent autonome — OpenAI", domain: "IA", impact: "critical" },
@@ -48,27 +47,23 @@ export default function DashboardPage() {
             Ceci est une démonstration du dashboard RADAR PRO, avec des données d&apos;illustration.
           </p>
 
-          <div className="grid gap-6 lg:grid-cols-[1fr_1.3fr]">
-            <div className="flex flex-col gap-6">
-              <ScoreGauge overall={72} />
-
-              <GlassCard className="">
-                <div className="mb-4 font-sans text-[11px] uppercase tracking-[0.18em] text-chalk-40">
-                  Répartition par sévérité
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  {SEVERITY_COUNTS.map((s) => (
-                    <div key={s.label} className="flex items-center gap-2.5">
-                      <span aria-hidden>{s.dot}</span>
-                      <div>
-                        <div className="font-serif text-xl font-bold text-white">{s.value}</div>
-                        <div className="font-sans text-[11px] text-chalk-40">{s.label}</div>
-                      </div>
+          <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+            <GlassCard className="">
+              <div className="mb-4 font-sans text-[11px] uppercase tracking-[0.18em] text-chalk-40">
+                Répartition par sévérité
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {SEVERITY_COUNTS.map((s) => (
+                  <div key={s.label} className="flex items-center gap-2.5">
+                    <span aria-hidden>{s.dot}</span>
+                    <div>
+                      <div className="font-serif text-xl font-bold text-white">{s.value}</div>
+                      <div className="font-sans text-[11px] text-chalk-40">{s.label}</div>
                     </div>
-                  ))}
-                </div>
-              </GlassCard>
-            </div>
+                  </div>
+                ))}
+              </div>
+            </GlassCard>
 
             <GlassCard className="">
               <div className="mb-5 font-sans text-[11px] uppercase tracking-[0.18em] text-brand">

@@ -2,7 +2,7 @@ import Link from "next/link"
 import { TIERS } from "@/lib/pricing-data"
 
 export function PricingTable({ compact = false }: { compact?: boolean }) {
-  const tiers = compact ? TIERS.slice(1, 4) : TIERS
+  const tiers = compact ? TIERS.slice(0, 3) : TIERS
 
   return (
     <div className={`grid gap-4 ${compact ? "md:grid-cols-3" : "md:grid-cols-2 lg:grid-cols-5"}`}>
@@ -32,7 +32,7 @@ export function PricingTable({ compact = false }: { compact?: boolean }) {
             ))}
           </ul>
           <Link href="/pricing" className={t.featured ? "btn-primary" : "btn-ghost"}>
-            {t.id === "free" ? "Commencer" : t.id === "enterprise" ? "Nous contacter" : "Choisir"}
+            {t.id === "enterprise" ? "Nous contacter" : "Choisir"}
           </Link>
         </div>
       ))}

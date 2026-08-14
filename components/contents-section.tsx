@@ -1,6 +1,6 @@
 const CONTENTS = [
-  { n: "72", t: "Le score", d: "Un chiffre unique de préparation, décomposé par domaine — IA, réglementation, concurrence, automatisation — pour savoir en un coup d'œil où vous êtes vulnérable." },
-  { n: "07", t: "Les radars", d: "Sept domaines surveillés en continu, chacun construit sur l'empreinte stratégique propre à votre entreprise, pas sur un modèle générique." },
+  { n: "01", t: "Le radar", d: "Une empreinte stratégique propre à votre entreprise — secteur, taille, marché, concurrents, outils — sur laquelle tout le reste se construit." },
+  { n: "07", t: "Les radars", d: "Sept domaines surveillés en continu, chacun construit sur cette empreinte, pas sur un modèle générique." },
   { n: "05", t: "Minutes par semaine", d: "Le changement majeur, l'opportunité, le risque, ce que font vos concurrents, ce que vous devriez faire. Pas cinquante newsletters à lire." },
   { n: "36", t: "Mois de visibilité", d: "Une timeline en quatre horizons — de l'imminent au scénario stratégique — pour cesser de subir et commencer à anticiper." },
 ]
