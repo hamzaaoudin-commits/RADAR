@@ -10,6 +10,11 @@ export function PricingCallout() {
           Les sept radars, les scénarios et la roadmap à 36 mois. Sans engagement, résiliable à tout moment.
         </p>
         <Link href="/pricing" className="btn-primary">Voir les formules</Link>
+        <p className="mt-4 font-sans text-[13px] text-chalk-40">
+          <Link href="/pricing" className="text-chalk-40 underline decoration-hair-strong underline-offset-4 hover:text-white">
+            D&apos;autres formules existent, du plus léger au sur-mesure
+          </Link>
+        </p>
       </div>
     </section>
   )

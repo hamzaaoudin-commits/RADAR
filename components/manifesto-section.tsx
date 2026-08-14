@@ -13,7 +13,7 @@ const REFUSALS = [
   },
   {
     title: "Nous refusons l'angle mort.",
-    body: "Une entreprise ne devrait jamais découvrir une révolution une fois qu'elle est déjà devenue son problème. C'est la seule raison d'être de RADAR.",
+    body: "Vous ne devriez jamais découvrir une révolution une fois qu'elle est déjà devenue votre problème. C'est la seule raison d'être de RADAR.",
   },
 ]
 
@@ -28,9 +28,9 @@ export function ManifestoSection() {
             L&apos;ennemi n&apos;est pas la concurrence. C&apos;est l&apos;angle mort.
           </h2>
           <p className="lede mx-auto max-w-[620px]">
-            Nous croyons qu&apos;aucune entreprise ne devrait apprendre qu&apos;un monde a changé
-            en le découvrant déjà installé chez un concurrent. Le changement ne prévient pas —
-            mais il laisse toujours des signaux, avant. RADAR existe pour les voir à votre place.
+            Vous ne devriez jamais apprendre qu&apos;un monde a changé en le découvrant
+            déjà installé chez un concurrent. Le changement ne prévient pas — mais il
+            laisse toujours des signaux, avant. RADAR existe pour les voir à votre place.
           </p>
         </div>
 

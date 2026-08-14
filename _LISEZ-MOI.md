@@ -125,3 +125,45 @@ visuel de RADAR est identique à celui de Strawberry-Prod. C'est un
 manquement réel au regard du Module 19 du corpus (une marque doit avoir
 ses propres codes pour être inimitable), mais c'est une contrainte
 explicitement posée, pas un oubli — à trancher plus tard si besoin.
+
+## Passe direct response (règle de l'Un, mécanisme, fausse cause)
+
+Corrections au regard du corpus de copywriting direct-response (règle de
+l'Un, 3 niveaux logique/émotion/identité, mécanisme, fausse cause → vraie
+cause, moins de « nous » plus de « vous »). Toujours sans toucher au design.
+
+- **Une action** : le hero n'a plus deux boutons de même poids. « Voir les
+  tarifs » reste l'unique bouton ; le lien dashboard est redescendu en
+  simple lien texte.
+- **Une offre** : la home affichait un aperçu à 3 formules (`PricingPreview`,
+  supprimé) juste au-dessus d'une carte à offre unique (`PricingCallout`,
+  conservée) — les deux se contredisaient. La home ne montre plus que
+  RADAR PRO comme offre unique, avec un lien discret vers `/pricing` pour
+  qui veut comparer. Le tableau comparatif complet reste sur `/pricing`,
+  où le visiteur a déjà choisi de comparer — c'est le bon endroit pour le
+  paradoxe du choix, pas la home.
+- **Mécanisme nommé** : le pipeline en 7 étapes s'appelle maintenant « Le
+  protocole RADAR » et le texte le relie explicitement au filtre construit
+  sur l'entreprise, pas sur le secteur.
+- **Fausse cause → vraie cause** : `problem-section.tsx` détaille
+  maintenant ce que le visiteur a déjà essayé (alertes mot-clé,
+  newsletters sectorielles, veille confiée à un collaborateur), pourquoi
+  chacun échoue, puis nomme la vraie cause (absence de filtre) avant
+  d'amener RADAR comme seule vraie solution — structure calquée sur le
+  modèle du corpus.
+- **Identité (niveau 3)** : ajout d'une ligne dans problem-section qui
+  oppose deux catégories de dirigeants plutôt que de rester au niveau
+  fonctionnel.
+- **Moins de « nous », plus de « vous »** : les refus du manifeste et son
+  intro sont repassés en 2e personne quand c'était encore à la 3e.
+
+## Ce qui n'a pas été fait, volontairement
+
+- **Pas de preuve sociale ajoutée.** RADAR n'a pas encore de client réel —
+  inventer un témoignage, un logo ou un chiffre serait un mensonge, pas
+  une correction. Priorité produit avant priorité copywriting.
+- **Pas d'urgence artificielle ajoutée.** Le corpus recommande la rareté
+  temporelle ou quantitative, mais toute urgence affichée doit être réelle
+  (ex. capacité d'onboarding limitée) — à activer seulement si elle
+  correspond à une contrainte vraie, jamais avec un chiffre inventé ou un
+  compte à rebours factice.

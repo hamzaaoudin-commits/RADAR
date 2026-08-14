@@ -7,7 +7,6 @@ import { SevenRadars } from "@/components/seven-radars"
 import { PipelineGrid } from "@/components/pipeline-grid"
 import { AlertBriefSection } from "@/components/alert-brief-section"
 import { SectionDivider } from "@/components/section-divider"
-import { PricingPreview } from "@/components/pricing-preview"
 import { PricingCallout } from "@/components/pricing-callout"
 import { BridgeSection } from "@/components/bridge-section"
 import { FaqSection } from "@/components/faq-section"
@@ -26,7 +25,6 @@ export default function Home() {
       <PipelineGrid />
       <AlertBriefSection />
       <SectionDivider word="DÉTECTEZ." caption="Ce que RADAR fait, avant tout le reste" />
-      <PricingPreview />
       <PricingCallout />
       <BridgeSection />
       <FaqSection faqs={FAQ_HOME} />

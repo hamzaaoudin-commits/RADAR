@@ -21,9 +21,11 @@ export function HeroSection() {
           Notre seul ennemi : l&apos;angle mort.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-3.5">
+        <div className="flex flex-col items-center gap-3">
           <a href="/pricing" className="btn-primary">Voir les tarifs</a>
-          <a href="/dashboard" className="btn-ghost">Voir le dashboard</a>
+          <a href="/dashboard" className="font-sans text-[13px] text-chalk-40 underline decoration-hair-strong underline-offset-4 hover:text-white">
+            ou voir à quoi ressemble votre dashboard
+          </a>
         </div>
 
         <RadarScope />
