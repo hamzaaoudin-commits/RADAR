@@ -101,3 +101,27 @@ avec le reste du site.
   tarifs, colonne score retirée du dashboard (qui garde la répartition par
   sévérité des alertes et le top 5 changements, qui ne notent pas
   l'entreprise elle-même).
+
+## Passe doctrinale
+
+Corrections des manques identifiés au regard du corpus de narratif de marque
+(manifeste, ennemi nommé, voix propre) — sans toucher au système visuel
+(couleurs, typographie, composants), qui reste exactement celui de
+Strawberry-Prod à la demande explicite.
+
+- Nouvelle section `components/manifesto-section.tsx` : nomme l'ennemi
+  (« l'angle mort », pas la concurrence) et donne à RADAR une liste de
+  refus dans le même esprit que celle de Strawberry Production, mais
+  écrite pour ce produit — RADAR refuse la veille passive, le bruit
+  générique, de se substituer au jugement humain, et l'angle mort.
+  Insérée sur la home entre le problème et le contenu produit, avec
+  ancre `#manifeste` et lien dans la navbar.
+- Le hero et le footer reprennent la même formule (« notre seul ennemi :
+  l'angle mort ») pour créer la répétition qui installe l'association,
+  sans changer un seul pixel du design.
+
+Ce qui reste un choix ouvert, volontairement non traité : le système
+visuel de RADAR est identique à celui de Strawberry-Prod. C'est un
+manquement réel au regard du Module 19 du corpus (une marque doit avoir
+ses propres codes pour être inimitable), mais c'est une contrainte
+explicitement posée, pas un oubli — à trancher plus tard si besoin.

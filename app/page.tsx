@@ -1,6 +1,7 @@
 import { NavBar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
 import { ProblemSection } from "@/components/problem-section"
+import { ManifestoSection } from "@/components/manifesto-section"
 import { ContentsSection } from "@/components/contents-section"
 import { SevenRadars } from "@/components/seven-radars"
 import { PipelineGrid } from "@/components/pipeline-grid"
@@ -19,6 +20,7 @@ export default function Home() {
       <NavBar />
       <HeroSection />
       <ProblemSection />
+      <ManifestoSection />
       <ContentsSection />
       <SevenRadars />
       <PipelineGrid />

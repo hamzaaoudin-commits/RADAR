@@ -13,8 +13,12 @@ export function HeroSection() {
           <span className="text-gradient">Détectez.</span>
         </h1>
 
-        <p className="lede mx-auto mb-9 max-w-[640px]">
+        <p className="lede mx-auto mb-4 max-w-[640px]">
           RADAR surveille en continu l&apos;IA, la réglementation, vos concurrents et votre marché — et transforme cette masse d&apos;informations en une seule question résolue chaque semaine : qu&apos;est-ce qui a changé, et que devez-vous faire maintenant.
+        </p>
+
+        <p className="mx-auto mb-9 max-w-[640px] font-sans text-[13px] uppercase tracking-[0.14em] text-brand/80">
+          Notre seul ennemi : l&apos;angle mort.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3.5">
