@@ -7,8 +7,9 @@ const NAV_LINKS = [
   { label: "Manifeste", href: "/#manifeste" },
   { label: "Produit", href: "/#produit" },
   { label: "Les 7 radars", href: "/#radars" },
+  { label: "Le brief", href: "/brief" },
   { label: "Tarifs", href: "/pricing" },
-  { label: "Dashboard (démo)", href: "/dashboard" },
+  { label: "Dashboard", href: "/dashboard" },
 ]
 
 export function NavBar() {

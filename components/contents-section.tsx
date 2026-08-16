@@ -1,3 +1,5 @@
+import { Reveal } from "./reveal"
+
 const CONTENTS = [
   { n: "01", t: "Le radar", d: "Une empreinte stratégique propre à votre entreprise — secteur, taille, marché, concurrents, outils — sur laquelle tout le reste se construit." },
   { n: "07", t: "Les radars", d: "Sept domaines surveillés en continu, chacun construit sur cette empreinte, pas sur un modèle générique." },
@@ -15,12 +17,14 @@ export function ContentsSection() {
         </div>
 
         <div className="grid-auto">
-          {CONTENTS.map((c) => (
-            <div key={c.t} className="card px-7 py-8">
-              <div className="mb-3.5 font-serif text-[2.25rem] font-bold leading-none text-brand">{c.n}</div>
-              <h3 className="mb-2.5 font-serif text-[1.3rem] font-bold">{c.t}</h3>
-              <p className="body-sm">{c.d}</p>
-            </div>
+          {CONTENTS.map((c, i) => (
+            <Reveal key={c.t} delay={i * 90}>
+              <div className="card card-hover h-full px-7 py-8">
+                <div className="mb-3.5 font-serif text-[2.25rem] font-bold leading-none text-brand">{c.n}</div>
+                <h3 className="mb-2.5 font-serif text-[1.3rem] font-bold">{c.t}</h3>
+                <p className="body-sm">{c.d}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

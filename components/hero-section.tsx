@@ -2,8 +2,9 @@ import { RadarScope } from "./radar-scope"
 
 export function HeroSection() {
   return (
-    <section className="section-hero pb-16 pt-40">
+    <section className="section-hero grain pb-16 pt-40">
       <div className="glow-top" aria-hidden />
+      <div className="grain-layer" aria-hidden />
       <div className="shell-md relative">
         <div className="pill mb-8">Intelligence stratégique continue</div>
 

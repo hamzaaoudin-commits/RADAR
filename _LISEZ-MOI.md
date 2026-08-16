@@ -167,3 +167,40 @@ cause, moins de « nous » plus de « vous »). Toujours sans toucher au design.
   (ex. capacité d'onboarding limitée) — à activer seulement si elle
   correspond à une contrainte vraie, jamais avec un chiffre inventé ou un
   compte à rebours factice.
+
+## Finitions visuelles + page /brief
+
+### Visuels (additifs uniquement — aucune couleur ni typo touchée)
+Nouveaux utilitaires en fin de `app/globals.css`, tous ajoutés à la suite du
+système existant sans en modifier une ligne :
+- `grain` / `grain-layer` — grain SVG en overlay sur le hero et l'en-tête du
+  brief. Casse l'aplat numérique des glows.
+- `card-hover` — les cartes réagissent au survol : liseré qui vire au rouge de
+  marque, surface qui se soulève de 2px. Appliqué aux cartes contenu, alerte,
+  brief et tarifs.
+- `reveal` + `components/reveal.tsx` — révélation au scroll via
+  IntersectionObserver, one-shot (pas de re-animation au scroll inverse),
+  neutralisée sous `prefers-reduced-motion`. Appliquée en cascade sur les
+  cartes contenu et les sept radars.
+- `hairline` — filet dégradé aux extrémités, plus fin qu'une bordure pleine.
+- `meter` — jauge fine utilisée par le suivi du brief.
+- Crochets d'angle (`bracket-tl` / `bracket-br`, déjà présents dans le
+  système) ajoutés à la formule recommandée dans la grille tarifaire.
+
+### Page `/brief`
+Nouvelle page, liée depuis la navbar, le footer et la section brief de la home.
+Deux blocs :
+
+1. **Le brief de la semaine** — colonne d'archive à gauche (semaines 31 à 33,
+   avec pastille « non lu »), brief sélectionné à droite : titre, résumé, puis
+   les 5 points en accordéon. Chaque point s'ouvre sur « pourquoi ça compte
+   pour vous » / « action recommandée » + horizon estimé.
+2. **Le suivi des sujets** (`ThreadTracker`) — c'est la réponse à la demande :
+   ce que l'e-mail ne peut pas donner. Chaque signal détecté est suivi sur une
+   timeline en 5 étapes (Détecté → Confirmé → En test → Décidé → Traité) avec
+   jauge de progression, semaine de première détection et note d'avancement.
+   Un sujet traité passe au vert et sort du rouge de marque.
+
+Les données sont dans `lib/brief-data.ts` et sont explicitement annoncées
+comme illustratives, en haut de page — même règle que le dashboard : jamais
+un chiffre inventé présenté comme un résultat réel.

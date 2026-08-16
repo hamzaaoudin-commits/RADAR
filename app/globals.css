@@ -522,3 +522,73 @@ body::before {
   @keyframes sp-check-circle { from, to { stroke-dashoffset: 0; } }
   @keyframes sp-check-mark { from, to { stroke-dashoffset: 0; } }
 }
+
+/* --- Finitions visuelles ---------------------------------------------------
+   Ajouts purement additifs : aucune couleur, typographie ou dimension du
+   système existant n'est modifiée. Ces utilitaires ne font que donner de la
+   profondeur et de la réactivité à des surfaces déjà définies plus haut. */
+
+/* Grain fin appliqué en overlay sur les grandes surfaces sombres. Casse le
+   dégradé plat des glows et donne une texture de tirage argentique plutôt
+   qu'un aplat numérique. */
+@utility grain {
+  position: relative;
+}
+@utility grain-layer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Les cartes réagissent au survol : le liseré s'anime vers le rouge de marque
+   et la surface se soulève très légèrement. Assez subtil pour ne pas
+   transformer une page de lecture en tableau de bord clignotant. */
+@utility card-hover {
+  transition: border-color 260ms ease, background 260ms ease, transform 260ms ease;
+  &:hover {
+    border-color: var(--color-brand-hair);
+    background: rgba(255, 255, 255, 0.035);
+    transform: translateY(-2px);
+  }
+}
+
+/* Filet horizontal qui s'estompe aux deux extrémités — sert de séparateur
+   plus fin qu'une bordure pleine. */
+@utility hairline {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-hair-strong) 18%, var(--color-hair-strong) 82%, transparent);
+}
+
+/* Révélation au scroll. La classe de base pose l'état masqué ; `is-in` est
+   ajoutée par l'IntersectionObserver du composant Reveal. Sous
+   prefers-reduced-motion, tout est visible immédiatement et rien ne bouge. */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 620ms cubic-bezier(0.22, 0.68, 0, 1.2), transform 620ms cubic-bezier(0.22, 0.68, 0, 1.2);
+  &.is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Barre de progression fine, utilisée par les jauges du brief. */
+@utility meter {
+  height: 6px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.06);
+}

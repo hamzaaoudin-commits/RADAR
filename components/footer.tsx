@@ -4,6 +4,7 @@ const EXPLORE = [
   { label: "Accueil", href: "/" },
   { label: "Les 7 radars", href: "/#radars" },
   { label: "Produit", href: "/#produit" },
+  { label: "Le brief (démo)", href: "/brief" },
   { label: "Dashboard (démo)", href: "/dashboard" },
 ]
 const OFFERS = [

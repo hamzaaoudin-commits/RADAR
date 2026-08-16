@@ -1,3 +1,5 @@
+import { Reveal } from "./reveal"
+
 export const RADARS = [
   { n: "01", t: "RADAR AI", d: "Modèles, agents, automatisation, nouveaux outils, baisse des coûts, mutation des métiers.", why: "Qu'est-ce que l'IA pourrait changer dans votre entreprise ?" },
   { n: "02", t: "RADAR TECH", d: "Robotique, spatial, biotech, énergie, XR, interfaces, nouveaux matériaux.", why: "Quelle technologie émergente vous concerne, avant qu'elle ne devienne la norme ?" },
@@ -92,9 +94,9 @@ export function SevenRadars() {
 
         <div className="mx-auto max-w-[920px]">
           {RADARS.map((r, i) => (
+            <Reveal key={r.n}>
             <div
-              key={r.n}
-              className="grid gap-6 border-b border-white/[0.08] py-10 first:border-t md:grid-cols-[100px_minmax(0,1fr)] md:gap-10"
+              className={`grid gap-6 border-b border-white/[0.08] py-10 md:grid-cols-[100px_minmax(0,1fr)] md:gap-10 ${i === 0 ? "border-t" : ""}`}
             >
               <div className="flex flex-row items-center gap-4 md:flex-col md:items-start md:gap-5">
                 <div className="flex h-[64px] w-[64px] shrink-0 items-center justify-center border border-brand/35 bg-brand/[0.06] text-brand">
@@ -111,6 +113,7 @@ export function SevenRadars() {
                 </p>
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
       </div>

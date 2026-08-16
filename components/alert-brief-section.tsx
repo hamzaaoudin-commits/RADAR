@@ -8,7 +8,7 @@ export function AlertBriefSection() {
         </div>
 
         <div className="flex flex-col gap-6">
-          <div className="card border-l-2 border-l-[#ff1a1a] px-6 py-6">
+          <div className="card card-hover border-l-2 border-l-[#ff1a1a] px-6 py-6">
             <div className="mb-2 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-[#ff1a1a]">
               🔴 RADAR ALERT
             </div>
@@ -24,9 +24,9 @@ export function AlertBriefSection() {
             </p>
           </div>
 
-          <div className="card px-6 py-6">
+          <div className="card card-hover px-6 py-6">
             <div className="mb-4 kicker">Your week in 5 minutes</div>
-            <ul className="m-0 flex list-none flex-col gap-3 p-0">
+            <ul className="m-0 mb-6 flex list-none flex-col gap-3 p-0">
               {[
                 ["01", "Le changement majeur"],
                 ["02", "L'opportunité"],
@@ -40,6 +40,12 @@ export function AlertBriefSection() {
                 </li>
               ))}
             </ul>
+            <a
+              href="/brief"
+              className="font-sans text-[13px] text-chalk-55 underline decoration-hair-strong underline-offset-4 transition-colors hover:text-white"
+            >
+              Voir un brief complet et son suivi dans le temps →
+            </a>
           </div>
         </div>
       </div>
