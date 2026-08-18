@@ -6,7 +6,6 @@ import Link from "next/link"
 const NAV_LINKS = [
   { label: "Produit", href: "/produit" },
   { label: "Le brief", href: "/brief" },
-  { label: "Tarifs", href: "/pricing" },
 ]
 
 export function NavBar() {
