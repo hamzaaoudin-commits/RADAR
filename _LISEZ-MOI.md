@@ -227,3 +227,28 @@ un chiffre inventé présenté comme un résultat réel.
   sur leurs pages dédiées.
 
 Navigation résultante : Manifeste · Produit · Le brief · Tarifs.
+
+## Le manifeste devient le moment de conversion
+
+Le manifeste était déjà sur la page d'accueil, mais deux choses le
+neutralisaient : une entrée « Manifeste » dans le menu le faisait passer pour
+une page annexe, et la section s'arrêtait sur une déclaration sans jamais
+demander quoi que ce soit.
+
+- **Entrée « Manifeste » retirée du menu.** La navigation ne garde que
+  Produit · Le brief · Tarifs. La doctrine n'est plus une destination : elle
+  est sur le chemin de tout le monde, lue au moment où le lecteur vient
+  d'admettre le problème.
+- **Chaque refus est suivi de sa conséquence pour le lecteur** (bloc « Pour
+  vous »). Une doctrine qui ne se traduit pas en bénéfice concret ne fait
+  adhérer personne — c'est ce qui manquait pour qu'elle vende.
+- **Le manifeste se referme sur une décision, pas sur une conviction** : « Si
+  vous êtes d'accord avec ces quatre lignes, vous n'avez pas besoin d'être
+  convaincu de la suite » + bouton tarifs + réassurance sans engagement.
+- **Relance finale après la FAQ** (`closing-cta.tsx`) : le manifeste demande
+  une première fois quand la conviction est fraîche, la relance demande une
+  seconde fois une fois les objections levées.
+- **Hiérarchie des boutons revue** pour éviter trois demandes concurrentes :
+  les deux demandes d'achat (manifeste, relance finale) sont en bouton
+  principal ; la passerelle produit passe en bouton secondaire et la
+  transition vers le brief en simple lien.
