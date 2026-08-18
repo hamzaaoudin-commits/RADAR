@@ -3,8 +3,8 @@
  *
  * Rien ici n'est réel : ce sont des briefs d'illustration pour une entreprise
  * fictive, destinés à montrer la forme du produit. Le site l'annonce
- * explicitement partout où ces données apparaissent — même principe que le
- * dashboard : jamais un chiffre inventé présenté comme un résultat réel.
+ * explicitement en tête de la page /brief. Règle tenue partout : jamais un
+ * chiffre inventé présenté comme un résultat réel.
  */
 
 export type Severity = "critical" | "important" | "watch"

@@ -204,3 +204,26 @@ Deux blocs :
 Les données sont dans `lib/brief-data.ts` et sont explicitement annoncées
 comme illustratives, en haut de page — même règle que le dashboard : jamais
 un chiffre inventé présenté comme un résultat réel.
+
+## Restructuration des pages
+
+- **`/dashboard` supprimé.** La page de démo du dashboard RADAR PRO et son
+  composant `glass-card.tsx` (devenu inutilisé) ont été retirés. Tous les
+  liens qui y menaient ont été repointés : le lien secondaire du hero mène
+  maintenant à `/produit`, celui de la section de transition à `/brief`, et
+  les entrées navbar/footer ont été supprimées.
+- **Nouvelle page `/produit`.** Elle rassemble tout le détail produit qui
+  encombrait la home : ce que RADAR construit, les sept radars, le protocole
+  en sept étapes, l'alerte et le brief. Elle se termine sur un CTA unique
+  vers les tarifs.
+- **Tarifs entièrement sur `/pricing`.** La carte d'offre recommandée
+  (`PricingCallout`) a quitté la home pour la page tarifs, où elle sert
+  désormais d'en-tête au-dessus de la grille comparative : recommandation
+  unique d'abord, comparaison ensuite pour qui veut creuser. Ses liens, qui
+  bouclaient sur `/pricing`, pointent maintenant vers l'ancre de la formule.
+- **Home allégée.** Elle ne garde que le parcours de conviction — hero,
+  problème (fausse cause → vraie cause), manifeste, passerelle vers le
+  produit, bandeau, transition, FAQ. Le détail produit et les prix vivent
+  sur leurs pages dédiées.
+
+Navigation résultante : Manifeste · Produit · Le brief · Tarifs.

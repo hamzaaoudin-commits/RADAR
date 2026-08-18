@@ -1,6 +1,7 @@
 import { NavBar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { PricingTable } from "@/components/pricing-table"
+import { PricingCallout } from "@/components/pricing-callout"
 
 const FAQ = [
   {
@@ -44,6 +45,8 @@ export default function PricingPage() {
           </p>
         </div>
       </section>
+
+      <PricingCallout />
 
       <section className="section bg-ink">
         <div className="shell">
