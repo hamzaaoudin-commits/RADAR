@@ -1,11 +1,29 @@
 "use client"
 
 /**
- * Le scope radar — copié à l'identique du composant RadarScope de la page
- * /radar de Strawberry Production : mêmes anneaux, même balayage en
- * conic-gradient, mêmes pings. Seuls les libellés des blips changent : au
- * lieu de noms de marques lues, ce sont les domaines que RADAR surveille.
+ * Le scope radar — anneaux, balayage en conic-gradient et pings repris du
+ * système visuel existant. Il porte les sept domaines que RADAR surveille.
+ *
+ * `phase` n'est pas décorative : le balayage fait un tour en 5,5s en partant
+ * du haut, donc un blip à l'angle A doit s'allumer à (A / 360) x 5,5s. C'est
+ * ce qui donne l'impression que le balayage révèle chaque cible en la
+ * croisant, au lieu de pings qui clignotent au hasard.
+ *
+ * `side` bascule l'étiquette à gauche pour les blips de la moitié gauche,
+ * sinon le texte partirait vers le centre du scope.
  */
+const SWEEP_SECONDS = 5.5
+
+const BLIPS = [
+  { label: "IA", angle: 28, dist: 112, side: "right" },
+  { label: "Tech", angle: 85, dist: 96, side: "right" },
+  { label: "Marché", angle: 140, dist: 120, side: "right" },
+  { label: "Concurrents", angle: 205, dist: 118, side: "left" },
+  { label: "Risques", angle: 240, dist: 96, side: "left" },
+  { label: "Opportunités", angle: 288, dist: 88, side: "left" },
+  { label: "Réglementation", angle: 332, dist: 116, side: "left" },
+].map((b) => ({ ...b, phase: ((b.angle / 360) * SWEEP_SECONDS).toFixed(2) }))
+
 export function RadarScope() {
   return (
     <div className="hero-stage" aria-hidden="true">
@@ -16,10 +34,17 @@ export function RadarScope() {
         <div className="scope-cross" />
         <div className="scope-sweep" />
         <div className="scope-center" />
-        <div className="blip" style={{ "--a": "38deg", "--d": "120px", "--phase": "0.58s" } as React.CSSProperties}><span className="dot" /><span className="ping" /><span className="blip-label">IA</span></div>
-        <div className="blip" style={{ "--a": "118deg", "--d": "92px", "--phase": "1.8s" } as React.CSSProperties}><span className="dot" /><span className="ping" /><span className="blip-label">Concurrents</span></div>
-        <div className="blip left" style={{ "--a": "212deg", "--d": "128px", "--phase": "3.24s" } as React.CSSProperties}><span className="dot" /><span className="ping" /><span className="blip-label">Réglementation</span></div>
-        <div className="blip left" style={{ "--a": "300deg", "--d": "76px", "--phase": "4.58s" } as React.CSSProperties}><span className="dot" /><span className="ping" /><span className="blip-label">Marché</span></div>
+        {BLIPS.map((b) => (
+          <div
+            key={b.label}
+            className={`blip${b.side === "left" ? " left" : ""}`}
+            style={{ "--a": `${b.angle}deg`, "--d": `${b.dist}px`, "--phase": `${b.phase}s` } as React.CSSProperties}
+          >
+            <span className="dot" />
+            <span className="ping" />
+            <span className="blip-label">{b.label}</span>
+          </div>
+        ))}
       </div>
       <style jsx>{`
         .hero-stage { position: relative; height: 320px; margin-top: 40px; display: flex; align-items: center; justify-content: center; }
@@ -45,6 +70,11 @@ export function RadarScope() {
           4% { opacity: 0.9; transform: translate(-50%,-50%) scale(1); }
           22% { opacity: 0; transform: translate(-50%,-50%) scale(3.4); }
           100% { opacity: 0; transform: translate(-50%,-50%) scale(3.4); }
+        }
+        @media (max-width: 700px) {
+          .hero-stage { height: 260px; }
+          .radar-scope { transform: scale(0.74); }
+          .blip .blip-label { font-size: 9.5px; }
         }
         @media (prefers-reduced-motion: reduce) {
           .scope-sweep { animation: none; background: conic-gradient(from 300deg, rgba(230,57,70,0) 0deg, rgba(230,57,70,0.28) 55deg, rgba(230,57,70,0) 60deg); }
