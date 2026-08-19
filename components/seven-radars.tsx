@@ -1,12 +1,12 @@
 import { Reveal } from "./reveal"
 
 export const RADARS = [
-  { n: "01", t: "RADAR AI", d: "Modèles, agents, automatisation, nouveaux outils, baisse des coûts, mutation des métiers.", why: "Qu'est-ce que l'IA pourrait changer dans votre entreprise ?" },
+  { n: "01", t: "RADAR AI", d: "Modèles, agents, automatisation, nouveaux outils, baisse des coûts, mutation des métiers.", why: "Qu'est-ce que l'IA est en train de changer dans les métiers de votre marché ?" },
   { n: "02", t: "RADAR TECH", d: "Robotique, spatial, biotech, énergie, XR, interfaces, nouveaux matériaux.", why: "Quelle technologie émergente vous concerne, avant qu'elle ne devienne la norme ?" },
   { n: "03", t: "RADAR REGULATION", d: "Lois, directives, normes, fiscalité, réglementation numérique et sectorielle. Informe et alerte — les décisions juridiques restent validées par des professionnels compétents.", why: "Quelle obligation arrive, et combien de temps avez-vous pour vous y préparer ?" },
   { n: "04", t: "RADAR MARKET", d: "Nouvelles catégories, nouveaux produits, demande, comportements, prix.", why: "Comment votre marché bouge-t-il pendant que vous êtes occupé à le servir ?" },
-  { n: "05", t: "RADAR COMPETITION", d: "Nouveaux entrants, levées de fonds, produits, acquisitions, recrutements, campagnes.", why: "Un repositionnement n'est annoncé par personne. Il se remarque des mois plus tard." },
-  { n: "06", t: "RADAR OPPORTUNITY", d: "Nouveau marché, nouveau canal, partenariat, niche émergente, technologie à adopter.", why: "Où pouvez-vous gagner de l'argent que vous ne voyez pas encore ?" },
+  { n: "05", t: "RADAR COMPETITION", d: "Les acteurs structurants du marché : dominants, entrants, substituts. Produits, levées, acquisitions, recrutements, changements de discours.", why: "Un repositionnement n'est annoncé par personne. Il se remarque des mois plus tard." },
+  { n: "06", t: "RADAR OPPORTUNITY", d: "Nouveau canal, partenariat, niche émergente, segment délaissé par les dominants, technologie à adopter avant saturation.", why: "Où peut-on gagner de l'argent sur ce marché avant que la place ne soit prise ?" },
   { n: "07", t: "RADAR RISK", d: "Disruption, nouveau concurrent, technologie remplaçante, dépendance à une plateforme.", why: "Qu'est-ce qui pourrait vous en faire perdre — avant que ce ne soit devenu votre problème ?" },
 ]
 
@@ -86,9 +86,9 @@ export function SevenRadars() {
       <div className="shell-lg">
         <div className="mb-14 text-center">
           <div className="kicker mb-5">Le produit central</div>
-          <h2 className="h-section mb-6">Sept radars. Un radar d&apos;entreprise, propre à vous.</h2>
+          <h2 className="h-section mb-6">Sept radars, braqués sur un seul marché.</h2>
           <p className="lede mx-auto max-w-[640px]">
-            À l&apos;inscription, RADAR apprend votre secteur, votre taille, votre marché, vos concurrents et vos outils, puis construit l&apos;empreinte stratégique de votre entreprise — et surveille ces sept domaines pour vous.
+            Chaque marché suivi a sa fiche : périmètre, chaîne de valeur, dépendances communes, acteurs structurants, cadre réglementaire. Les sept radars sont balayés contre elle, chaque semaine, et ce qui ne la touche pas est jeté.
           </p>
         </div>
 

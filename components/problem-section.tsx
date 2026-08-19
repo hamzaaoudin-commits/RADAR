@@ -11,11 +11,11 @@ const SIGNALS = [
 const TRIED = [
   {
     t: "Des alertes par mot-clé",
-    d: "Elles remontent tout, sans distinguer ce qui vous concerne de ce qui ne vous concerne pas. Vous les désactivez au bout de deux semaines.",
+    d: "Elles remontent tout, sans jamais distinguer un fait qui change une décision d'une mention anecdotique. Vous les désactivez au bout de deux semaines.",
   },
   {
     t: "Des newsletters sectorielles",
-    d: "Elles parlent à tout votre secteur en même temps. Rien n'y est écrit pour votre entreprise en particulier — vous devez encore faire le tri vous-même.",
+    d: "Elles racontent ce qui s'est passé. Elles ne disent jamais ce que ça coûte, sous quel délai, ni quoi faire lundi. Vous finissez informé et toujours pas avancé.",
   },
   {
     t: "Un collaborateur chargé de la veille, à côté de son poste",
@@ -65,11 +65,12 @@ export function ProblemSection() {
         </div>
 
         <p className="mb-8 body-sm">
-          Aucune de ces solutions n&apos;échoue par manque de bonne volonté. Elles échouent
-          parce qu&apos;elles ajoutent de l&apos;information sans ajouter de filtre — et sans
-          filtre construit sur votre entreprise précise, plus d&apos;information ne veut
-          jamais dire plus de décision. C&apos;est la vraie cause. C&apos;est la seule que RADAR
-          a été construit pour traiter.
+          Aucune de ces solutions n&apos;échoue par manque de bonne volonté. Elles
+          échouent parce qu&apos;elles s&apos;arrêtent à l&apos;information. Personne ne va
+          jusqu&apos;au bout : quel effet sur vos coûts, sous quel délai, et quelle est
+          la première chose à faire. Sans ce dernier pas, plus d&apos;information ne
+          veut jamais dire plus de décision. C&apos;est la vraie cause, et la seule que
+          RADAR a été construit pour traiter.
         </p>
 
         <div className="card px-7 py-8">

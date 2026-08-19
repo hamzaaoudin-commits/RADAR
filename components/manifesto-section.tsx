@@ -12,13 +12,13 @@ import { Reveal } from "./reveal"
 const REFUSALS = [
   {
     title: "Nous refusons la veille passive.",
-    body: "Un flux d'informations n'est pas une réponse. RADAR ne relaie jamais un fait sans dire pourquoi il compte pour vous et ce qu'il faut en faire.",
+    body: "Un flux d'informations n'est pas une réponse. RADAR ne relaie jamais un fait sans dire ce qu'il coûte, sous quel délai, et quelle est la première chose à faire.",
     gain: "Vous ne lisez plus pour vous informer. Vous lisez pour décider.",
   },
   {
-    title: "Nous refusons le bruit générique.",
-    body: "Pas d'alerte sectorielle envoyée à tout le monde. Chaque signal est filtré par l'empreinte stratégique propre à votre entreprise — ou il n'est pas envoyé.",
-    gain: "Ce qui arrive dans votre boîte vous concerne. Sans exception, sans tri à faire.",
+    title: "Nous refusons de surveiller tout pour tout le monde.",
+    body: "Un marché à la fois, avec sa chaîne de valeur, ses acteurs et ses obligations. Un signal qui ne change rien sur ce marché-là n'est pas envoyé, même s'il fait la une ailleurs.",
+    gain: "Cinq points par semaine qui concernent votre métier. Pas un panorama de l'économie mondiale.",
   },
   {
     title: "Nous refusons de remplacer votre jugement.",

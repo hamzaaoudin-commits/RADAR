@@ -252,3 +252,34 @@ demander quoi que ce soit.
   les deux demandes d'achat (manifeste, relance finale) sont en bouton
   principal ; la passerelle produit passe en bouton secondaire et la
   transition vers le brief en simple lien.
+
+## Passage au modèle par marché
+
+Le site promettait un filtrage « par l'empreinte stratégique propre à votre
+entreprise ». Le produit réel couvre un marché entier, le même brief servant
+tous ses abonnés. La promesse a été réalignée partout — plus aucune occurrence
+d'« empreinte » ni de « votre entreprise » comme périmètre de surveillance.
+
+Correction la plus importante — la section « fausse solution » de la home
+reprochait aux newsletters sectorielles de « parler à tout votre secteur en même
+temps ». C'était devenu une attaque contre RADAR lui-même. La différenciation
+repose maintenant sur ce qui est vrai : une newsletter raconte ce qui s'est
+passé, RADAR va jusqu'au coût, au délai, à l'action testable en sept jours, et
+au suivi du sujet jusqu'à sa résolution.
+
+Autres réécritures — hero, footer, métadonnées, passerelle produit, page
+/produit, section « ce que RADAR couvre » (l'empreinte devient « un marché »),
+manifeste (le refus n° 2 devient « nous refusons de surveiller tout pour tout le
+monde »), protocole, les sept radars (RADAR COMPETITION surveille désormais les
+acteurs structurants du marché), page /brief et données de démonstration.
+
+Tarifs — les paliers s'expriment maintenant en unités de marché plutôt qu'en
+degrés de personnalisation : RADAR et PRO couvrent un marché, ENTERPRISE
+plusieurs marchés ou un marché sur mesure. La personnalisation à l'entreprise
+réapparaît à partir d'ADVISORY, où elle est réelle : c'est l'analyste humain qui
+applique le marché à votre configuration. Deux lignes ajoutées au comparatif :
+« Marchés suivis » et « Application à votre entreprise ».
+
+FAQ — une question a été ajoutée et assumée frontalement : « Le brief est-il
+personnalisé pour mon entreprise ? — Non, et c'est un choix. » Mieux vaut traiter
+l'objection sur le site que la laisser découvrir après paiement.

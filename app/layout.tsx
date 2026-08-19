@@ -15,9 +15,9 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "RADAR · L'intelligence qui empêche votre entreprise de devenir obsolète",
+  title: "RADAR · L'intelligence de votre marché, chaque semaine",
   description:
-    "RADAR surveille en continu l'IA, la réglementation, vos concurrents et votre marché — et vous dit quoi faire. Détectez le changement avant qu'il ne devienne votre problème.",
+    "Chaque semaine, RADAR balaye sept domaines sur votre marché et vous dit quoi faire. Détectez le changement avant qu'il ne devienne votre problème.",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

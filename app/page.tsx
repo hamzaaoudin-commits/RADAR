@@ -25,11 +25,11 @@ export default function Home() {
       <section className="section text-center">
         <div className="mx-auto max-w-[640px]">
           <div className="kicker mb-5">La réponse</div>
-          <h2 className="h-section mb-6">Sept radars, construits sur votre entreprise.</h2>
+          <h2 className="h-section mb-6">Sept radars, braqués sur un seul marché.</h2>
           <p className="lede mx-auto mb-8 max-w-[560px]">
             IA, technologies, réglementation, marché, concurrence, opportunités,
-            risques. Chacun filtré par l&apos;empreinte stratégique propre à votre
-            entreprise — pas par votre secteur en général.
+            risques. Balayés chaque semaine sur votre marché, et filtrés contre
+            sa chaîne de valeur, ses acteurs et ses obligations.
           </p>
           <Link href="/produit" className="btn-ghost">Voir ce que RADAR surveille</Link>
         </div>

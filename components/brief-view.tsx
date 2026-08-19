@@ -59,9 +59,9 @@ export function BriefView() {
         <div className="hidden lg:block">
           <div className="eyebrow mb-3">Le brief par e-mail</div>
           <p className="m-0 font-sans text-[12.5px] leading-relaxed text-chalk-55">
-            Vous recevez ce même brief chaque lundi à 7h. Cette page en conserve
-            l&apos;historique et le suivi — l&apos;e-mail vous prévient, la page vous
-            montre où vous en êtes.
+            Vous recevez ce même brief chaque lundi à 7h, comme tous les abonnés de
+            votre marché. Cette page en conserve l&apos;historique et le suivi —
+            l&apos;e-mail vous prévient, la page vous montre où vous en êtes.
           </p>
         </div>
       </aside>
@@ -128,7 +128,7 @@ export function BriefView() {
                   <div className="overflow-hidden">
                     <div className="grid gap-5 pb-7 pl-8 sm:grid-cols-2">
                       <div>
-                        <div className="eyebrow mb-1.5">Pourquoi ça compte pour vous</div>
+                        <div className="eyebrow mb-1.5">Pourquoi ça compte sur ce marché</div>
                         <p className="m-0 body-sm">{item.why}</p>
                       </div>
                       <div>

@@ -15,7 +15,7 @@ export function HeroSection() {
         </h1>
 
         <p className="lede mx-auto mb-4 max-w-[640px]">
-          RADAR surveille en continu l&apos;IA, la réglementation, vos concurrents et votre marché — et transforme cette masse d&apos;informations en une seule question résolue chaque semaine : qu&apos;est-ce qui a changé, et que devez-vous faire maintenant.
+          Chaque semaine, RADAR balaye sept domaines sur un seul marché — le vôtre — et répond à une question, une seule : qu&apos;est-ce qui a changé, et que devez-vous faire lundi.
         </p>
 
         <p className="mx-auto mb-9 max-w-[640px] font-sans text-[13px] uppercase tracking-[0.14em] text-brand/80">
@@ -25,7 +25,7 @@ export function HeroSection() {
         <div className="flex flex-col items-center gap-3">
           <a href="/pricing" className="btn-primary">Voir les tarifs</a>
           <a href="/produit" className="font-sans text-[13px] text-chalk-40 underline decoration-hair-strong underline-offset-4 hover:text-white">
-            ou voir ce que RADAR surveille pour vous
+            ou voir ce que RADAR surveille sur votre marché
           </a>
         </div>
 

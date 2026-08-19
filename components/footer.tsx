@@ -39,7 +39,7 @@ export function Footer() {
               <span className="text-gradient">RADAR</span>.
             </Link>
             <p className="mb-5 max-w-[240px] text-[13px] leading-relaxed text-chalk-55">
-              L&apos;intelligence qui empêche votre entreprise de devenir obsolète. Notre seul ennemi : l&apos;angle mort.
+              L&apos;intelligence de votre marché, chaque semaine. Notre seul ennemi : l&apos;angle mort.
             </p>
             <div className="text-[11px] uppercase tracking-[0.1em] text-chalk-40">Paris · France</div>
           </div>

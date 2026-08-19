@@ -13,8 +13,8 @@ const FAQ = [
     a: "Non. RADAR informe et alerte sur les évolutions réglementaires qui vous concernent ; toute décision juridique doit être validée par un professionnel compétent.",
   },
   {
-    q: "Comment RADAR construit-il mon radar d'entreprise ?",
-    a: "À l'inscription, vous renseignez votre secteur, votre taille, votre marché, vos concurrents et vos outils. RADAR construit à partir de ça une empreinte stratégique et surveille en continu les sept domaines qui vous concernent.",
+    q: "Le brief est-il personnalisé pour mon entreprise ?",
+    a: "Non, et c'est un choix. RADAR couvre un marché entier : le brief est le même pour toutes les entreprises qui y opèrent, ce qui permet d'y consacrer un travail de fond impossible à produire maison par maison. Quand une action dépend de votre configuration, elle est explicitement segmentée.",
   },
   {
     q: "Qu'est-ce qui différencie RADAR PRO de RADAR ADVISORY ?",
@@ -41,7 +41,7 @@ export default function PricingPage() {
             Une formule pour chaque niveau de risque que vous êtes prêt à ignorer.
           </h1>
           <p className="mx-auto max-w-[560px] font-sans text-[16px] leading-relaxed text-white/60">
-            De la surveillance ciblée à l&apos;intelligence sur-mesure pour grands groupes. Pas d&apos;engagement sur RADAR et RADAR PRO.
+            Un marché suivi en profondeur, ou plusieurs sur mesure. Pas d&apos;engagement sur RADAR et RADAR PRO.
           </p>
         </div>
       </section>
@@ -83,8 +83,11 @@ export default function PricingPage() {
                   ["RADAR COMPETITION", "—", "✓", "✓", "✓"],
                   ["RADAR OPPORTUNITY", "—", "✓", "✓", "✓"],
                   ["RADAR RISK", "—", "✓", "✓", "✓"],
+                  ["Marchés suivis", "1", "1", "1", "plusieurs"],
                   ["Briefing hebdomadaire", "✓", "✓", "✓", "✓"],
+                  ["Suivi des sujets dans le temps", "—", "✓", "✓", "✓"],
                   ["Scénarios & roadmap 36 mois", "—", "✓", "✓", "✓"],
+                  ["Application à votre entreprise", "—", "—", "✓", "✓"],
                   ["Analyste humain dédié", "—", "—", "✓", "✓"],
                   ["API & intégrations", "—", "—", "—", "✓"],
                 ].map((row) => (

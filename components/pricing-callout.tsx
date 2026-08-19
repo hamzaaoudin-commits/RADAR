@@ -15,8 +15,9 @@ export function PricingCallout() {
         <span className="tag">Notre recommandation · RADAR PRO · 199€/mois</span>
         <h3 className="mb-3 mt-5 font-serif text-[1.8rem] font-bold">La surveillance complète, à volonté.</h3>
         <p className="mb-7 font-sans text-[15px] leading-relaxed text-chalk-65">
-          Les sept radars, les scénarios et la roadmap à 36 mois. Sans engagement,
-          résiliable à tout moment.
+          Les sept radars balayés chaque semaine sur votre marché, le suivi des
+          sujets jusqu&apos;à leur résolution, les scénarios et la roadmap à 36 mois.
+          Sans engagement, résiliable à tout moment.
         </p>
         <Link href="#pro" className="btn-primary">Choisir RADAR PRO</Link>
         <p className="mt-4 font-sans text-[13px] text-chalk-40">

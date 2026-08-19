@@ -1,8 +1,8 @@
 /**
  * Données d'exemple du brief hebdomadaire.
  *
- * Rien ici n'est réel : ce sont des briefs d'illustration pour une entreprise
- * fictive, destinés à montrer la forme du produit. Le site l'annonce
+ * Rien ici n'est réel : ce sont des briefs d'illustration portant sur un marché
+ * fictif, destinés à montrer la forme du produit. Le site l'annonce
  * explicitement en tête de la page /brief. Règle tenue partout : jamais un
  * chiffre inventé présenté comme un résultat réel.
  */
@@ -62,7 +62,7 @@ export const BRIEFS: Brief[] = [
         label: "Un concurrent direct lance une offre de conseil automatisé",
         domain: "Concurrence",
         severity: "critical",
-        why: "Il attaque le segment sur lequel vous réalisez votre meilleure marge, avec un prix d'appel 40 % inférieur au vôtre.",
+        why: "Il attaque le segment le mieux margé du marché, avec un prix d'appel 40 % sous la moyenne pratiquée.",
         action: "Préparer un argumentaire de différenciation avant la rentrée, sur ce que l'automatisation ne couvre pas.",
         horizon: "0–3 mois",
       },
@@ -71,7 +71,7 @@ export const BRIEFS: Brief[] = [
         label: "Nouvelle capacité d'agent autonome chez un fournisseur majeur",
         domain: "IA",
         severity: "important",
-        why: "Une partie de votre traitement des demandes entrantes devient automatisable à coût marginal.",
+        why: "Sur ce marché, le traitement des demandes entrantes devient automatisable à coût marginal.",
         action: "Tester sur un flux pilote non critique pendant sept jours.",
         horizon: "6–18 mois",
       },
@@ -80,7 +80,7 @@ export const BRIEFS: Brief[] = [
         label: "Obligation de transparence sectorielle en consultation",
         domain: "Réglementation",
         severity: "important",
-        why: "Le texte en préparation touche directement vos supports commerciaux.",
+        why: "Le texte en préparation touche les supports commerciaux de toute la filière.",
         action: "Faire vérifier votre exposition par votre conseil habituel.",
         horizon: "3–6 mois",
       },
@@ -89,7 +89,7 @@ export const BRIEFS: Brief[] = [
         label: "Un nouveau canal de distribution s'ouvre sur votre segment",
         domain: "Marché",
         severity: "watch",
-        why: "Un acteur adjacent ouvre sa plateforme à des partenaires — position à prendre tôt ou pas du tout.",
+        why: "Un acteur adjacent ouvre sa plateforme aux entreprises du marché — position à prendre tôt ou pas du tout.",
         action: "Évaluer le coût d'entrée avant que le canal ne se remplisse.",
         horizon: "3–6 mois",
       },
@@ -98,7 +98,7 @@ export const BRIEFS: Brief[] = [
         label: "Baisse du coût d'inférence des modèles",
         domain: "IA",
         severity: "watch",
-        why: "Ce qui était trop cher à automatiser il y a six mois redevient rentable.",
+        why: "Ce qui était trop cher à automatiser il y a six mois redevient rentable pour tout le marché.",
         action: "Ressortir la liste des automatisations abandonnées pour cause de coût.",
         horizon: "0–3 mois",
       },
@@ -110,7 +110,7 @@ export const BRIEFS: Brief[] = [
     dateLabel: "4 — 10 août",
     headline: "Consolidation en cours sur votre segment",
     summary:
-      "Deux acteurs de taille moyenne fusionnent. À court terme, cela libère des clients mécontents ; à moyen terme, cela crée un concurrent à votre échelle.",
+      "Deux acteurs de taille moyenne fusionnent. À court terme, cela libère des clients mécontents ; à moyen terme, cela crée un concurrent de taille intermédiaire sur le marché.",
     read: true,
     items: [
       {
@@ -127,7 +127,7 @@ export const BRIEFS: Brief[] = [
         label: "Durcissement des règles de démarchage",
         domain: "Réglementation",
         severity: "important",
-        why: "Vos séquences de prospection sortantes sont concernées.",
+        why: "Les séquences de prospection sortantes utilisées sur ce marché sont concernées.",
         action: "Faire relire vos séquences par votre conseil.",
         horizon: "0–3 mois",
       },
@@ -156,8 +156,8 @@ export const BRIEFS: Brief[] = [
         label: "Seuil de rentabilité de l'automatisation franchi",
         domain: "IA",
         severity: "important",
-        why: "Le calcul qui rendait l'automatisation non rentable en 2025 ne tient plus.",
-        action: "Refaire le calcul sur les trois tâches les plus répétitives.",
+        why: "Le calcul qui rendait l'automatisation non rentable sur ce marché en 2025 ne tient plus.",
+        action: "Refaire le calcul sur les trois tâches les plus répétitives de votre métier.",
         horizon: "0–3 mois",
       },
       {
@@ -166,7 +166,7 @@ export const BRIEFS: Brief[] = [
         domain: "Comportement",
         severity: "watch",
         why: "La norme implicite du secteur se resserre — sans annonce, mais mesurable.",
-        action: "Comparer votre délai moyen actuel à la nouvelle norme.",
+        action: "Comparer votre délai moyen actuel à la nouvelle norme du marché.",
         horizon: "3–6 mois",
       },
     ],
