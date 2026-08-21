@@ -283,3 +283,52 @@ applique le marché à votre configuration. Deux lignes ajoutées au comparatif 
 FAQ — une question a été ajoutée et assumée frontalement : « Le brief est-il
 personnalisé pour mon entreprise ? — Non, et c'est un choix. » Mieux vaut traiter
 l'objection sur le site que la laisser découvrir après paiement.
+
+## Pages légales
+
+Trois pages ajoutées : /mentions-legales, /cgv, /confidentialite. Les liens du
+pied de page ne renvoient plus vers des 404.
+
+Reprises de l'identité légale existante — Hamza El Jaouahiry, entrepreneur
+individuel, SIREN 105 253 314, SIRET 105 253 314 00014, code APE 7022Z, TVA non
+applicable au titre de l'article 293 B du CGI, siège à Noisy-le-Grand,
+hébergement Vercel, paiement Stripe. Le nom commercial est RADAR : aucune autre
+activité n'est mentionnée nulle part.
+
+Ce qui a été réécrit, parce que le modèle économique n'est pas le même :
+
+- CGV entièrement refondues pour l'abonnement. Reconduction tacite mensuelle,
+  résiliation en ligne au sens de l'article L.215-1-1 du Code de la
+  consommation, préavis de 30 jours sur toute révision tarifaire, suspension
+  après échec de prélèvement, résiliation par le Prestataire s'il cesse de
+  couvrir un marché avec remboursement de la période non servie.
+- Droit de rétractation adapté : 14 jours pour le consommateur, et extension aux
+  professionnels de cinq salariés au plus dont l'objet du contrat sort de leur
+  activité principale (article L.221-3), ce qui couvre une partie réelle de la
+  cible.
+- Droit d'usage à la place de la cession. L'Abonné reçoit un droit d'usage
+  interne pendant l'abonnement ; la rediffusion, la revente, l'intégration dans
+  une prestation vendue et l'entraînement d'un système automatisé sont exclus.
+- Responsabilité plafonnée aux douze derniers mois d'abonnement, et non au
+  montant d'une prestation unique.
+- Engagement de production ajouté côté Prestataire : sourcer et dater chaque
+  fait, distinguer les faits établis des informations non recoupées, déclarer un
+  domaine vide plutôt que le combler. Avoir au prorata au-delà de deux semaines
+  d'interruption.
+
+La clause la plus importante est en article 02 des CGV et reprise en mentions
+légales : le service n'est pas un conseil juridique, fiscal, comptable, médical
+ou financier personnalisé, et l'analyse porte sur un marché entier, identique
+pour tous les abonnés. C'est ce qui protège une activité qui commente de la
+réglementation sans être un professionnel réglementé.
+
+À COMPLÉTER AVANT MISE EN LIGNE
+- L'adresse contact@radar-intelligence.fr doit être créée, ou remplacée partout
+  (trois pages légales et pied de page).
+- Le prestataire d'acheminement des courriels doit être nommé dans la politique
+  de confidentialité, section 4, dès qu'il est choisi.
+- La fonctionnalité de résiliation en ligne annoncée à l'article 05 des CGV doit
+  exister réellement avant le premier abonnement encaissé.
+- L'adresse du siège est une adresse personnelle. C'est légal pour une
+  micro-entreprise, mais elle est publique : une domiciliation commerciale est à
+  envisager.

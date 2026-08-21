@@ -14,7 +14,7 @@ const OFFERS = [
   { label: "RADAR ENTERPRISE", href: "/pricing#enterprise" },
 ]
 const REACH = [
-  { label: "Nous écrire", href: "mailto:hello@radar-intelligence.io" },
+  { label: "Nous écrire", href: "mailto:contact@radar-intelligence.fr" },
   { label: "LinkedIn", href: "https://www.linkedin.com", external: true },
 ]
 
