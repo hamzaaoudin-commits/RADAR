@@ -17,8 +17,8 @@ export const TIERS: Tier[] = [
     target: "Petites entreprises",
     features: [
       "Un marché suivi",
-      "Brief hebdomadaire — 5 minutes",
-      "Alertes hors cycle quand ça ne peut pas attendre",
+      "Le journal hebdomadaire du marché",
+      "Alertes hors numéro quand ça ne peut pas attendre",
       "Rapport mensuel",
     ],
   },
@@ -31,11 +31,11 @@ export const TIERS: Tier[] = [
     featured: true,
     features: [
       "Tout RADAR, plus :",
-      "Les 7 radars balayés chaque semaine",
+      "Les 7 rubriques complètes, agenda et chiffres",
       "Suivi des sujets jusqu'à leur résolution",
       "Acteurs structurants du marché surveillés nommément",
       "Scénarios & roadmap 36 mois",
-      "Archive complète des briefs",
+      "Archive complète des numéros",
     ],
   },
   {

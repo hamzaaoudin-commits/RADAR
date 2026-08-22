@@ -7,8 +7,10 @@ export function PipelineGrid() {
         <div className="kicker mb-5">Le protocole RADAR</div>
         <h2 className="h-section mb-6">Le filtre que rien d&apos;autre ne vous donne.</h2>
         <p className="lede mx-auto mb-10 max-w-[600px]">
-          Sept étapes, toujours dans cet ordre. La deuxième est celle que personne
-          ne fait : on jette tout ce qui ne change rien sur votre marché.
+          Sept étapes, toujours dans cet ordre, appliquées à chaque information
+          avant qu&apos;elle n&apos;entre dans le journal. La quatrième est celle que
+          personne ne fait : dire ce que le fait change, et pas seulement qu&apos;il
+          s&apos;est produit.
         </p>
 
         <div className="grid gap-px border border-white/[0.07] bg-white/[0.07] [grid-template-columns:repeat(auto-fit,minmax(120px,1fr))]">
@@ -23,9 +25,9 @@ export function PipelineGrid() {
         </div>
 
         <p className="mt-8 body-sm">
-          Une veille s&apos;arrête à l&apos;étape 1. Une newsletter va jusqu&apos;à la 3. RADAR
-          va jusqu&apos;à la 7 : ce que ça coûte, ce que vous pouvez faire, et comment
-          le tester en sept jours.
+          Une revue de presse s&apos;arrête à l&apos;étape 1. Une newsletter va jusqu&apos;à
+          la 3. Chaque brève du journal va au moins jusqu&apos;à la 4, et la une va
+          jusqu&apos;à la 7 : ce que ça coûte, et quoi faire cette semaine.
         </p>
       </div>
     </section>

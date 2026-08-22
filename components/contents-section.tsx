@@ -1,10 +1,10 @@
 import { Reveal } from "./reveal"
 
 const CONTENTS = [
-  { n: "01", t: "Un marché", d: "RADAR ne surveille pas tout pour tout le monde. Un marché à la fois, avec sa chaîne de valeur, ses acteurs structurants, ses obligations et son vocabulaire." },
-  { n: "07", t: "Les radars", d: "Sept domaines balayés chaque semaine sur ce marché — y compris ceux qui n'ont rien donné, qui sont déclarés vides plutôt que remplis." },
-  { n: "05", t: "Minutes par semaine", d: "Le changement majeur, l'opportunité, le risque, ce que font les acteurs du marché, ce que vous devriez faire. Pas cinquante newsletters à lire." },
-  { n: "36", t: "Mois de visibilité", d: "Une timeline en quatre horizons — de l'imminent au scénario stratégique — pour cesser de subir et commencer à anticiper." },
+  { n: "01", t: "La une", d: "Le mouvement le plus important de la semaine, traité en entier : le fait, ce qu'il change chez vous avec son chiffre, et la seule chose à faire d'ici lundi prochain." },
+  { n: "07", t: "Rubriques", d: "IA, technologies, réglementation, marché, concurrence, opportunités, risques. Une rubrique sans actualité l'écrit, plutôt que de disparaître — vous savez ainsi que vous n'avez rien manqué." },
+  { n: "25", t: "Brèves au maximum", d: "Chacune tient en quelques phrases : le fait daté, sa source, et ce qu'il change pour une entreprise de votre marché. Le nombre suit l'activité réelle, jamais un quota." },
+  { n: "10", t: "Minutes de lecture", d: "Vous parcourez les titres, vous vous arrêtez sur ce qui vous concerne. Plus l'agenda des échéances à venir et les chiffres publiés cette semaine." },
 ]
 
 export function ContentsSection() {
@@ -12,8 +12,8 @@ export function ContentsSection() {
     <section id="produit" className="section">
       <div className="shell-lg">
         <div className="mb-12 text-center">
-          <div className="kicker mb-5">Ce que RADAR couvre</div>
-          <h2 className="h-section">Un marché, surveillé en profondeur.</h2>
+          <div className="kicker mb-5">Le journal</div>
+          <h2 className="h-section">Ce que vous recevez chaque lundi.</h2>
         </div>
 
         <div className="grid-auto">

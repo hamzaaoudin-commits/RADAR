@@ -15,7 +15,7 @@ const TRIED = [
   },
   {
     t: "Des newsletters sectorielles",
-    d: "Elles racontent ce qui s'est passé. Elles ne disent jamais ce que ça coûte, sous quel délai, ni quoi faire lundi. Vous finissez informé et toujours pas avancé.",
+    d: "Il en faut cinq pour couvrir un marché, et aucune ne dit ce que l'information change pour vous. Vous finissez informé, et toujours pas avancé.",
   },
   {
     t: "Un collaborateur chargé de la veille, à côté de son poste",
@@ -29,7 +29,7 @@ export function ProblemSection() {
       <div className="shell-md">
         <div className="mb-5 kicker">Le problème</div>
         <h2 className="h-section mb-7">
-          Vous ne manquez pas d&apos;information. Vous manquez d&apos;un filtre.
+          Vous ne manquez pas d&apos;information. Elle est éparpillée partout.
         </h2>
         <p className="lede mb-5">
           Chaque semaine, votre secteur encaisse, en même temps :
@@ -47,9 +47,11 @@ export function ProblemSection() {
         </div>
 
         <p className="mb-10 body-sm">
-          Vous n&apos;avez le temps de lire ni cinquante newsletters, ni de surveiller
-          cent entreprises, ni de tester chaque nouvel outil — en plus de diriger
-          la vôtre. Ce n&apos;est pas un manque de discipline. C&apos;est un manque de filtre.
+          Le journal officiel, le site du régulateur, trois newsletters, la presse
+          du métier, les pages tarifaires de vos fournisseurs, les annonces de vos
+          concurrents. Six sources minimum, chaque semaine, pour savoir ce qui a
+          changé. Ce n&apos;est pas un manque de discipline. C&apos;est un travail
+          à temps plein que personne ne fait à votre place.
         </p>
 
         <div className="mb-3 font-sans text-[11px] uppercase tracking-[0.18em] text-chalk-40">
@@ -66,18 +68,17 @@ export function ProblemSection() {
 
         <p className="mb-8 body-sm">
           Aucune de ces solutions n&apos;échoue par manque de bonne volonté. Elles
-          échouent parce qu&apos;elles s&apos;arrêtent à l&apos;information. Personne ne va
-          jusqu&apos;au bout : quel effet sur vos coûts, sous quel délai, et quelle est
-          la première chose à faire. Sans ce dernier pas, plus d&apos;information ne
-          veut jamais dire plus de décision. C&apos;est la vraie cause, et la seule que
+          échouent parce qu&apos;aucune ne couvre le marché entier, et qu&apos;aucune
+          ne dit ce que l&apos;information change. Il faut donc les additionner, puis
+          faire soi-même le travail de tri. C&apos;est la vraie cause, et la seule que
           RADAR a été construit pour traiter.
         </p>
 
         <div className="card px-7 py-8">
           <p className="m-0 font-serif text-[clamp(1.15rem,2.2vw,1.55rem)] leading-snug text-white/90">
-            Il y a deux types de dirigeants : ceux qui découvrent le changement une
-            fois qu&apos;il a déjà coûté une part de marché, et ceux qui l&apos;ont vu venir.
-            RADAR existe pour vous faire changer de catégorie.
+            Un seul journal, chaque lundi, qui couvre votre marché en entier — et
+            qui dit, pour chaque information, ce qu&apos;elle change chez vous. Après
+            l&apos;avoir lu, vous n&apos;avez plus rien à ouvrir.
           </p>
         </div>
       </div>

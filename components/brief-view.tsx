@@ -20,7 +20,7 @@ export function BriefView() {
     <div className="grid gap-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-14">
       {/* Colonne des semaines — l'archive, ce que l'e-mail ne peut pas donner. */}
       <aside>
-        <div className="eyebrow mb-4">Vos briefs</div>
+        <div className="eyebrow mb-4">Vos numéros</div>
         <div className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0">
           {BRIEFS.map((b) => {
             const active = b.slug === brief.slug
@@ -57,10 +57,10 @@ export function BriefView() {
         <div className="hairline my-7 hidden lg:block" />
 
         <div className="hidden lg:block">
-          <div className="eyebrow mb-3">Le brief par e-mail</div>
+          <div className="eyebrow mb-3">Le journal par e-mail</div>
           <p className="m-0 font-sans text-[12.5px] leading-relaxed text-chalk-55">
-            Vous recevez ce même brief chaque lundi à 7h, comme tous les abonnés de
-            votre marché. Cette page en conserve l&apos;historique et le suivi —
+            Vous recevez ce même numéro chaque lundi à 7h, comme tous les abonnés
+            de votre marché. Cette page en conserve l&apos;archive et le suivi —
             l&apos;e-mail vous prévient, la page vous montre où vous en êtes.
           </p>
         </div>
@@ -82,9 +82,9 @@ export function BriefView() {
         </Reveal>
 
         <div className="mb-5 mt-12 flex items-baseline justify-between gap-4">
-          <div className="kicker">Votre semaine en 5 minutes</div>
+          <div className="kicker">La une</div>
           <div className="font-sans text-[12px] text-chalk-40">
-            {brief.items.length} points
+            {brief.rubriques.reduce((n, r) => n + r.breves.length, 0)} brèves dans ce numéro
           </div>
         </div>
 
@@ -144,6 +144,88 @@ export function BriefView() {
               </div>
             )
           })}
+        </div>
+
+        {brief.rubriques.length > 0 && (
+          <>
+            <div className="mb-5 mt-16 kicker">Les rubriques</div>
+            <div className="flex flex-col gap-10">
+              {brief.rubriques.map((r) => (
+                <div key={r.name}>
+                  <div className="mb-4 flex items-center gap-3">
+                    <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
+                      {r.name}
+                    </span>
+                    <span className="hairline flex-1" />
+                    <span className="font-sans text-[11px] text-chalk-40">
+                      {r.breves.length === 0 ? "—" : r.breves.length}
+                    </span>
+                  </div>
+
+                  {r.breves.length === 0 ? (
+                    <p className="m-0 body-sm">
+                      Rien à signaler cette semaine. Balayé : {r.empty}.
+                    </p>
+                  ) : (
+                    <div className="flex flex-col gap-6">
+                      {r.breves.map((b) => (
+                        <div key={b.title}>
+                          <h4 className="mb-1.5 font-serif text-[15.5px] font-semibold leading-snug text-white">
+                            {b.title}
+                          </h4>
+                          <p className="mb-1.5 body-sm">{b.body}</p>
+                          <div className="font-sans text-[11.5px] text-chalk-40">
+                            SOURCE — {b.source}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {brief.agenda.length > 0 && (
+          <>
+            <div className="mb-5 mt-16 kicker">L&apos;agenda</div>
+            <div className="flex flex-col divide-y divide-hair">
+              {brief.agenda.map((a) => (
+                <div key={a.date + a.what} className="grid gap-1 py-3.5 sm:grid-cols-[130px_minmax(0,1fr)] sm:gap-5">
+                  <div className="font-mono text-[12.5px] text-brand">{a.date}</div>
+                  <div>
+                    <div className="font-sans text-[14px] text-chalk-90">{a.what}</div>
+                    <div className="font-sans text-[11.5px] text-chalk-40">{a.who}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {brief.figures.length > 0 && (
+          <>
+            <div className="mb-5 mt-16 kicker">Les chiffres de la semaine</div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {brief.figures.map((f) => (
+                <div key={f.value + f.what} className="card card-hover px-5 py-5">
+                  <div className="mb-1.5 font-serif text-[1.6rem] font-bold leading-none text-gradient">
+                    {f.value}
+                  </div>
+                  <p className="mb-1.5 m-0 font-sans text-[13.5px] leading-relaxed text-chalk-75">
+                    {f.what}
+                  </p>
+                  <div className="font-sans text-[11.5px] text-chalk-40">{f.source}</div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        <div className="card mt-16 border-l-2 border-l-brand px-7 py-7">
+          <div className="mb-3 kicker">Ce qu&apos;il faut faire cette semaine</div>
+          <p className="m-0 body-sm">{brief.todo}</p>
         </div>
       </div>
     </div>

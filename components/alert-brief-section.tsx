@@ -4,13 +4,13 @@ export function AlertBriefSection() {
       <div className="shell-md">
         <div className="mb-12 text-center">
           <div className="kicker mb-5">Ce que vous recevez</div>
-          <h2 className="h-section">Une alerte quand ça compte. Cinq minutes par semaine.</h2>
+          <h2 className="h-section">Un numéro, cinq blocs, dix minutes.</h2>
         </div>
 
         <div className="flex flex-col gap-6">
           <div className="card card-hover border-l-2 border-l-[#ff1a1a] px-6 py-6">
             <div className="mb-2 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-[#ff1a1a]">
-              🔴 RADAR ALERT
+              LA UNE DE LA SEMAINE
             </div>
             <h3 className="mb-1 font-serif text-base font-bold text-white">
               OpenAI — nouvelle capacité d&apos;agent autonome
@@ -25,14 +25,14 @@ export function AlertBriefSection() {
           </div>
 
           <div className="card card-hover px-6 py-6">
-            <div className="mb-4 kicker">Your week in 5 minutes</div>
+            <div className="mb-4 kicker">La structure d&apos;un numéro</div>
             <ul className="m-0 mb-6 flex list-none flex-col gap-3 p-0">
               {[
-                ["01", "Le changement majeur"],
-                ["02", "L'opportunité"],
-                ["03", "Le risque"],
-                ["04", "Ce que font vos concurrents"],
-                ["05", "Ce que vous devriez faire"],
+                ["01", "La une, traitée en entier"],
+                ["02", "Les sept rubriques du marché"],
+                ["03", "L'agenda des échéances"],
+                ["04", "Les chiffres de la semaine"],
+                ["05", "Ce qu'il faut faire cette semaine"],
               ].map(([n, label]) => (
                 <li key={n} className="flex items-center gap-3 font-sans text-[14px] text-chalk-75">
                   <span className="font-mono text-[12px] text-brand">{n}</span>
@@ -44,7 +44,7 @@ export function AlertBriefSection() {
               href="/brief"
               className="font-sans text-[13px] text-chalk-55 underline decoration-hair-strong underline-offset-4 transition-colors hover:text-white"
             >
-              Voir un brief complet et son suivi dans le temps →
+              Lire un numéro complet →
             </a>
           </div>
         </div>

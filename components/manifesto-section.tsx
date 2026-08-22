@@ -11,14 +11,14 @@ import { Reveal } from "./reveal"
  */
 const REFUSALS = [
   {
-    title: "Nous refusons la veille passive.",
-    body: "Un flux d'informations n'est pas une réponse. RADAR ne relaie jamais un fait sans dire ce qu'il coûte, sous quel délai, et quelle est la première chose à faire.",
+    title: "Nous refusons la revue de presse.",
+    body: "Un flux d'informations n'est pas une réponse. RADAR ne relaie jamais un fait sans dire, en une phrase, ce qu'il change pour une entreprise de votre marché.",
     gain: "Vous ne lisez plus pour vous informer. Vous lisez pour décider.",
   },
   {
     title: "Nous refusons de surveiller tout pour tout le monde.",
-    body: "Un marché à la fois, avec sa chaîne de valeur, ses acteurs et ses obligations. Un signal qui ne change rien sur ce marché-là n'est pas envoyé, même s'il fait la une ailleurs.",
-    gain: "Cinq points par semaine qui concernent votre métier. Pas un panorama de l'économie mondiale.",
+    body: "Un marché à la fois, avec sa chaîne de valeur, ses acteurs et ses obligations. Un fait qui ne change rien sur ce marché-là n'entre pas dans le journal, même s'il fait la une ailleurs.",
+    gain: "Un journal entier consacré à votre métier. Pas un panorama de l'économie mondiale.",
   },
   {
     title: "Nous refusons de remplacer votre jugement.",
@@ -26,7 +26,7 @@ const REFUSALS = [
     gain: "Vous gardez la main. RADAR vous donne l'avance, pas des ordres.",
   },
   {
-    title: "Nous refusons l'angle mort.",
+    title: "Nous refusons de vous laisser un angle mort.",
     body: "Vous ne devriez jamais découvrir une révolution une fois qu'elle est déjà devenue votre problème. C'est la seule raison d'être de RADAR.",
     gain: "Vous voyez arriver ce que vos concurrents découvriront trop tard.",
   },

@@ -29,13 +29,35 @@ export type TrackedThread = {
   note: string
 }
 
+export type Breve = {
+  title: string
+  body: string
+  source: string
+}
+
+export type Rubrique = {
+  name: string
+  breves: Breve[]
+  /** Ce qui a été balayé quand la rubrique n'a rien donné. */
+  empty?: string
+}
+
+export type AgendaEntry = { date: string; what: string; who: string }
+
+export type KeyFigure = { value: string; what: string; source: string }
+
 export type Brief = {
   slug: string
   week: string
   dateLabel: string
   headline: string
   summary: string
+  /** La une, traitée en entier. */
   items: BriefItem[]
+  rubriques: Rubrique[]
+  agenda: AgendaEntry[]
+  figures: KeyFigure[]
+  todo: string
   read: boolean
 }
 
@@ -56,6 +78,104 @@ export const BRIEFS: Brief[] = [
     summary:
       "Le mouvement le plus important de la semaine ne vient pas d'un fournisseur de technologie mais d'un concurrent : il déplace son offre vers un modèle que vos clients vont comparer au vôtre dès la rentrée.",
     read: false,
+    todo:
+      "Traitez d'abord la une : tant que vous n'avez pas chiffré ce que ce mouvement coûte chez vous, aucun des autres sujets n'est décidable. Deux points demanderont une décision plus tard, sans urgence cette semaine : le nouveau canal de distribution, dont les conditions ne sont pas publiées, et la consultation réglementaire, ouverte jusqu'en mars.",
+    rubriques: [
+      {
+        name: "IA",
+        breves: [
+          {
+            title: "Le coût d'inférence franchit le seuil de rentabilité du secteur",
+            body: "La baisse annoncée le 14 août rend rentables des automatisations abandonnées en 2025 pour cause de coût. Les tâches répétitives à faible valeur sont les premières concernées.",
+            source: "Fournisseur, page de tarification, 14 août",
+          },
+          {
+            title: "Un outil métier intègre l'analyse automatique des dossiers",
+            body: "L'éditeur a ouvert la fonction le 12 août à ses clients existants, sans surcoût annoncé pour l'instant. La facturation de la fonction reste à surveiller au renouvellement.",
+            source: "Éditeur, note de version, 12 août",
+          },
+        ],
+      },
+      {
+        name: "Technologies",
+        breves: [],
+        empty:
+          "annonces d'infrastructure des fournisseurs de la filière, dépôts de brevets, documentations techniques, normes en cours d'adoption",
+      },
+      {
+        name: "Réglementation",
+        breves: [
+          {
+            title: "Une obligation de transparence sectorielle entre en consultation",
+            body: "Le texte en préparation touche les supports commerciaux de toute la filière. La consultation se clôt à la mi-mars ; l'exposition dépend de vos supports existants.",
+            source: "Autorité compétente, avis de consultation, 13 août",
+          },
+          {
+            title: "Le calendrier d'application est confirmé sans report",
+            body: "Les demandes de décalage portées par la filière ont été écartées le 15 août. Les entreprises qui attendaient un report doivent reprendre leur calendrier de conformité.",
+            source: "Autorité compétente, réponse publiée le 15 août",
+          },
+        ],
+      },
+      {
+        name: "Marché",
+        breves: [
+          {
+            title: "Un nouveau canal de distribution s'ouvre aux entreprises du secteur",
+            body: "Un acteur adjacent ouvre sa plateforme aux partenaires depuis le 11 août. Les places sont attribuées par ordre d'inscription : la position se prend tôt ou pas du tout.",
+            source: "Plateforme, communiqué du 11 août",
+          },
+        ],
+      },
+      {
+        name: "Concurrence",
+        breves: [
+          {
+            title: "Un concurrent direct lance une offre de conseil automatisé",
+            body: "Le prix d'appel est inférieur d'environ 40 % à la moyenne pratiquée sur le segment le mieux margé. L'offre a été annoncée le 13 août, sans date de disponibilité générale.",
+            source: "Concurrent, communiqué du 13 août",
+          },
+          {
+            title: "Deux acteurs de taille moyenne rapprochent leurs activités",
+            body: "L'opération a été rendue publique le 12 août. Les intégrations dégradent presque toujours le service pendant deux à trois trimestres : des clients se libèrent à court terme.",
+            source: "Acteurs concernés, communiqué du 12 août",
+          },
+        ],
+      },
+      {
+        name: "Opportunités",
+        breves: [
+          {
+            title: "Un dispositif d'aide à la modernisation rouvre pour six mois",
+            body: "L'enveloppe cible les structures de moins de cinquante salariés et s'instruit au fil de l'eau jusqu'à épuisement. Le dépôt est ouvert depuis le 12 août.",
+            source: "Organisme instructeur, 12 août",
+          },
+        ],
+      },
+      {
+        name: "Risques",
+        breves: [
+          {
+            title: "Une dépendance de filière modifie ses conditions d'accès",
+            body: "Le changement est entré en vigueur le 15 août, sans préavis. Aucune alternative substituable n'existe à ce jour sur ce maillon de la chaîne.",
+            source: "Fournisseur, documentation, version du 15 août",
+          },
+        ],
+      },
+    ],
+    agenda: [
+      { date: "30 août", what: "Fin de la période couverte par le dispositif d'urgence", who: "structures de moins de 250 salariés" },
+      { date: "1er septembre", what: "Entrée en vigueur de l'obligation sectorielle", who: "tout le marché" },
+      { date: "15 septembre", what: "Clôture du premier appel du dispositif de modernisation", who: "moins de 50 salariés" },
+      { date: "1er octobre", what: "Application de la nouvelle grille tarifaire du fournisseur", who: "tout le marché" },
+      { date: "15 mars", what: "Clôture de la consultation sur la transparence", who: "producteurs de supports commerciaux" },
+    ],
+    figures: [
+      { value: "−40 %", what: "prix d'appel du nouvel entrant sur le segment le mieux margé", source: "Concurrent, 13 août" },
+      { value: "6–18 mois", what: "horizon d'adoption estimé des agents autonomes dans la filière", source: "Étude de filière, 10 août" },
+      { value: "50 salariés", what: "seuil d'éligibilité au dispositif de modernisation rouvert", source: "Organisme instructeur, 12 août" },
+      { value: "3 trimestres", what: "durée moyenne de dégradation de service après un rapprochement", source: "Observatoire sectoriel, août" },
+    ],
     items: [
       {
         rank: "01",
@@ -112,6 +232,11 @@ export const BRIEFS: Brief[] = [
     summary:
       "Deux acteurs de taille moyenne fusionnent. À court terme, cela libère des clients mécontents ; à moyen terme, cela crée un concurrent de taille intermédiaire sur le marché.",
     read: true,
+    todo: "Numéro archivé — les blocs agenda et chiffres ne sont pas conservés au-delà de quatre semaines dans cette démonstration.",
+    rubriques: [],
+    agenda: [],
+    figures: [],
+
     items: [
       {
         rank: "01",
@@ -150,6 +275,11 @@ export const BRIEFS: Brief[] = [
     summary:
       "Rien de spectaculaire cette semaine, mais un seuil économique a été franchi : plusieurs tâches que vous aviez renoncé à automatiser redeviennent rentables.",
     read: true,
+    todo: "Numéro archivé — les blocs agenda et chiffres ne sont pas conservés au-delà de quatre semaines dans cette démonstration.",
+    rubriques: [],
+    agenda: [],
+    figures: [],
+
     items: [
       {
         rank: "01",

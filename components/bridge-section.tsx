@@ -18,7 +18,7 @@ export function BridgeSection() {
           href="/brief"
           className="font-sans text-[13.5px] text-chalk-55 underline decoration-hair-strong underline-offset-4 transition-colors hover:text-white"
         >
-          Voir un brief hebdomadaire et son suivi dans le temps →
+          Lire un numéro complet et son suivi dans le temps →
         </Link>
       </div>
     </section>

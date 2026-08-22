@@ -332,3 +332,32 @@ réglementation sans être un professionnel réglementé.
 - L'adresse du siège est une adresse personnelle. C'est légal pour une
   micro-entreprise, mais elle est publique : une domiciliation commerciale est à
   envisager.
+
+## Alignement sur le journal hebdomadaire
+
+Le produit est passé d'un brief de cinq points filtrés à un journal de marché
+couvrant tout ce qui a bougé. Le site vendait encore l'ancien produit.
+
+Contradictions corrigées
+- « Cinq points en cinq minutes » partout → un numéro en cinq blocs, dix minutes.
+- Le protocole promettait une action pour chaque signal ; seule la une en porte
+  une désormais. Le texte distingue les deux niveaux : chaque brève va au moins
+  jusqu'à l'étape 4 (dire ce que le fait change), la une va jusqu'à 7.
+- La page de démonstration montrait une maquette à cinq points avec sévérité.
+  Elle rend maintenant un numéro complet : la une, les sept rubriques avec leurs
+  brèves, l'agenda des échéances, les chiffres de la semaine, l'action de la
+  semaine. Une rubrique sans actualité affiche « rien à signaler cette semaine »
+  suivi de ce qui a été balayé — c'est ce qui prouve la couverture.
+- Vocabulaire unifié : brief → numéro, briefs → numéros, « Le brief » → « Le
+  journal » en navigation.
+
+Changement de fond, pas de forme
+La promesse de substitution est devenue littéralement vraie et prend la tête du
+site. Cinq points filtrés ne remplacent pas cinquante sources ; un journal qui
+couvre le marché entier, si. Le hero dit désormais « vous n'ouvrez plus rien
+d'autre », et la section problème énumère les six sources qu'un dirigeant doit
+consulter chaque semaine plutôt que d'invoquer un manque de filtre.
+
+Le manifeste suit : « nous refusons la revue de presse » remplace « nous
+refusons la veille passive », parce que le concurrent n'est plus l'absence
+d'analyse mais l'éparpillement.
