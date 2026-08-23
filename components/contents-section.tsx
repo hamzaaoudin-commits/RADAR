@@ -3,7 +3,7 @@ import { Reveal } from "./reveal"
 const CONTENTS = [
   { n: "01", t: "La une", d: "Le mouvement le plus important de la semaine, traité en entier : le fait, ce qu'il change chez vous avec son chiffre, et la seule chose à faire d'ici lundi prochain." },
   { n: "07", t: "Rubriques", d: "IA, technologies, réglementation, marché, concurrence, opportunités, risques. Une rubrique sans actualité l'écrit, plutôt que de disparaître — vous savez ainsi que vous n'avez rien manqué." },
-  { n: "25", t: "Brèves au maximum", d: "Chacune tient en quelques phrases : le fait daté, sa source, et ce qu'il change pour une entreprise de votre marché. Le nombre suit l'activité réelle, jamais un quota." },
+  { n: "15", t: "Articles au maximum", d: "Chacun en trois temps : le titre qui porte le fait, le développement avec ses modalités et ses chiffres, puis ce que ça implique concrètement pour une entreprise de votre marché." },
   { n: "10", t: "Minutes de lecture", d: "Vous parcourez les titres, vous vous arrêtez sur ce qui vous concerne. Plus l'agenda des échéances à venir et les chiffres publiés cette semaine." },
 ]
 

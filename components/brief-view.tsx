@@ -84,7 +84,7 @@ export function BriefView() {
         <div className="mb-5 mt-12 flex items-baseline justify-between gap-4">
           <div className="kicker">La une</div>
           <div className="font-sans text-[12px] text-chalk-40">
-            {brief.rubriques.reduce((n, r) => n + r.breves.length, 0)} brèves dans ce numéro
+            {brief.rubriques.reduce((n, r) => n + r.breves.length, 0)} articles dans ce numéro
           </div>
         </div>
 
@@ -167,13 +167,21 @@ export function BriefView() {
                       Rien à signaler cette semaine. Balayé : {r.empty}.
                     </p>
                   ) : (
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-9">
                       {r.breves.map((b) => (
                         <div key={b.title}>
-                          <h4 className="mb-1.5 font-serif text-[15.5px] font-semibold leading-snug text-white">
+                          <h4 className="mb-2 font-serif text-[16px] font-semibold leading-snug text-white">
                             {b.title}
                           </h4>
-                          <p className="mb-1.5 body-sm">{b.body}</p>
+                          <p className="mb-3 body-sm">{b.body}</p>
+                          <div className="mb-3 border-l-2 border-brand/50 pl-4">
+                            <div className="mb-1 font-sans text-[10.5px] font-semibold uppercase tracking-[0.12em] text-brand">
+                              Ce que ça implique pour vous
+                            </div>
+                            <p className="m-0 font-sans text-[14px] leading-relaxed text-chalk-75">
+                              {b.implication}
+                            </p>
+                          </div>
                           <div className="font-sans text-[11.5px] text-chalk-40">
                             SOURCE — {b.source}
                           </div>

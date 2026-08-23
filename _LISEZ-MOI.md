@@ -361,3 +361,26 @@ consulter chaque semaine plutôt que d'invoquer un manque de filtre.
 Le manifeste suit : « nous refusons la revue de presse » remplace « nous
 refusons la veille passive », parce que le concurrent n'est plus l'absence
 d'analyse mais l'éparpillement.
+
+## L'article en trois parties
+
+Chaque information du journal prend désormais cette forme : un titre qui porte
+le fait, un corps développé de trois à cinq phrases avec les modalités et les
+chiffres, puis un bloc séparé « Ce que ça implique pour vous ».
+
+Conséquence sur le volume : la fourchette passe de 12–25 brèves à 8–15 articles.
+Chaque article étant développé, garder vingt-cinq entrées aurait rendu le numéro
+illisible.
+
+Deux règles inscrites pour que la forme ne se vide pas de son sens :
+- L'implication doit apporter ce que le fait ne dit pas. Test écrit dans la
+  charte de voix : masquer l'implication et relire le fait ; si rien n'est perdu,
+  elle est à réécrire ou l'article n'a pas sa place.
+- L'implication n'est pas une consigne. « Vous devrez intervenir avant le
+  1er février » est une implication ; « intervenez avant le 1er février » est une
+  action, et les actions restent réservées à la une et au bloc de fin. Quinze
+  articles porteurs de consignes produisent un lecteur qui n'en suit aucune.
+
+Le site suit : la page de démonstration affiche le bloc d'implication en liseré
+rouge sous chaque article, et le compteur annonce des articles plutôt que des
+brèves.

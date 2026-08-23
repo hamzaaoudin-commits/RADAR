@@ -31,7 +31,10 @@ export type TrackedThread = {
 
 export type Breve = {
   title: string
+  /** Le corps développé de l'article : le fait, ses modalités, ses chiffres. */
   body: string
+  /** Ce que ça implique pour une entreprise du marché. Jamais une action datée. */
+  implication: string
   source: string
 }
 
@@ -86,12 +89,14 @@ export const BRIEFS: Brief[] = [
         breves: [
           {
             title: "Le coût d'inférence franchit le seuil de rentabilité du secteur",
-            body: "La baisse annoncée le 14 août rend rentables des automatisations abandonnées en 2025 pour cause de coût. Les tâches répétitives à faible valeur sont les premières concernées.",
+            body: "La grille publiée le 14 août divise par deux le prix unitaire sur le palier le plus utilisé en production. Le seuil au-delà duquel une tâche répétitive devient rentable à automatiser passe donc sous le coût horaire moyen du secteur. Le fournisseur n'annonce aucune date de fin pour cette grille.",
+            implication: "Les calculs d'automatisation abandonnés en 2025 pour cause de coût ne tiennent plus. Les tâches que vous aviez écartées comme non rentables méritent d'être rechiffrées, et ce sont les plus répétitives qui basculent en premier.",
             source: "Fournisseur, page de tarification, 14 août",
           },
           {
             title: "Un outil métier intègre l'analyse automatique des dossiers",
-            body: "L'éditeur a ouvert la fonction le 12 août à ses clients existants, sans surcoût annoncé pour l'instant. La facturation de la fonction reste à surveiller au renouvellement.",
+            body: "L'éditeur a ouvert la fonction le 12 août à ses clients existants, sans surcoût à ce stade. Elle est activée par défaut et traite les dossiers déposés après cette date. Aucune communication n'a été faite sur son maintien en gratuité après le renouvellement annuel.",
+            implication: "Une fonction offerte à l'ouverture est rarement offerte au renouvellement. Si vos équipes l'intègrent à leur routine d'ici là, son prix futur ne se négociera plus : il se subira.",
             source: "Éditeur, note de version, 12 août",
           },
         ],
@@ -107,12 +112,14 @@ export const BRIEFS: Brief[] = [
         breves: [
           {
             title: "Une obligation de transparence sectorielle entre en consultation",
-            body: "Le texte en préparation touche les supports commerciaux de toute la filière. La consultation se clôt à la mi-mars ; l'exposition dépend de vos supports existants.",
+            body: "Le projet mis en consultation le 13 août impose une mention normalisée sur tous les supports commerciaux de la filière, quel que soit le canal. La consultation se clôt à la mi-mars et le texte n'ouvre aucune période transitoire. Les modalités exactes de la mention ne sont pas encore arrêtées.",
+            implication: "L'absence de période transitoire signifie que la mise en conformité devra être faite avant l'entrée en vigueur, pas pendant. Les entreprises qui produisent beaucoup de supports sont les plus exposées, indépendamment de leur taille.",
             source: "Autorité compétente, avis de consultation, 13 août",
           },
           {
             title: "Le calendrier d'application est confirmé sans report",
-            body: "Les demandes de décalage portées par la filière ont été écartées le 15 août. Les entreprises qui attendaient un report doivent reprendre leur calendrier de conformité.",
+            body: "L'autorité a écarté le 15 août les demandes de décalage portées par plusieurs organisations professionnelles. Elle indique que le délai initial était calibré pour absorber la charge et n'annonce aucune tolérance de sanction.",
+            implication: "Les entreprises qui avaient calé leur planning interne sur un report probable ont perdu le temps qu'elles pensaient gagner. La conformité revient dans la fenêtre initiale et déplace mécaniquement les autres chantiers du semestre.",
             source: "Autorité compétente, réponse publiée le 15 août",
           },
         ],
@@ -122,7 +129,8 @@ export const BRIEFS: Brief[] = [
         breves: [
           {
             title: "Un nouveau canal de distribution s'ouvre aux entreprises du secteur",
-            body: "Un acteur adjacent ouvre sa plateforme aux partenaires depuis le 11 août. Les places sont attribuées par ordre d'inscription : la position se prend tôt ou pas du tout.",
+            body: "Un acteur adjacent a ouvert sa plateforme aux partenaires le 11 août. Le référencement est gratuit la première année, puis facturé à la commission. Le nombre de places par catégorie est plafonné et l'attribution se fait par ordre d'inscription.",
+            implication: "Un plafond par catégorie transforme l'ouverture en course : les entreprises qui attendent de voir les premiers résultats trouveront la catégorie fermée. La gratuité de la première année sert précisément à accélérer ce remplissage.",
             source: "Plateforme, communiqué du 11 août",
           },
         ],
@@ -132,12 +140,14 @@ export const BRIEFS: Brief[] = [
         breves: [
           {
             title: "Un concurrent direct lance une offre de conseil automatisé",
-            body: "Le prix d'appel est inférieur d'environ 40 % à la moyenne pratiquée sur le segment le mieux margé. L'offre a été annoncée le 13 août, sans date de disponibilité générale.",
+            body: "L'offre annoncée le 13 août affiche un prix d'appel inférieur d'environ 40 % à la moyenne pratiquée sur le segment le mieux margé du marché. Elle est présentée en accès limité, sans date de disponibilité générale ni engagement de volume.",
+            implication: "Un prix d'appel public devient une référence, même pour ceux qui ne l'atteignent pas : vos clients l'auront vu avant votre prochain rendez-vous. La question ne sera pas de vous aligner, mais d'expliquer l'écart.",
             source: "Concurrent, communiqué du 13 août",
           },
           {
             title: "Deux acteurs de taille moyenne rapprochent leurs activités",
-            body: "L'opération a été rendue publique le 12 août. Les intégrations dégradent presque toujours le service pendant deux à trois trimestres : des clients se libèrent à court terme.",
+            body: "L'opération, rendue publique le 12 août, réunit deux structures aux portefeuilles largement complémentaires. Les équipes commerciales seront fusionnées d'ici la fin de l'année selon le communiqué, ce qui suppose un changement d'interlocuteur pour une partie des clients.",
+            implication: "Un changement d'interlocuteur imposé est le moment où un client accepte de reconsidérer son fournisseur. La fenêtre s'ouvre au moment de la fusion des équipes, pas au moment de l'annonce.",
             source: "Acteurs concernés, communiqué du 12 août",
           },
         ],
@@ -147,7 +157,8 @@ export const BRIEFS: Brief[] = [
         breves: [
           {
             title: "Un dispositif d'aide à la modernisation rouvre pour six mois",
-            body: "L'enveloppe cible les structures de moins de cinquante salariés et s'instruit au fil de l'eau jusqu'à épuisement. Le dépôt est ouvert depuis le 12 août.",
+            body: "Le dispositif rouvert le 12 août finance jusqu'à 40 % des dépenses d'équipement et de formation, plafonnées par entreprise. Il cible les structures de moins de cinquante salariés et s'instruit au fil de l'eau jusqu'à épuisement de l'enveloppe, sans date de clôture annoncée.",
+            implication: "L'instruction au fil de l'eau fait que l'ordre d'arrivée compte plus que la qualité du dossier. Sur l'édition précédente, l'enveloppe avait été consommée en quatre mois : la fenêtre réelle est plus courte que les six mois affichés.",
             source: "Organisme instructeur, 12 août",
           },
         ],
@@ -157,7 +168,8 @@ export const BRIEFS: Brief[] = [
         breves: [
           {
             title: "Une dépendance de filière modifie ses conditions d'accès",
-            body: "Le changement est entré en vigueur le 15 août, sans préavis. Aucune alternative substituable n'existe à ce jour sur ce maillon de la chaîne.",
+            body: "Le fournisseur a modifié le 15 août ses conditions d'accès technique, sans notification aux clients : le changement n'apparaît que dans le journal de version de sa documentation. Les quotas sont réduits et la méthode d'authentification change au 1er octobre.",
+            implication: "Aucune alternative substituable n'existe sur ce maillon, ce qui rend le changement non négociable. Les entreprises qui ne surveillent pas le journal de version l'apprendront le jour de la coupure, pas avant.",
             source: "Fournisseur, documentation, version du 15 août",
           },
         ],
