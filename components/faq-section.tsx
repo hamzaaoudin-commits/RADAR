@@ -36,7 +36,7 @@ export function FaqSection({ faqs }: { faqs: FaqEntry[] }) {
                     <span className="hidden h-8 w-8 shrink-0 items-center justify-center border border-white/10 text-brand transition-colors duration-300 group-hover:border-brand/40 sm:flex">
                       <FaqIcon kind={faq.icon} />
                     </span>
-                    <span className="font-serif text-[clamp(1rem,1.8vw,1.25rem)] font-semibold leading-snug tracking-[-0.01em] text-white transition-colors duration-300 group-hover:text-brand">
+                    <span className="font-sans text-[clamp(0.98rem,1.7vw,1.15rem)] font-bold leading-snug tracking-[-0.01em] text-white transition-colors duration-300 group-hover:text-brand">
                       {faq.q}
                     </span>
                   </span>

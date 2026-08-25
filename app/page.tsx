@@ -1,8 +1,14 @@
 import Link from "next/link"
 import { NavBar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
+import { MarketsMarquee } from "@/components/markets-marquee"
+import { SourceTrustBar } from "@/components/source-trust-bar"
 import { ProblemSection } from "@/components/problem-section"
 import { ManifestoSection } from "@/components/manifesto-section"
+import { ContentsSection } from "@/components/contents-section"
+import { SevenRadars } from "@/components/seven-radars"
+import { PipelineGrid } from "@/components/pipeline-grid"
+import { AlertBriefSection } from "@/components/alert-brief-section"
 import { SectionDivider } from "@/components/section-divider"
 import { BridgeSection } from "@/components/bridge-section"
 import { FaqSection } from "@/components/faq-section"
@@ -15,25 +21,20 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-ink font-sans text-white">
       <NavBar />
       <HeroSection />
+      <MarketsMarquee />
+      <SourceTrustBar />
       <ProblemSection />
 
       {/* La conviction arrive juste après l'aveu du problème, pas sur une page
           annexe : c'est le moment où le lecteur est prêt à adhérer. */}
       <ManifestoSection />
 
-      {/* Pour qui veut d'abord comprendre le produit avant de décider. */}
-      <section className="section text-center">
-        <div className="mx-auto max-w-[640px]">
-          <div className="kicker mb-5">La réponse</div>
-          <h2 className="h-section mb-6">Sept radars, braqués sur un seul marché.</h2>
-          <p className="lede mx-auto mb-8 max-w-[560px]">
-            IA, technologies, réglementation, marché, concurrence, opportunités,
-            risques. Balayés chaque semaine sur votre marché, et filtrés contre
-            sa chaîne de valeur, ses acteurs et ses obligations.
-          </p>
-          <Link href="/produit" className="btn-ghost">Voir ce que RADAR surveille</Link>
-        </div>
-      </section>
+      {/* Le produit vit ici, sur la home, pas sur une page à part : c'est ce
+          qu'on vend, il ne doit jamais être à un clic de distance. */}
+      <ContentsSection />
+      <SevenRadars />
+      <PipelineGrid />
+      <AlertBriefSection />
 
       <SectionDivider word="DÉTECTEZ." caption="Ce que RADAR fait, avant tout le reste" />
       <BridgeSection />

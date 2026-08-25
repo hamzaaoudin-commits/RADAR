@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Playfair_Display, DM_Sans } from "next/font/google"
+import { Playfair_Display, DM_Sans, IBM_Plex_Mono } from "next/font/google"
 import "./globals.css"
 
 const playfair = Playfair_Display({
@@ -14,6 +14,13 @@ const dmSans = DM_Sans({
   display: "swap",
 })
 
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-mono",
+  display: "swap",
+})
+
 export const metadata: Metadata = {
   title: "RADAR · L'intelligence de votre marché, chaque semaine",
   description:
@@ -22,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${plexMono.variable}`}>
       <body className="bg-ink font-sans text-white antialiased">{children}</body>
     </html>
   )

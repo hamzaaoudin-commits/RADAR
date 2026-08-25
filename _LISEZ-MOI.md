@@ -384,3 +384,60 @@ Deux règles inscrites pour que la forme ne se vide pas de son sens :
 Le site suit : la page de démonstration affiche le bloc d'implication en liseré
 rouge sous chaque article, et le compteur annonce des articles plutôt que des
 brèves.
+
+## Passe visuelle (bulles, flipbook, marchés, tarifs)
+
+Points d'entrée : ce que le message précédent demandait, dans l'ordre.
+
+- **Point du logo** : retiré. En cherchant, c'était en fait le point blanc au
+  centre du RadarScope animé (`.scope-center`), pas le point après le mot
+  RADAR dans le wordmark — celui-ci était déjà coloré, pas blanc. Les deux
+  ont été vérifiés, seul le premier a été retiré.
+- **Police des questions FAQ** : passée de Playfair (serif) à DM Sans en gras,
+  pour une lecture plus directe dans la liste de questions.
+- **Bulles animées** : trois nouveaux composants, `tag-bubbles.tsx` (mots-clés
+  courts, deux tons alternés) et `content-bubbles.tsx` (cartes titre +
+  description, décalage vertical alterné). Flottaison via un utilitaire CSS
+  `bubble-float` dérivé de l'index de chaque élément — jamais de valeur
+  aléatoire, pour que le rendu serveur et client soient identiques au premier
+  affichage. Neutralisé sous `prefers-reduced-motion`. Appliqué aux trois
+  listes de la section problème : les sept signaux, les six sources à
+  surveiller (la phrase a été éclatée en liste), et les trois solutions déjà
+  essayées.
+- **Ligne de confiance sur les sources** (`source-trust-bar.tsx`) : bandeau
+  discret sous le bandeau de marchés — « Chaque fait sourcé · Toujours daté ·
+  Vérifiable, jamais une affirmation nue ».
+- **Bandeau des marchés couverts** (`markets-marquee.tsx`) : les seize marchés
+  du catalogue, en défilement continu sous le hero, même mécanique que
+  l'ancien bandeau de marques (liste dupliquée, translation à -50%).
+- **Grille tarifaire recentrée** : passée de `lg:grid-cols-5` avec quatre
+  formules (colonne vide, grille décalée) à `lg:grid-cols-4`, centrée,
+  largeur maximale posée. La formule recommandée est légèrement surélevée et
+  agrandie (`-translate-y-2 scale-[1.03]`) pour guider l'œil ; les trois
+  autres sont légèrement adoucies en opacité — hiérarchie visuelle au lieu de
+  quatre colonnes de poids égal.
+- **Couverture de marché par palier** : RADAR = 1 marché, RADAR PRO = jusqu'à
+  2, RADAR ADVISORY = jusqu'à 5, RADAR ENTERPRISE = tous les marchés en
+  parallèle. Placé en premier item de chaque liste de fonctionnalités.
+- **Flipbook du journal** (`journal-flipbook.tsx`) : remplace l'ancien rendu
+  statique de `/brief`. Empilement de feuilles avec rotation 3D réelle
+  (`rotateY`), pas un carrousel qui glisse — chaque page tourne autour de son
+  bord gauche. La feuille en cours d'animation reçoit un z-index forcé le
+  temps de la transition (sinon la page suivante, déjà immobile au bon angle,
+  s'affiche instantanément par-dessus et l'animation devient invisible).
+  Contenu tiré des données déjà existantes du site (`lib/brief-data.ts`) :
+  couverture, la une, une page par rubrique, agenda, chiffres, action de
+  clôture — sans donnée inventée, sur le même numéro d'exemple qu'avant.
+  Vérifié par capture d'écran en conditions réelles (serveur de dev +
+  Playwright), pas seulement par la compilation : la première version
+  laissait la feuille en rotation déborder du cadre du livre, corrigé en
+  séparant la couche d'ombre portée (`filter`) de la couche de découpe
+  (`overflow: hidden`) — les deux sur le même élément se neutralisent en CSS.
+- **Page /produit supprimée**, tout son contenu (ContentsSection, SevenRadars,
+  PipelineGrid, AlertBriefSection) rapatrié sur la home entre le manifeste et
+  le bandeau rouge. Liens de nav et de pied de page repointés vers les ancres
+  correspondantes (`/#produit`, `/#radars`).
+- **IBM Plex Mono** ajouté aux polices chargées (`app/layout.tsx`) : le
+  site l'utilisait déjà via la classe `font-mono` à plusieurs endroits sans
+  jamais la charger réellement, ce qui la faisait retomber sur une police
+  système. Corrigé au passage.

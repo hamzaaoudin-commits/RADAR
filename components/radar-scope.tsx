@@ -33,7 +33,6 @@ export function RadarScope() {
         <div className="scope-ring r3" />
         <div className="scope-cross" />
         <div className="scope-sweep" />
-        <div className="scope-center" />
         {BLIPS.map((b) => (
           <div
             key={b.label}
@@ -56,7 +55,6 @@ export function RadarScope() {
         .scope-cross::before, .scope-cross::after { content: ""; position: absolute; top: 50%; left: 50%; background: rgba(255,255,255,0.12); }
         .scope-cross::before { width: 300px; height: 1px; transform: translate(-50%,-50%); }
         .scope-cross::after { width: 1px; height: 300px; transform: translate(-50%,-50%); }
-        .scope-center { position: absolute; top: 50%; left: 50%; width: 8px; height: 8px; background: #fff; border-radius: 50%; transform: translate(-50%,-50%); z-index: 3; }
         .scope-sweep { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, rgba(230,57,70,0) 0deg, rgba(230,57,70,0) 300deg, rgba(230,57,70,0.10) 340deg, rgba(230,57,70,0.32) 356deg, rgba(230,57,70,0.6) 360deg); animation: radar-sweep 5.5s linear infinite; z-index: 2; }
         .scope-sweep::after { content: ""; position: absolute; top: 0; left: 50%; width: 1px; height: 50%; background: linear-gradient(#e63946, rgba(230,57,70,0)); transform-origin: bottom center; }
         .blip { position: absolute; top: 50%; left: 50%; width: 9px; height: 9px; transform: rotate(var(--a)) translateY(calc(-1 * var(--d))) rotate(calc(-1 * var(--a))); z-index: 3; }

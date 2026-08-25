@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 
 const NAV_LINKS = [
-  { label: "Produit", href: "/produit" },
+  { label: "Produit", href: "/#produit" },
   { label: "Le journal", href: "/brief" },
 ]
 
@@ -37,7 +37,7 @@ export function NavBar() {
     >
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between">
         <Link href="/" className="font-serif text-[22px] font-bold tracking-[-0.02em] text-white no-underline">
-          <span className="text-gradient">RADAR</span>.
+          <span className="text-gradient">RADAR</span>
         </Link>
 
         <button

@@ -1,3 +1,6 @@
+import { TagBubbles } from "./tag-bubbles"
+import { ContentBubbles } from "./content-bubbles"
+
 const SIGNALS = [
   "une nouvelle IA",
   "un nouveau concurrent",
@@ -6,6 +9,15 @@ const SIGNALS = [
   "une nouvelle plateforme",
   "une nouvelle habitude de vos clients",
   "un nouveau business model",
+]
+
+const SOURCES = [
+  "le journal officiel",
+  "le site du régulateur",
+  "trois newsletters",
+  "la presse du métier",
+  "les pages tarifaires de vos fournisseurs",
+  "les annonces de vos concurrents",
 ]
 
 const TRIED = [
@@ -31,39 +43,31 @@ export function ProblemSection() {
         <h2 className="h-section mb-7">
           Vous ne manquez pas d&apos;information. Elle est éparpillée partout.
         </h2>
-        <p className="lede mb-5">
+        <p className="lede mb-6">
           Chaque semaine, votre secteur encaisse, en même temps :
         </p>
 
-        <div className="mb-8 flex flex-wrap gap-2.5">
-          {SIGNALS.map((s) => (
-            <span
-              key={s}
-              className="rounded-full border border-hair-strong bg-white/[0.03] px-3.5 py-1.5 font-sans text-[13px] text-chalk-65"
-            >
-              {s}
-            </span>
-          ))}
+        <div className="mb-10">
+          <TagBubbles items={SIGNALS} />
         </div>
 
+        <p className="mb-4 body-sm">
+          Et pour savoir ce qui a changé, il faudrait surveiller vous-même :
+        </p>
+        <div className="mb-6">
+          <TagBubbles items={SOURCES} />
+        </div>
         <p className="mb-10 body-sm">
-          Le journal officiel, le site du régulateur, trois newsletters, la presse
-          du métier, les pages tarifaires de vos fournisseurs, les annonces de vos
-          concurrents. Six sources minimum, chaque semaine, pour savoir ce qui a
-          changé. Ce n&apos;est pas un manque de discipline. C&apos;est un travail
-          à temps plein que personne ne fait à votre place.
+          Six sources minimum, chaque semaine. Ce n&apos;est pas un manque de
+          discipline. C&apos;est un travail à temps plein que personne ne fait à
+          votre place.
         </p>
 
-        <div className="mb-3 font-sans text-[11px] uppercase tracking-[0.18em] text-chalk-40">
+        <div className="mb-4 font-sans text-[11px] uppercase tracking-[0.18em] text-chalk-40">
           Ce que vous avez sans doute déjà essayé
         </div>
-        <div className="mb-10 flex flex-col gap-5">
-          {TRIED.map((x) => (
-            <div key={x.t} className="border-l-2 border-hair-strong pl-4">
-              <div className="mb-1 font-serif text-[15px] font-bold text-white/85">{x.t}</div>
-              <p className="m-0 body-sm">{x.d}</p>
-            </div>
-          ))}
+        <div className="mb-12">
+          <ContentBubbles items={TRIED} />
         </div>
 
         <p className="mb-8 body-sm">

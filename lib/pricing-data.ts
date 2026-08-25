@@ -16,7 +16,7 @@ export const TIERS: Tier[] = [
     cadence: "/mois",
     target: "Petites entreprises",
     features: [
-      "Un marché suivi",
+      "1 marché suivi",
       "Le journal hebdomadaire du marché",
       "Alertes hors numéro quand ça ne peut pas attendre",
       "Rapport mensuel",
@@ -30,10 +30,10 @@ export const TIERS: Tier[] = [
     target: "PME",
     featured: true,
     features: [
-      "Tout RADAR, plus :",
+      "Jusqu'à 2 marchés suivis",
       "Les 7 rubriques complètes, agenda et chiffres",
       "Suivi des sujets jusqu'à leur résolution",
-      "Acteurs structurants du marché surveillés nommément",
+      "Acteurs structurants des marchés surveillés nommément",
       "Scénarios & roadmap 36 mois",
       "Archive complète des numéros",
     ],
@@ -45,8 +45,8 @@ export const TIERS: Tier[] = [
     cadence: "/mois",
     target: "IA + analyste humain",
     features: [
-      "Tout RADAR PRO, plus :",
-      "Un analyste applique le marché à votre entreprise",
+      "Jusqu'à 5 marchés suivis",
+      "Un analyste applique chaque marché à votre entreprise",
       "Réunions régulières",
       "Audits ponctuels",
       "Recommandations propres à votre configuration",
@@ -59,7 +59,7 @@ export const TIERS: Tier[] = [
     cadence: "/mois",
     target: "Grandes entreprises",
     features: [
-      "Plusieurs marchés suivis en parallèle",
+      "Tous les marchés couverts, en parallèle",
       "Marché sur mesure, créé pour vous",
       "Équipe dédiée",
       "Intégrations & API",

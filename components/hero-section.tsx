@@ -24,7 +24,7 @@ export function HeroSection() {
 
         <div className="flex flex-col items-center gap-3">
           <a href="/pricing" className="btn-primary">Voir les tarifs</a>
-          <a href="/produit" className="font-sans text-[13px] text-chalk-40 underline decoration-hair-strong underline-offset-4 hover:text-white">
+          <a href="/brief" className="font-sans text-[13px] text-chalk-40 underline decoration-hair-strong underline-offset-4 hover:text-white">
             ou lire un numéro complet
           </a>
         </div>

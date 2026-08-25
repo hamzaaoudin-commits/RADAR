@@ -5,12 +5,20 @@ export function PricingTable({ compact = false }: { compact?: boolean }) {
   const tiers = compact ? TIERS.slice(0, 3) : TIERS
 
   return (
-    <div className={`grid gap-4 ${compact ? "md:grid-cols-3" : "md:grid-cols-2 lg:grid-cols-5"}`}>
+    <div
+      className={`mx-auto grid max-w-[1040px] items-start gap-5 ${
+        compact ? "md:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-4"
+      }`}
+    >
       {tiers.map((t) => (
         <div
           key={t.id}
           id={t.id}
-          className={`flex flex-col card-hover ${t.featured ? "card-featured" : "card"}`}
+          className={`relative flex flex-col card-hover transition-transform duration-300 ${
+            t.featured
+              ? "card-featured lg:-translate-y-2 lg:scale-[1.03]"
+              : "card opacity-[0.92]"
+          }`}
         >
           {t.featured && (
             <>
