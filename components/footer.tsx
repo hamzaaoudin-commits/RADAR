@@ -28,7 +28,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1280px] px-gutter pb-12 pt-20">
         <div
           aria-hidden
-          className="pointer-events-none select-none whitespace-nowrap font-serif text-[clamp(2rem,7vw,3.6rem)] font-bold leading-none tracking-[-0.01em] text-white/[0.05]"
+          className="sheen-text pointer-events-none select-none whitespace-nowrap font-serif text-[clamp(2rem,7vw,3.6rem)] font-bold leading-none tracking-[-0.01em]"
         >
           RADAR Intelligence
         </div>

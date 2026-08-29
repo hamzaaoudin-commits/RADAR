@@ -2,6 +2,7 @@
 
 import { useMemo, useState, type ReactNode } from "react"
 import type { Brief } from "@/lib/brief-data"
+import { ArticleVisual } from "./article-visual"
 
 /**
  * Le numéro présenté comme l'objet qu'il deviendra réellement : un book
@@ -26,17 +27,42 @@ function buildPages(b: Brief): Page[] {
     content: (
       <div className="flex h-full flex-col justify-between">
         <div>
-          <div className="jf-eyebrow">Intelligence de marché</div>
+          <div className="flex items-baseline justify-between">
+            <div className="jf-eyebrow">Intelligence de marché</div>
+            <div className="jf-eyebrow">France</div>
+          </div>
           <div className="jf-mast">
             RADAR<span className="text-brand">.</span>
           </div>
-          <div className="jf-eyebrow mt-2">Hebdomadaire</div>
+          <div className="jf-eyebrow mt-2">Hebdomadaire · Édition abonné</div>
         </div>
+
+        {/* Sommaire : ce qui transforme une page de titre en couverture de
+            dossier — le lecteur sait ce qu'il tient avant d'ouvrir. */}
+        <div className="my-6">
+          <div className="jf-eyebrow mb-3 text-brand">Au sommaire</div>
+          <div className="flex flex-col gap-1.5">
+            {b.rubriques.map((r) => (
+              <div key={r.name} className="flex items-baseline gap-2">
+                <span className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/45">
+                  {r.name}
+                </span>
+                <span className="h-px flex-1 bg-white/10" />
+                <span className="font-mono text-[8.5px] text-white/30">
+                  {r.breves.length || "—"}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div>
-          <div className="mb-3 h-px bg-black/15" />
+          <div className="mb-3 h-px bg-white/12" />
           <div className="jf-eyebrow mb-2 text-brand">Édition de la semaine</div>
           <div className="jf-market">{b.week}</div>
-          <div className="mt-2 font-sans text-[11px] text-black/45">{b.dateLabel}</div>
+          <div className="mt-2 font-mono text-[10px] tracking-[0.06em] text-white/40">
+            {b.dateLabel}
+          </div>
         </div>
       </div>
     ),
@@ -60,7 +86,7 @@ function buildPages(b: Brief): Page[] {
         <div>
           <div className="jf-rubline">
             <span className="jf-eyebrow text-brand">{r.name}</span>
-            <span className="jf-eyebrow text-black/35">
+            <span className="jf-eyebrow text-white/30">
               {r.breves.length ? `${r.breves.length} article${r.breves.length > 1 ? "s" : ""}` : "rien cette semaine"}
             </span>
           </div>
@@ -72,6 +98,7 @@ function buildPages(b: Brief): Page[] {
                 <div key={a.title}>
                   <h4 className="jf-h2">{a.title}</h4>
                   <p className="jf-body">{a.body}</p>
+                  {a.visual && <ArticleVisual visual={a.visual} />}
                   <div className="jf-imp">
                     <div className="jf-eyebrow mb-1 text-brand">Ce que ça implique pour vous</div>
                     <p className="jf-imp-text">{a.implication}</p>
@@ -92,7 +119,7 @@ function buildPages(b: Brief): Page[] {
       <div>
         <div className="jf-rubline">
           <span className="jf-eyebrow text-brand">L&apos;agenda</span>
-          <span className="jf-eyebrow text-black/35">{b.agenda.length} échéances</span>
+          <span className="jf-eyebrow text-white/30">{b.agenda.length} échéances</span>
         </div>
         <div className="flex flex-col">
           {b.agenda.map((a) => (
@@ -115,7 +142,7 @@ function buildPages(b: Brief): Page[] {
       <div>
         <div className="jf-rubline">
           <span className="jf-eyebrow text-brand">Les chiffres de la semaine</span>
-          <span className="jf-eyebrow text-black/35">{b.figures.length}</span>
+          <span className="jf-eyebrow text-white/30">{b.figures.length}</span>
         </div>
         <div className="flex flex-col">
           {b.figures.map((f) => (
@@ -144,7 +171,7 @@ function buildPages(b: Brief): Page[] {
           <div className="jf-mast" style={{ fontSize: "1.3rem" }}>
             RADAR<span className="text-brand">.</span>
           </div>
-          <div className="jf-eyebrow mt-1 text-black/35">Prochain numéro lundi</div>
+          <div className="jf-eyebrow mt-1 text-white/30">Prochain numéro lundi</div>
         </div>
       </div>
     ),
@@ -198,8 +225,9 @@ export function JournalFlipbook({ brief }: { brief: Brief }) {
                 }}
               >
                 <div className="jf-face jf-front">
-                  <div className="jf-page-num">{String(i + 1).padStart(2, "0")}</div>
                   <div className="jf-content">{p.content}</div>
+                  <div aria-hidden className="jf-page-rule" />
+                  <div className="jf-page-num">{String(i + 1).padStart(2, "0")}</div>
                 </div>
                 <div className="jf-face jf-back" />
               </div>

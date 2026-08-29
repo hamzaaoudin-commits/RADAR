@@ -441,3 +441,53 @@ Points d'entrée : ce que le message précédent demandait, dans l'ordre.
   site l'utilisait déjà via la classe `font-mono` à plusieurs endroits sans
   jamais la charger réellement, ce qui la faisait retomber sur une police
   système. Corrigé au passage.
+
+## Reflet du mot-marque + refonte visuelle du journal
+
+### Reflet balayant (pied de page)
+Le grand « RADAR Intelligence » gris est désormais traversé lentement par un
+reflet clair virant au rouge de marque (`sheen-text` dans `app/globals.css`).
+Technique : le dégradé est peint dans le texte lui-même via
+`background-clip: text`, et c'est sa position qui est animée. `background-size`
+à 200 % pour que la bande claire ait la place de sortir du cadre aux deux
+extrémités — sans ça le reflet rebondit au lieu de balayer. Cycle de 7 s,
+neutralisé sous `prefers-reduced-motion` (retour au gris fixe).
+
+### Le journal : dossier premium sur fond noir
+Le flipbook passe du papier crème à l'encre profonde. Ce n'est pas qu'un
+changement de couleurs :
+
+- **Chrome de l'objet** : dégradé radial rouge très discret en tête de page,
+  ombre de reliure côté gauche, et un filet rouge vertical de tranche — le seul
+  rouge permanent de l'objet. Filet de pied de page sous chaque bloc texte pour
+  donner l'assise.
+- **Couverture** : devient une vraie couverture de dossier avec un sommaire à
+  filets de conduite (rubrique … nombre d'articles). Le lecteur sait ce qu'il
+  tient avant d'ouvrir.
+- **Capitale ornée** en rouge sur le chapô de la une, une seule fois par numéro.
+- **Hiérarchie typographique** : mono (IBM Plex Mono) pour toute métadonnée —
+  dates, sources, folios, étiquettes ; serif pour la titraille ; sans pour le
+  corps.
+
+### Les visuels d'article
+Nouveau modèle `Visual` typé dans `lib/brief-data.ts` et rendu par
+`components/article-visual.tsx`, en SVG et CSS purs (aucune bibliothèque de
+graphiques : les données sont trop simples pour le justifier, et une dépendance
+de plus alourdirait le flipbook).
+
+Cinq formes, chacune pour un type d'information précis — jamais décoratives :
+- `compare` — barres comparées, pour un écart de prix ou de part
+- `threshold` — axe avec ligne de seuil, pour un franchissement
+- `timeline` — frise verticale, pour une échéance et l'absence de sas
+- `gauge` — anneau, pour un remplissage ou un plafond
+- `flow` — enchaînement d'états, pour une fusion ou une chaîne de dépendance
+
+Six articles du numéro de démonstration en portent un. Un article sans visuel
+réellement utile n'en reçoit pas.
+
+Vérifié par capture d'écran en conditions réelles, pas seulement à la
+compilation : la première version du visuel de seuil plaçait le point « après »
+exactement SUR la ligne de seuil (valeur = seuil), alors que le texte dit qu'il
+passe dessous — il restait donc gris au lieu de virer au rouge. Donnée corrigée,
+et étiquette de seuil déplacée à gauche pour ne plus chevaucher le point de
+droite.

@@ -29,6 +29,52 @@ export type TrackedThread = {
   note: string
 }
 
+/**
+ * Visuel attaché à un article.
+ *
+ * Chaque type existe pour expliquer une forme d'information précise, et non
+ * pour décorer : un écart de prix se lit en barres comparées, un seuil franchi
+ * se lit sur un axe, une échéance se lit sur une frise, un remplissage se lit
+ * en jauge. Un article sans visuel utile n'en porte pas.
+ */
+export type Visual =
+  | {
+      kind: "compare"
+      /** Barres comparées : écart de prix, de coût, de part. */
+      unit?: string
+      items: { label: string; value: number; display: string; accent?: boolean }[]
+      note?: string
+    }
+  | {
+      kind: "threshold"
+      /** Franchissement d'un seuil : avant/après contre une ligne de référence. */
+      axisLabel: string
+      thresholdLabel: string
+      threshold: number
+      points: { label: string; value: number; display: string }[]
+      note?: string
+    }
+  | {
+      kind: "timeline"
+      /** Frise d'échéances, avec ou sans période transitoire. */
+      points: { date: string; label: string; state: "past" | "now" | "future" | "deadline" }[]
+      note?: string
+    }
+  | {
+      kind: "gauge"
+      /** Remplissage : places prises, enveloppe consommée, quota. */
+      pct: number
+      centerLabel: string
+      caption: string
+      note?: string
+    }
+  | {
+      kind: "flow"
+      /** Enchaînement d'états : fusion, bascule, chaîne de dépendance. */
+      steps: { label: string; sub?: string; accent?: boolean }[]
+      note?: string
+    }
+
 export type Breve = {
   title: string
   /** Le corps développé de l'article : le fait, ses modalités, ses chiffres. */
@@ -36,6 +82,7 @@ export type Breve = {
   /** Ce que ça implique pour une entreprise du marché. Jamais une action datée. */
   implication: string
   source: string
+  visual?: Visual
 }
 
 export type Rubrique = {
@@ -92,6 +139,17 @@ export const BRIEFS: Brief[] = [
             body: "La grille publiée le 14 août divise par deux le prix unitaire sur le palier le plus utilisé en production. Le seuil au-delà duquel une tâche répétitive devient rentable à automatiser passe donc sous le coût horaire moyen du secteur. Le fournisseur n'annonce aucune date de fin pour cette grille.",
             implication: "Les calculs d'automatisation abandonnés en 2025 pour cause de coût ne tiennent plus. Les tâches que vous aviez écartées comme non rentables méritent d'être rechiffrées, et ce sont les plus répétitives qui basculent en premier.",
             source: "Fournisseur, page de tarification, 14 août",
+            visual: {
+              kind: "threshold",
+              axisLabel: "Coût d'une tâche répétitive automatisée",
+              thresholdLabel: "Coût horaire moyen du secteur",
+              threshold: 50,
+              points: [
+                { label: "Avant le 14 août", value: 100, display: "au-dessus du seuil" },
+                { label: "Après le 14 août", value: 34, display: "prix unitaire divisé par deux" },
+              ],
+              note: "Sous la ligne, l'automatisation devient rentable. Le calcul de 2025 ne tient plus.",
+            },
           },
           {
             title: "Un outil métier intègre l'analyse automatique des dossiers",
@@ -115,6 +173,16 @@ export const BRIEFS: Brief[] = [
             body: "Le projet mis en consultation le 13 août impose une mention normalisée sur tous les supports commerciaux de la filière, quel que soit le canal. La consultation se clôt à la mi-mars et le texte n'ouvre aucune période transitoire. Les modalités exactes de la mention ne sont pas encore arrêtées.",
             implication: "L'absence de période transitoire signifie que la mise en conformité devra être faite avant l'entrée en vigueur, pas pendant. Les entreprises qui produisent beaucoup de supports sont les plus exposées, indépendamment de leur taille.",
             source: "Autorité compétente, avis de consultation, 13 août",
+            visual: {
+              kind: "timeline",
+              points: [
+                { date: "13 août", label: "Ouverture de la consultation", state: "past" },
+                { date: "Aujourd'hui", label: "Modalités non arrêtées", state: "now" },
+                { date: "Mi-mars", label: "Clôture de la consultation", state: "future" },
+                { date: "Entrée en vigueur", label: "Aucune période transitoire", state: "deadline" },
+              ],
+              note: "Pas de sas entre la clôture et l'application : la mise en conformité se fait avant, pas pendant.",
+            },
           },
           {
             title: "Le calendrier d'application est confirmé sans report",
@@ -132,6 +200,13 @@ export const BRIEFS: Brief[] = [
             body: "Un acteur adjacent a ouvert sa plateforme aux partenaires le 11 août. Le référencement est gratuit la première année, puis facturé à la commission. Le nombre de places par catégorie est plafonné et l'attribution se fait par ordre d'inscription.",
             implication: "Un plafond par catégorie transforme l'ouverture en course : les entreprises qui attendent de voir les premiers résultats trouveront la catégorie fermée. La gratuité de la première année sert précisément à accélérer ce remplissage.",
             source: "Plateforme, communiqué du 11 août",
+            visual: {
+              kind: "gauge",
+              pct: 100,
+              centerLabel: "Plafond",
+              caption: "Places par catégorie, attribuées par ordre d'inscription",
+              note: "La gratuité de la première année sert à remplir vite. Attendre les premiers résultats, c'est trouver la catégorie fermée.",
+            },
           },
         ],
       },
@@ -143,12 +218,30 @@ export const BRIEFS: Brief[] = [
             body: "L'offre annoncée le 13 août affiche un prix d'appel inférieur d'environ 40 % à la moyenne pratiquée sur le segment le mieux margé du marché. Elle est présentée en accès limité, sans date de disponibilité générale ni engagement de volume.",
             implication: "Un prix d'appel public devient une référence, même pour ceux qui ne l'atteignent pas : vos clients l'auront vu avant votre prochain rendez-vous. La question ne sera pas de vous aligner, mais d'expliquer l'écart.",
             source: "Concurrent, communiqué du 13 août",
+            visual: {
+              kind: "compare",
+              unit: "Prix d'appel sur le segment le mieux margé",
+              items: [
+                { label: "Moyenne du marché", value: 100, display: "référence" },
+                { label: "Nouvel entrant", value: 60, display: "−40 %", accent: true },
+              ],
+              note: "Un prix d'appel public devient une référence, même pour ceux qui ne l'atteignent pas.",
+            },
           },
           {
             title: "Deux acteurs de taille moyenne rapprochent leurs activités",
             body: "L'opération, rendue publique le 12 août, réunit deux structures aux portefeuilles largement complémentaires. Les équipes commerciales seront fusionnées d'ici la fin de l'année selon le communiqué, ce qui suppose un changement d'interlocuteur pour une partie des clients.",
             implication: "Un changement d'interlocuteur imposé est le moment où un client accepte de reconsidérer son fournisseur. La fenêtre s'ouvre au moment de la fusion des équipes, pas au moment de l'annonce.",
             source: "Acteurs concernés, communiqué du 12 août",
+            visual: {
+              kind: "flow",
+              steps: [
+                { label: "12 août", sub: "Annonce publique" },
+                { label: "Fin d'année", sub: "Fusion des équipes commerciales", accent: true },
+                { label: "Ensuite", sub: "Changement d'interlocuteur imposé" },
+              ],
+              note: "La fenêtre commerciale s'ouvre à la fusion des équipes, pas à l'annonce.",
+            },
           },
         ],
       },
@@ -171,6 +264,15 @@ export const BRIEFS: Brief[] = [
             body: "Le fournisseur a modifié le 15 août ses conditions d'accès technique, sans notification aux clients : le changement n'apparaît que dans le journal de version de sa documentation. Les quotas sont réduits et la méthode d'authentification change au 1er octobre.",
             implication: "Aucune alternative substituable n'existe sur ce maillon, ce qui rend le changement non négociable. Les entreprises qui ne surveillent pas le journal de version l'apprendront le jour de la coupure, pas avant.",
             source: "Fournisseur, documentation, version du 15 août",
+            visual: {
+              kind: "flow",
+              steps: [
+                { label: "15 août", sub: "Quotas réduits, sans notification" },
+                { label: "1er octobre", sub: "Changement d'authentification", accent: true },
+                { label: "Aucune alternative", sub: "Maillon non substituable" },
+              ],
+              note: "Le changement n'apparaît que dans le journal de version : sans veille, on l'apprend le jour de la coupure.",
+            },
           },
         ],
       },
