@@ -2,27 +2,33 @@ import { NavBar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { PricingTable } from "@/components/pricing-table"
 import { PricingCallout } from "@/components/pricing-callout"
+import { FaqSection, type FaqEntry } from "@/components/faq-section"
 
-const FAQ = [
+const FAQ: FaqEntry[] = [
   {
     q: "Puis-je changer de formule à tout moment ?",
     a: "Oui. Vous pouvez monter ou descendre de formule à tout moment ; le changement s'applique dès la prochaine échéance.",
+    icon: "cpu",
+  },
+  {
+    q: "Le journal est-il personnalisé pour mon entreprise ?",
+    a: "Non, et c'est un choix. RADAR couvre un marché entier : le journal est le même pour toutes les entreprises qui y opèrent, ce qui permet d'y consacrer un travail de fond impossible à produire maison par maison. Quand une action dépend de votre configuration, elle est explicitement segmentée.",
+    icon: "eye",
   },
   {
     q: "RADAR REGULATION remplace-t-il un conseil juridique ?",
     a: "Non. RADAR informe et alerte sur les évolutions réglementaires qui vous concernent ; toute décision juridique doit être validée par un professionnel compétent.",
-  },
-  {
-    q: "Le brief est-il personnalisé pour mon entreprise ?",
-    a: "Non, et c'est un choix. RADAR couvre un marché entier : le brief est le même pour toutes les entreprises qui y opèrent, ce qui permet d'y consacrer un travail de fond impossible à produire maison par maison. Quand une action dépend de votre configuration, elle est explicitement segmentée.",
+    icon: "shield",
   },
   {
     q: "Qu'est-ce qui différencie RADAR PRO de RADAR ADVISORY ?",
-    a: "PRO est une surveillance approfondie et automatisée sur vos sept radars, avec scénarios et roadmap. ADVISORY y ajoute un analyste humain : réunions, audits, recommandations personnalisées et accompagnement de transformation.",
+    a: "PRO couvre jusqu'à deux marchés, avec les sept rubriques, le suivi des sujets et la roadmap à 36 mois — le tout produit sans intervention. ADVISORY monte à cinq marchés et y ajoute un analyste humain qui applique chaque marché à votre configuration : réunions, audits, recommandations propres à votre entreprise.",
+    icon: "price",
   },
   {
     q: "Puis-je annuler à tout moment ?",
     a: "Oui, sans engagement de durée sur les formules RADAR et RADAR PRO. ADVISORY et ENTERPRISE sont contractualisés à la mise en place.",
+    icon: "xcircle",
   },
 ]
 
@@ -106,25 +112,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="section bg-ink">
-        <div className="shell-sm">
-          <div className="mb-3 font-sans text-[11px] font-semibold tracking-[0.14em] text-brand">FAQ</div>
-          <h2 className="mb-10 font-serif text-[clamp(1.6rem,3.2vw,2.4rem)] font-bold leading-[1.15] tracking-[-0.02em] text-white">
-            Questions fréquentes.
-          </h2>
-          <div className="flex flex-col divide-y divide-hair">
-            {FAQ.map((f) => (
-              <details key={f.q} className="group py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between font-serif text-[16px] text-white">
-                  {f.q}
-                  <span className="ml-4 shrink-0 text-brand transition-transform group-open:rotate-45">+</span>
-                </summary>
-                <p className="mt-3 font-sans text-[14px] leading-relaxed text-chalk-65">{f.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqSection faqs={FAQ} />
 
       <Footer />
     </main>

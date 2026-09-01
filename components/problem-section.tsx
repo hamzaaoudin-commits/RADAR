@@ -59,8 +59,10 @@ export function ProblemSection() {
         </div>
         <p className="mb-10 body-sm">
           Six sources minimum, chaque semaine. Ce n&apos;est pas un manque de
-          discipline. C&apos;est un travail à temps plein que personne ne fait à
-          votre place.
+          discipline. Et le coût réel n&apos;est pas le temps passé : c&apos;est
+          l&apos;attention consommée. Une heure passée à balayer des sources vous
+          laisse informé mais vidé, au moment précis où vous auriez dû arbitrer,
+          vendre ou décider.
         </p>
 
         <div className="mb-4 font-sans text-[11px] uppercase tracking-[0.18em] text-chalk-40">
@@ -82,7 +84,8 @@ export function ProblemSection() {
           <p className="m-0 font-serif text-[clamp(1.15rem,2.2vw,1.55rem)] leading-snug text-white/90">
             Un seul journal, chaque lundi, qui couvre votre marché en entier — et
             qui dit, pour chaque information, ce qu&apos;elle change chez vous. Après
-            l&apos;avoir lu, vous n&apos;avez plus rien à ouvrir.
+            l&apos;avoir lu, vous n&apos;avez plus rien à ouvrir, et le reste de votre
+            semaine vous appartient.
           </p>
         </div>
       </div>

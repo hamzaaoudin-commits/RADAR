@@ -9,7 +9,6 @@ import { ContentsSection } from "@/components/contents-section"
 import { SevenRadars } from "@/components/seven-radars"
 import { PipelineGrid } from "@/components/pipeline-grid"
 import { AlertBriefSection } from "@/components/alert-brief-section"
-import { SectionDivider } from "@/components/section-divider"
 import { BridgeSection } from "@/components/bridge-section"
 import { FaqSection } from "@/components/faq-section"
 import { ClosingCTA } from "@/components/closing-cta"
@@ -36,7 +35,6 @@ export default function Home() {
       <PipelineGrid />
       <AlertBriefSection />
 
-      <SectionDivider word="DÉTECTEZ." caption="Ce que RADAR fait, avant tout le reste" />
       <BridgeSection />
       <FaqSection faqs={FAQ_HOME} />
       <ClosingCTA />

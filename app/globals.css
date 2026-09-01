@@ -593,23 +593,44 @@ body::before {
   background: rgba(255, 255, 255, 0.06);
 }
 
-/* --- Bulles flottantes ------------------------------------------------
-   Mouvement organique pour les listes de mots-clés et les cartes courtes :
-   une légère oscillation verticale + rotation inverse, désynchronisée par
-   élément via --dur/--delay/--float posés en style inline (valeurs dérivées
-   de l'index, jamais aléatoires, pour ne pas produire de désaccord
-   serveur/client). Neutralisé sous prefers-reduced-motion. */
-@keyframes rd-float {
-  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
-  50% { transform: translateY(var(--float, -7px)) rotate(calc(var(--rot, 0deg) * -1)); }
+/* --- Bulles du secteur : pulsation séquentielle -------------------------
+   Les bulles ne flottent pas : elles restent en place et lisibles. À tour de
+   rôle, l'une d'elles grossit brièvement et s'éclaire — façon de montrer que
+   le secteur bouge en permanence, mais jamais partout en même temps.
+
+   Le décalage se fait par --delay négatif, dérivé de l'index : l'animation
+   est déjà "en cours" au chargement, donc pas d'attente avant la première
+   pulsation. La durée totale du cycle vaut (nombre de bulles x intervalle),
+   de sorte qu'une seule bulle est active à un instant donné. */
+@keyframes rd-pulse {
+  0%, 100% {
+    transform: scale(1);
+    border-color: var(--pulse-border-idle, rgba(255,255,255,0.12));
+    background-color: var(--pulse-bg-idle, rgba(255,255,255,0.04));
+  }
+  4% {
+    transform: scale(var(--pulse-scale, 1.09));
+    border-color: var(--color-brand);
+    background-color: rgba(230,57,70,0.14);
+  }
+  12% {
+    transform: scale(var(--pulse-scale, 1.09));
+    border-color: var(--color-brand);
+    background-color: rgba(230,57,70,0.14);
+  }
+  18% {
+    transform: scale(1);
+    border-color: var(--pulse-border-idle, rgba(255,255,255,0.12));
+    background-color: var(--pulse-bg-idle, rgba(255,255,255,0.04));
+  }
 }
-@utility bubble-float {
-  animation: rd-float var(--dur, 6s) ease-in-out infinite;
+@utility bubble-pulse {
+  animation: rd-pulse var(--cycle, 12s) ease-in-out infinite;
   animation-delay: var(--delay, 0s);
   will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) {
-  .bubble-float { animation: none !important; }
+  .bubble-pulse { animation: none !important; }
 }
 
 /* --- Reflet balayant du grand mot-marque en pied de page ----------------

@@ -73,18 +73,29 @@ export function ManifestoSection() {
           ))}
         </div>
 
-        {/* La doctrine se referme sur une décision, pas sur une déclaration. */}
+        {/* La doctrine se referme sur ce qu'elle rend au lecteur — son
+            attention — plutôt que sur une relance commerciale. */}
         <Reveal>
-          <div className="mx-auto mt-16 max-w-[620px] text-center">
-            <p className="mb-8 font-serif text-[clamp(1.2rem,2.4vw,1.6rem)] leading-snug text-white/90">
-              Si vous êtes d&apos;accord avec ces quatre lignes, vous n&apos;avez pas
-              besoin d&apos;être convaincu de la suite. Vous avez juste besoin que
-              quelqu&apos;un le fasse, chaque semaine, à votre place.
+          <div className="mx-auto mt-16 max-w-[660px]">
+            <div className="hairline mb-10" />
+            <p className="mb-6 font-serif text-[clamp(1.25rem,2.5vw,1.7rem)] leading-snug text-white/90">
+              Surveiller son marché n&apos;a jamais été le métier de personne.
+              C&apos;est une charge qu&apos;on ajoute à un dirigeant déjà occupé, et
+              qui consomme exactement ce qu&apos;il a de plus rare : son attention.
             </p>
-            <Link href="/pricing" className="btn-primary">Voir les tarifs</Link>
-            <p className="mt-4 font-sans text-[13px] text-chalk-40">
-              Sans engagement. Résiliable à tout moment.
+            <p className="mb-10 body-sm">
+              Ce que RADAR vous rend, ce n&apos;est pas du temps — c&apos;est de
+              l&apos;attention disponible. Celle que vous passiez à balayer six
+              sources pour ne rien manquer retourne là où elle a de la valeur :
+              vos clients, vos équipes, les décisions que personne ne peut prendre
+              à votre place.
             </p>
+            <div className="flex flex-wrap items-center gap-5">
+              <Link href="/pricing" className="btn-primary">Voir les tarifs</Link>
+              <span className="font-sans text-[13px] text-chalk-40">
+                Sans engagement. Résiliable à tout moment.
+              </span>
+            </div>
           </div>
         </Reveal>
       </div>

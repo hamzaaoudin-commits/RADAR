@@ -491,3 +491,38 @@ exactement SUR la ligne de seuil (valeur = seuil), alors que le texte dit qu'il
 passe dessous — il restait donc gris au lieu de virer au rouge. Donnée corrigée,
 et étiquette de seuil déplacée à gauche pour ne plus chevaucher le point de
 droite.
+
+## Passe : pulsation, attention, nettoyage, favicon Safari
+
+- **Bulles du secteur** : l'animation de flottaison est supprimée — elle rendait
+  le texte illisible. Les bulles restent fixes dans leur cadre ; à tour de rôle,
+  une seule grossit brièvement et s'éclaire en rouge, jamais deux en même temps
+  (`bubble-pulse`). Le décalage vient d'un `--delay` négatif dérivé de l'index :
+  l'animation est déjà en cours au chargement, donc pas d'attente avant la
+  première pulsation, et le cycle vaut (nombre de bulles × intervalle) pour
+  qu'une seule soit active à un instant donné. Amplitude plus faible sur les
+  cartes de texte que sur les mots-clés — sur un paragraphe, un agrandissement
+  marqué gênerait la lecture.
+- **Clôture du manifeste** réécrite : la formule « si vous êtes d'accord avec ces
+  quatre lignes… » est remplacée par un propos sur l'attention, aligné à gauche
+  et non plus centré comme une accroche.
+- **L'argument de l'attention** est maintenant porté à trois endroits plutôt que
+  suggéré : le hero (« votre attention retourne là où elle compte »), la section
+  problème (le coût réel n'est pas le temps mais l'attention consommée : « une
+  heure passée à balayer des sources vous laisse informé mais vidé »), et la
+  clôture du manifeste (ce que RADAR rend, c'est de l'attention disponible).
+- **Bandeau rouge « DÉTECTEZ. » supprimé**, composant `section-divider.tsx`
+  retiré du projet.
+- **Entrée « Produit » retirée** de la navbar et du pied de page — tout est déjà
+  sur la home. La navigation ne garde que « Le journal » et le bouton tarifs.
+- **FAQ de la page tarifs** : l'implémentation maison en `<details>` est
+  remplacée par le composant `FaqSection` de la home. Même police, même taille,
+  mêmes icônes, même accordéon.
+- **Favicon Safari** : `app/icon.svg` seul ne suffisait pas — Safari ne s'en sert
+  ni pour les favoris ni pour l'écran d'accueil. Ajout de `app/favicon.ico`
+  (multi-tailles 16/32/48/64) et `app/apple-icon.png` (180 px, fond opaque,
+  coins laissés au système). Les icônes sont dessinées en Pillow plutôt que
+  converties depuis le SVG : aucun convertisseur n'est installé dans
+  l'environnement, et le motif est assez simple pour être redessiné à
+  l'identique. Le point central blanc a été retiré des trois fichiers, par
+  cohérence avec le retrait demandé sur le scope du site.

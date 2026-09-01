@@ -3,7 +3,6 @@ import Link from "next/link"
 const EXPLORE = [
   { label: "Accueil", href: "/" },
   { label: "Les 7 radars", href: "/#radars" },
-  { label: "Produit", href: "/#produit" },
   { label: "Le journal (démo)", href: "/brief" },
 ]
 const OFFERS = [
