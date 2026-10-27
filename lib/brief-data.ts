@@ -81,6 +81,10 @@ export type Breve = {
   /** Ce que ça implique pour une entreprise du marché. Jamais une action datée. */
   implication: string
   source: string
+  /** « direct » : source consultée par la rédaction ; « relayed » : relayée par un tiers, à confirmer avant d'agir. */
+  confidence?: "direct" | "relayed"
+  /** Numéros (à partir de 1) des sources du numéro, dans l'ordre de `sources`. */
+  refs?: number[]
   visual?: Visual
 }
 
@@ -200,12 +204,16 @@ export const BRIEFS: Brief[] = [
             body: "Le Conseil national des barreaux a annoncé le 23 octobre Avocat+, développé avec le Legal Data Space. La plateforme propose dix assistants spécialisés en droit français, soit près de 50 préconfigurés. Selon le CNB, les modèles tournent sur une infrastructure hébergée en France et les documents déposés ne servent pas à les entraîner. L'hébergeur, les fournisseurs de modèles et les tarifs ne sont pas publiés.",
             implication: "Une profession réglementée voisine obtient une plateforme de branche, avec deux engagements que vos clients et vos collaborateurs sauront désormais nommer : l'hébergement en France et la non-réutilisation des documents. Ce que vous utilisez aujourd'hui doit pouvoir répondre à ces deux questions.",
             source: "CNB, annonce du 23 octobre, relayée par Le Brief IA des experts-comptables du 26 octobre",
+            confidence: "relayed",
+            refs: [8],
           },
           {
             title: "Cegid met des agents de contrôle dans ses logiciels de finance",
             body: "Présentés le 8 octobre, les agents notent le risque de chaque virement d'un lot et repèrent dans l'ERP les marges négatives. La validation reste distincte de la détection : l'agent signale, un humain décide.",
             implication: "Le premier niveau de contrôle devient une fonction du logiciel que vos clients utilisent déjà. Ce qui reste à votre charge, c'est la validation et l'explication de ce que l'agent a signalé.",
             source: "Daf-Mag, 8 octobre, relayé par Le Brief IA du 26 octobre",
+            confidence: "relayed",
+            refs: [8],
           },
         ],
       },
@@ -217,12 +225,16 @@ export const BRIEFS: Brief[] = [
             body: "BILL, Billtrust et Visa ont présenté vers le 21 octobre un pilote réel : un agent autorisé règle une facture approuvée sans connexion humaine au portail du fournisseur, dans les limites fixées par l'acheteur. L'agent est reconnu grâce au Trusted Agent Protocol de Visa, qui peut tenir lieu de CAPTCHA. Le pilote se déroule aux États-Unis.",
             implication: "Le paiement sans intervention humaine d'une facture approuvée est techniquement démontré. Il ne concerne pas encore la France, mais il montre vers quoi la facture électronique peut conduire côté client.",
             source: "Accounting Today et CPA Practice Advisor, vers le 21 octobre, relayés par Le Brief IA du 26 octobre",
+            confidence: "relayed",
+            refs: [8],
           },
           {
             title: "Thomson Reuters lance CoCounsel Tax, Audit & Accounting aux États-Unis",
             body: "L'outil calcule les amortissements par code et produit des classeurs Excel avec un onglet d'hypothèses. Il est conçu pour fonctionner sur n'importe quel modèle de pointe. Annonce relayée le 22 octobre ; l'offre concerne le marché américain.",
             implication: "L'outil est conçu pour fonctionner sur n'importe quel modèle ; ce qu'il met en avant, c'est le classeur dont les hypothèses sont visibles. C'est l'exigence que vos propres revues de travaux produits par IA devraient avoir.",
             source: "Accounting Today et CPA Practice Advisor, octobre, relayés par Le Brief IA du 26 octobre",
+            confidence: "relayed",
+            refs: [8],
           },
         ],
       },
@@ -234,6 +246,8 @@ export const BRIEFS: Brief[] = [
             body: "À la fin de la séance du 19 octobre, les députés n'avaient examiné que 15 articles sur 58 de la première partie ; 43 restent à examiner, avec plus de 2 600 amendements. Le vote prévu le 20 octobre est donc repoussé au mardi 3 novembre. L'examen reprend le 27 octobre jusqu'au 2 novembre, et le vote sur l'ensemble du budget reste fixé au 17 novembre. Si la partie recettes est rejetée, le texte part au Sénat, une commission mixte paritaire cherche un accord et le gouvernement pourrait agir ensuite par ordonnance ; la date limite du Parlement est le 17 décembre, faute de quoi une loi spéciale permettrait à l'État de continuer à percevoir les impôts. Le budget 2026 n'avait été adopté qu'en février 2026, par le 49.3, et la première partie de l'an dernier avait été rejetée par 404 voix contre 1. Votes adoptés à ce stade : indexation du barème de l'impôt sur le revenu sur l'inflation (96 voix contre 0) et suppression de la baisse de l'abattement fiscal sur les pensions (116 contre 30).",
             implication: "Aucune mesure fiscale du projet n'est acquise, et rien ne garantit que la première partie sera adoptée. Les conseils de clôture qui supposent une mesure du projet doivent être livrés en deux versions.",
             source: "NosParlementaires, 11 octobre, mis à jour le 24 octobre",
+            confidence: "direct",
+            refs: [1],
             visual: {
               kind: "timeline",
               points: [
@@ -251,6 +265,8 @@ export const BRIEFS: Brief[] = [
             body: "Selon la loi de finances 2026, l'émission d'une facture non électronique est sanctionnée de 50 € par facture, plafonnée à 15 000 € par an (15 € auparavant). Le défaut de transmission des données de transaction coûte 500 € par transmission, avec le même plafond (250 € auparavant). L'absence de plateforme désignée est sanctionnée de 500 € après une première mise en demeure, puis 1 000 € après une seconde, renouvelable tous les trois mois. La phase d'accompagnement annoncée par la DGFiP en juillet 2026 évite l'application automatique des sanctions en cas de difficultés réelles et documentées suivies d'une correction, mais elle ne couvre ni l'inaction ni un refus durable. Une version de la FAQ de l'administration affiche encore l'ancien montant de 15 €.",
             implication: "L'accompagnement protège les clients de bonne foi, pas ceux qui n'ont rien fait. Le dossier à constituer est un dossier de preuve : plateforme choisie, date, difficultés rencontrées, corrections apportées.",
             source: "Village de la Justice, article de Y. El Jouaidi, publié le 31 août, mis à jour le 9 octobre",
+            confidence: "direct",
+            refs: [4],
             visual: {
               kind: "compare",
               unit: "Amende en euros, avant et après la loi de finances 2026",
@@ -268,6 +284,8 @@ export const BRIEFS: Brief[] = [
             body: "Le 23 octobre, l'Assemblée a rejeté la partie recettes du budget de la Sécurité sociale par 115 voix contre 1. Le vote prévu le 27 octobre ne s'applique donc plus.",
             implication: "Aucune règle nouvelle de cotisations n'est acquise pour vos clients employeurs : le texte poursuit son parcours et son calendrier est à suivre semaine après semaine.",
             source: "NosParlementaires, mis à jour le 24 octobre",
+            confidence: "direct",
+            refs: [1],
           },
         ],
       },
@@ -279,6 +297,8 @@ export const BRIEFS: Brief[] = [
             body: "Au comité de suivi du 8 octobre, rapporté par economie.gouv.fr le 12 octobre, 75 % des entreprises assujetties à la TVA avaient désigné une plateforme de réception. Environ 20 millions de factures ont été échangées du 1er septembre au 8 octobre, pour environ 70 milliards d'euros facturés. Au 13 octobre, la liste officielle comptait 155 plateformes, dont 9 en attente de tests d'interopérabilité. Sur 57 offres relevées au 25 octobre, 14 sont gratuites et le prix d'entrée payant médian est de 29 € HT par mois. Précaution : ces derniers chiffres viennent d'un comparateur rémunéré par commissions d'affiliation.",
             implication: "Le sujet n'est plus de convaincre mais de raccorder les retardataires. Un quart des assujettis n'a pas désigné de plateforme : c'est le travail d'accompagnement le plus immédiat de votre portefeuille.",
             source: "Observatoire de la facturation électronique, mis à jour le 25 octobre ; economie.gouv.fr, 12 octobre",
+            confidence: "direct",
+            refs: [5],
             visual: {
               kind: "gauge",
               pct: 75,
@@ -297,12 +317,16 @@ export const BRIEFS: Brief[] = [
             body: "Le groupe parisien d'expertise comptable Numeris, environ 350 collaborateurs et 42 M€ de chiffre d'affaires, a repris l'intégralité des titres de FCS Consulting, un cabinet de conseil en fusions-acquisitions. Numeris est financé en LBO par Strada Partners. Opération publiée le 13 octobre ; le prix et le chiffre d'affaires de la cible ne sont pas publiés. Cette opération date de la semaine précédente, aucune nouvelle opération équivalente n'a été retenue cette semaine.",
             implication: "Un cabinet capitalisé ajoute à son offre le conseil en cession, qui est une porte d'entrée vers les clients dirigeants. Cela renforce l'intérêt de savoir ce que vous répondez à un dirigeant qui prépare une cession.",
             source: "CFNEWS, 13 octobre",
+            confidence: "direct",
+            refs: [6],
           },
           {
             title: "Audit CPA veut tripler de taille et se tourne vers le capital-investissement",
             body: "Le cabinet parisien, fondé en 2005, attend plus de 80 M€ de chiffre d'affaires cette année et se tourne vers le private equity pour tripler de taille. Une opération de financement est datée du 6 octobre ; le montant de la dette et les financeurs ne sont pas publiés. Article du 8 octobre.",
             implication: "Deux cabinets parisiens annoncent une croissance appuyée sur des capitaux en moins d'une semaine : la consolidation du segment se poursuit.",
             source: "CFNEWS, 8 octobre, mis à jour le 9 octobre",
+            confidence: "direct",
+            refs: [7],
           },
         ],
       },
@@ -314,12 +338,16 @@ export const BRIEFS: Brief[] = [
             body: "Pour les cessions réalisées entre le 1er janvier 2027 et le 31 décembre 2029, le projet de loi prévoit un abattement fixe du dirigeant porté de 500 000 € à 1 M€, un suramortissement de 30 % pour les PME et de 60 % pour les microentreprises, et des droits de mutation réduits à 0,1 % sur les fonds de commerce et les parts sociales, sous conditions d'ancienneté du salarié repreneur (cinq ans de contrat sur les dix dernières années). En parallèle, un amendement adopté par les députés étend l'abattement de 500 000 € aux associés de sociétés d'exercice libéral partant en retraite, pour les cessions à compter de 2027. Rien n'est définitivement voté : le vote de la première partie est repoussé au 3 novembre.",
             implication: "Une mesure de transmission en discussion crée un motif de conversation avec chaque dirigeant proche d'une cession, même si le texte final peut différer. Elle justifie un point de situation avant la fin de l'année plutôt qu'un conseil ferme.",
             source: "KPMG, 2 octobre ; Legifiscal, 21 octobre",
+            confidence: "direct",
+            refs: [2, 3],
           },
           {
             title: "Un cabinet australien fait écrire par l'IA des scripts qu'il exécute en local",
             body: "Le cabinet de Townsville dirigé par Trent Yesberg fait écrire des scripts par Claude et ChatGPT, puis les exécute en local, reliés à QuickBooks et Xero. Un script exécuté en local n'entraîne pas d'appel facturé au modèle à chaque traitement ; les coûts d'infrastructure, de maintenance et de contrôle restent à la charge du cabinet. La démarche a donné naissance à Twine Biller, un outil de refacturation des abonnements. Article du 16 octobre.",
             implication: "Une autre façon d'industrialiser un traitement répétitif : écrire une fois, exécuter sans coût par appel. Le coût réel se déplace vers la maintenance et le contrôle du script.",
             source: "CPA Trendlines, 16 octobre, relayé par Le Brief IA du 26 octobre",
+            confidence: "relayed",
+            refs: [8],
           },
         ],
       },
@@ -331,12 +359,16 @@ export const BRIEFS: Brief[] = [
             body: "Les correctifs ont été publiés le 21 octobre. Calif a découvert les failles avec GPT-5.6 Sol ; Wiz les a aussi trouvées dans le programme « Patch the Planet » d'OpenAI. Elles peuvent permettre l'exécution de code à distance sur des installations non corrigées.",
             implication: "Votre extranet clients, votre site ou celui d'un prestataire peuvent tourner sous PHP. Demandez la confirmation écrite que les correctifs sont appliqués : le risque porte sur les données de vos clients.",
             source: "Business Insider, relayé par Le Brief IA du 26 octobre",
+            confidence: "relayed",
+            refs: [8],
           },
           {
             title: "Les recommandations de l'IA sont acceptées près de 80 % du temps, même fausses",
             body: "Dans les expériences de Steven Shaw (King's College de Londres), menées auprès de 1 372 participants, les recommandations de l'IA étaient acceptées près de 80 % du temps, même lorsqu'elles étaient délibérément fausses. L'auteur compare l'IA au pilote automatique et conseille de forger son propre jugement avant d'interroger l'outil. Date de publication non précisée.",
             implication: "Une revue qui se contente de valider ce que l'IA propose est exposée à ce biais. Une procédure de revue doit prévoir un contrôle avant la consultation de l'outil, sur les écritures et estimations à enjeu.",
             source: "Business Insider, relayé par Le Brief IA du 26 octobre",
+            confidence: "relayed",
+            refs: [8],
           },
         ],
       },
