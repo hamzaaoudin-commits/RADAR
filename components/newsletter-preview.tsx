@@ -221,7 +221,22 @@ export function NewsletterPreview() {
                         </span>
                         <span>
                           {x.source}
-                          {x.refs?.length ? ` ${x.refs.map((n) => `[${n}]`).join(" ")}` : ""}
+                          {x.refs?.map((n) => {
+                            const src = b.sources?.[n - 1]
+                            return src ? (
+                              <a
+                                key={n}
+                                href={src.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title={src.label}
+                                className="ml-1.5 font-serif italic underline"
+                                style={{ color: RED }}
+                              >
+                                [{n}]
+                              </a>
+                            ) : null
+                          })}
                         </span>
                       </div>
                     </article>
@@ -286,6 +301,12 @@ export function NewsletterPreview() {
                 </li>
               ))}
             </ol>
+
+            <p className="mb-8 text-[11px] leading-relaxed" style={{ opacity: 0.6 }}>
+              <strong>Source consultée</strong> : la rédaction a lu la page citée.{" "}
+              <strong>Relayé · à confirmer</strong> : l&apos;information vient d&apos;un tiers et n&apos;a pas été
+              revérifiée à la source. Un montant que la source ne publie pas est écrit « non publié », jamais estimé.
+            </p>
 
             <div className="text-center">
               <Link

@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState, type ReactNode } from "react"
-import type { Brief } from "@/lib/brief-data"
+import type { Brief, Severity } from "@/lib/brief-data"
 import { ArticleVisual } from "./article-visual"
 
 /**
@@ -19,109 +19,190 @@ import { ArticleVisual } from "./article-visual"
 
 type Page = { label: string; content: ReactNode }
 
+const ALERT_LABEL: Record<Severity, string> = {
+  critical: "Critique",
+  important: "Élevé",
+  watch: "Surveillance",
+}
+
+function Folio({ n, children }: { n: string; children: ReactNode }) {
+  return (
+    <div className="jf-folio">
+      <span className="jf-folio-n">{n}</span>
+      <span className="jf-folio-t">{children}</span>
+      <span aria-hidden className="jf-folio-line" />
+    </div>
+  )
+}
+
+function Refs({ refs, sources }: { refs?: number[]; sources?: Brief["sources"] }) {
+  if (!refs?.length || !sources) return null
+  return (
+    <ul className="jf-refs">
+      {refs.map((n) => {
+        const src = sources[n - 1]
+        if (!src) return null
+        return (
+          <li key={n}>
+            <span className="jf-ref-n">[{n}]</span>{" "}
+            <a href={src.url} target="_blank" rel="noopener noreferrer">
+              {src.label}
+            </a>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
 function buildPages(b: Brief): Page[] {
   const pages: Page[] = []
+  const ref = `RADAR/EC/2026-${b.week.replace("Semaine ", "")}`
+  const nb = b.rubriques.reduce((n, r) => n + r.breves.length, 0)
+  const une = b.items[0]
 
+  /* Couverture */
   pages.push({
     label: "Couverture",
     content: (
-      <div className="flex h-full flex-col justify-between">
-        <div>
-          <div className="flex items-baseline justify-between">
-            <div className="jf-eyebrow">Intelligence de marché</div>
-            <div className="jf-eyebrow">France</div>
-          </div>
-          <div className="jf-mast">
-            RADAR<span className="text-brand">.</span>
-          </div>
-          <div className="jf-eyebrow mt-2">Hebdomadaire · Édition abonné</div>
+      <div className="jf-cover">
+        <div aria-hidden className="jf-cover-rings" />
+        <div className="jf-cover-top">
+          <div className="jf-eyebrow jf-red">Diffusion restreinte · Abonnés</div>
         </div>
-
-        {/* Sommaire : ce qui transforme une page de titre en couverture de
-            dossier — le lecteur sait ce qu'il tient avant d'ouvrir. */}
-        <div className="my-6">
-          <div className="jf-eyebrow mb-3 text-brand">Au sommaire</div>
-          <div className="flex flex-col gap-1.5">
-            {b.rubriques.map((r) => (
-              <div key={r.name} className="flex items-baseline gap-2">
-                <span className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/45">
-                  {r.name}
-                </span>
-                <span className="h-px flex-1 bg-white/10" />
-                <span className="font-mono text-[8.5px] text-white/30">
-                  {r.breves.length || "—"}
-                </span>
-              </div>
-            ))}
-          </div>
+        <div className="jf-cover-mid">
+          <div className="jf-mast">RADAR</div>
+          <div className="jf-cover-sub">Note hebdomadaire de veille stratégique</div>
+          <div aria-hidden className="jf-cover-rule" />
+          <div className="jf-cover-num">N° {b.week.replace("Semaine ", "")}</div>
+          <div className="jf-cover-market">{b.market}</div>
+          <div className="jf-cover-period">{b.dateLabel}</div>
         </div>
-
-        <div>
-          <div className="mb-3 h-px bg-white/12" />
-          <div className="jf-eyebrow mb-2 text-brand">Édition de la semaine</div>
-          <div className="jf-market">{b.week}</div>
-          <div className="mt-2 font-mono text-[10px] tracking-[0.06em] text-white/40">
-            {b.dateLabel}
-            {b.market ? ` · ${b.market}` : ""}
-          </div>
+        <div className="jf-cover-bot">
+          <div className="jf-eyebrow">Référence {ref}</div>
+          <div className="jf-eyebrow">Établie le lundi 26 octobre 2026</div>
         </div>
       </div>
     ),
   })
 
+  /* Synthèse */
   pages.push({
-    label: "La une",
+    label: "Synthèse",
     content: (
       <div>
-        <div className="jf-eyebrow mb-3 text-brand">La une</div>
+        <Folio n="I.">Synthèse</Folio>
         <h3 className="jf-h1">{b.headline}</h3>
         <p className="jf-chapo">{b.summary}</p>
+        <div className="jf-alert">
+          <div className="jf-alert-tag">
+            <span>Niveau d&apos;alerte</span>
+            <strong>{ALERT_LABEL[une.severity]}</strong>
+          </div>
+          <div className="jf-alert-txt">
+            <strong>{une.label}.</strong> {une.why}
+          </div>
+        </div>
+        <div className="jf-sommaire-h">Au sommaire — {nb} articles</div>
+        <div className="flex flex-col gap-1.5">
+          {b.rubriques.map((r) => (
+            <div key={r.name} className="flex items-baseline gap-2">
+              <span className="jf-som-name">{r.name}</span>
+              <span className="jf-som-dots" />
+              <span className="jf-som-n">{r.breves.length || "—"}</span>
+            </div>
+          ))}
+        </div>
       </div>
     ),
   })
 
-  for (const r of b.rubriques) {
-    pages.push({
-      label: r.name,
-      content: (
-        <div>
-          <div className="jf-rubline">
-            <span className="jf-eyebrow text-brand">{r.name}</span>
-            <span className="jf-eyebrow text-white/30">
-              {r.breves.length ? `${r.breves.length} article${r.breves.length > 1 ? "s" : ""}` : "rien cette semaine"}
-            </span>
-          </div>
-          {r.breves.length === 0 ? (
-            <p className="jf-empty">Rien à signaler cette semaine. Balayé : {r.empty}.</p>
-          ) : (
-            <div className="flex flex-col gap-5">
-              {r.breves.map((a) => (
-                <div key={a.title}>
-                  <h4 className="jf-h2">{a.title}</h4>
-                  <p className="jf-body">{a.body}</p>
-                  {a.visual && <ArticleVisual visual={a.visual} />}
-                  <div className="jf-imp">
-                    <div className="jf-eyebrow mb-1 text-brand">Ce que ça implique pour vous</div>
-                    <p className="jf-imp-text">{a.implication}</p>
-                  </div>
-                  <div className="jf-src">Source — {a.source}</div>
+  /* Sujets prioritaires */
+  pages.push({
+    label: "Sujets prioritaires",
+    content: (
+      <div>
+        <Folio n="II.">Sujets prioritaires</Folio>
+        <div className="flex flex-col">
+          {b.items.map((i) => (
+            <div key={i.rank} className="jf-sujet">
+              <div className="jf-sujet-rank">{i.rank}</div>
+              <div>
+                <div className="jf-sujet-label">{i.label}</div>
+                <div className="jf-sujet-meta">
+                  {i.domain} · Alerte {ALERT_LABEL[i.severity].toLowerCase()} · Horizon {i.horizon}
                 </div>
-              ))}
+                <p className="jf-sujet-act">
+                  <span className="jf-red">À faire : </span>
+                  {i.action}
+                </p>
+              </div>
             </div>
-          )}
+          ))}
         </div>
-      ),
+      </div>
+    ),
+  })
+
+  /* Recommandation */
+  pages.push({
+    label: "Recommandation",
+    content: (
+      <div className="flex h-full flex-col">
+        <Folio n="III.">Recommandation de la semaine</Folio>
+        <div className="jf-action">{b.todo}</div>
+      </div>
+    ),
+  })
+
+  /* Articles : une page par article */
+  for (const r of b.rubriques) {
+    if (r.breves.length === 0) {
+      pages.push({
+        label: r.name,
+        content: (
+          <div>
+            <Folio n="IV.">{r.name}</Folio>
+            <p className="jf-empty">Rien à signaler cette semaine. Balayé : {r.empty}.</p>
+          </div>
+        ),
+      })
+      continue
+    }
+    r.breves.forEach((a, idx) => {
+      pages.push({
+        label: `${r.name} ${idx + 1}`,
+        content: (
+          <div>
+            <Folio n="IV.">
+              {r.name} · {idx + 1}/{r.breves.length}
+            </Folio>
+            <h4 className="jf-h2">{a.title}</h4>
+            <p className="jf-body">{a.body}</p>
+            {a.visual && <ArticleVisual visual={a.visual} />}
+            <div className="jf-imp">
+              <div className="jf-eyebrow jf-red mb-1">Ce que cela change</div>
+              <p className="jf-imp-text">{a.implication}</p>
+            </div>
+            <div className="jf-srcbox">
+              <span className={`jf-conf ${a.confidence === "relayed" ? "is-relayed" : ""}`}>
+                {a.confidence === "relayed" ? "Relayé · à confirmer" : "Source consultée"}
+              </span>
+              <div className="jf-src">{a.source}</div>
+              <Refs refs={a.refs} sources={b.sources} />
+            </div>
+          </div>
+        ),
+      })
     })
   }
 
+  /* Calendrier */
   pages.push({
-    label: "L’agenda",
+    label: "Calendrier",
     content: (
       <div>
-        <div className="jf-rubline">
-          <span className="jf-eyebrow text-brand">L&apos;agenda</span>
-          <span className="jf-eyebrow text-white/30">{b.agenda.length} échéances</span>
-        </div>
+        <Folio n="V.">Calendrier</Folio>
         <div className="flex flex-col">
           {b.agenda.map((a) => (
             <div key={a.what} className="jf-ag">
@@ -137,14 +218,12 @@ function buildPages(b: Brief): Page[] {
     ),
   })
 
+  /* Chiffres */
   pages.push({
-    label: "Les chiffres",
+    label: "Chiffres clés",
     content: (
       <div>
-        <div className="jf-rubline">
-          <span className="jf-eyebrow text-brand">Les chiffres de la semaine</span>
-          <span className="jf-eyebrow text-white/30">{b.figures.length}</span>
-        </div>
+        <Folio n="VI.">Chiffres clés</Folio>
         <div className="flex flex-col">
           {b.figures.map((f) => (
             <div key={f.what} className="jf-fig">
@@ -160,20 +239,32 @@ function buildPages(b: Brief): Page[] {
     ),
   })
 
+  /* Sources et méthode */
   pages.push({
-    label: "L’action",
+    label: "Sources",
     content: (
-      <div className="flex h-full flex-col">
-        <div className="jf-rubline">
-          <span className="jf-eyebrow text-brand">Ce qu&apos;il faut faire cette semaine</span>
+      <div>
+        <Folio n="VII.">Sources et méthode</Folio>
+        <ol className="jf-srclist">
+          {b.sources?.map((s, i) => (
+            <li key={s.url}>
+              <span className="jf-ref-n">[{i + 1}]</span>{" "}
+              <a href={s.url} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ol>
+        <div className="jf-method">
+          <div className="jf-eyebrow jf-red mb-1.5">Comment lire ce numéro</div>
+          <p>
+            <strong>Source consultée</strong> : la rédaction a lu la page citée. <strong>Relayé · à confirmer</strong> :
+            l&apos;information vient d&apos;un tiers et n&apos;a pas été revérifiée à la source. Un montant que la source ne
+            publie pas est écrit « non publié », jamais estimé. Ce document informe ; il ne remplace ni un conseil juridique
+            ni un conseil fiscal.
+          </p>
         </div>
-        <div className="jf-action">{b.todo}</div>
-        <div className="mt-auto pt-6 text-center">
-          <div className="jf-mast" style={{ fontSize: "1.3rem" }}>
-            RADAR<span className="text-brand">.</span>
-          </div>
-          <div className="jf-eyebrow mt-1 text-white/30">Prochain numéro lundi</div>
-        </div>
+        <div className="jf-sign">La rédaction RADAR</div>
       </div>
     ),
   })
@@ -202,11 +293,16 @@ export function JournalFlipbook({ brief }: { brief: Brief }) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-[520px]">
+    <div className="mx-auto w-full max-w-[580px]">
       <div
         className="jf-stage"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowRight") next()
+          if (e.key === "ArrowLeft") prev()
+        }}
         role="group"
-        aria-label="Numéro de démonstration, feuilletable"
+        aria-label="Note hebdomadaire RADAR, feuilletable"
       >
         <div className="jf-inner">
           {pages.map((p, i) => {
