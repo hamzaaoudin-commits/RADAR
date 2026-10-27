@@ -12,10 +12,12 @@ import { BRIEFS, type Severity } from "@/lib/brief-data"
  * exactement le même langage.
  */
 
-const INK = "#0a0a0a"
-const MUTE = "#6b6b6b"
-const LINE = "#dcdcdc"
-const SOFT = "#f3f3f1"
+const INK = "#f5f5f5" // texte et filets (fond sombre)
+const BG = "#0c0c0e"
+const DEEP = "#050506"
+const MUTE = "rgba(255,255,255,0.52)"
+const LINE = "rgba(255,255,255,0.14)"
+const SOFT = "rgba(255,255,255,0.055)"
 const RED = "#e63946"
 
 const ALERT_LABEL: Record<Severity, string> = {
@@ -26,9 +28,9 @@ const ALERT_LABEL: Record<Severity, string> = {
 
 function Row({ n, title, children }: { n: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="grid gap-x-8 gap-y-3 border-t py-8 sm:grid-cols-[132px_1fr]" style={{ borderColor: INK }}>
+    <section className="grid gap-x-8 gap-y-3 border-t py-8 sm:grid-cols-[132px_1fr]" style={{ borderColor: RED }}>
       <div>
-        <div className="font-mono text-[11px] font-semibold" style={{ color: MUTE }}>
+        <div className="font-mono text-[11px] font-semibold" style={{ color: RED }}>
           {n}
         </div>
         <h4 className="m-0 mt-1 font-sans text-[12px] font-bold uppercase tracking-[0.12em]" style={{ color: INK }}>
@@ -85,9 +87,9 @@ export function NewsletterPreview() {
           </div>
 
           {/* La note */}
-          <div className="bg-white font-sans" style={{ color: INK }}>
+          <div className="font-sans" style={{ color: INK, background: BG }}>
             {/* Bandeau */}
-            <div className="px-7 pb-8 pt-7 sm:px-10" style={{ background: INK, color: "#fff" }}>
+            <div className="px-7 pb-8 pt-7 sm:px-10" style={{ background: DEEP, color: "#fff" }}>
               <div className="mb-10 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <Square size={10} />
@@ -98,7 +100,7 @@ export function NewsletterPreview() {
                 </span>
               </div>
               <div className="flex items-end justify-between gap-6">
-                <div className="text-[84px] font-bold leading-[0.8] tracking-[-0.05em] sm:text-[112px]">{num}</div>
+                <div className="text-[84px] font-bold leading-[0.8] tracking-[-0.05em] sm:text-[112px]" style={{ color: RED }}>{num}</div>
                 <div className="pb-1 text-right font-mono text-[11px] leading-[1.7] text-white/65">
                   <div className="font-semibold text-white">{b.market}</div>
                   <div>{b.dateLabel}</div>
@@ -119,10 +121,10 @@ export function NewsletterPreview() {
                 </div>
                 <div className="min-w-0">
                   <h3 className="mb-4 text-[30px] font-bold leading-[1.1] tracking-[-0.03em]">{b.headline}</h3>
-                  <p className="mb-6 text-[14.5px] leading-[1.7]" style={{ color: "#2b2b2b" }}>
+                  <p className="mb-6 text-[14.5px] leading-[1.7]" style={{ color: "rgba(255,255,255,0.82)" }}>
                     {b.summary}
                   </p>
-                  <div className="flex items-stretch" style={{ background: INK, color: "#fff" }}>
+                  <div className="flex items-stretch" style={{ background: "rgba(230,57,70,0.1)", border: `1px solid rgba(230,57,70,0.45)`, color: "#fff" }}>
                     <div className="flex w-[104px] shrink-0 flex-col justify-center gap-1.5 px-4 py-4" style={{ background: RED }}>
                       <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em]">Niveau d&apos;alerte</span>
                       <span className="text-[17px] font-bold leading-none">{ALERT_LABEL[une.severity]}</span>
@@ -143,13 +145,13 @@ export function NewsletterPreview() {
                       className="grid grid-cols-[34px_1fr] gap-x-3 py-4"
                       style={{ borderTop: k === 0 ? "none" : `1px solid ${LINE}`, paddingTop: k === 0 ? 0 : undefined }}
                     >
-                      <span className="font-mono text-[13px] font-bold">{i.rank}</span>
+                      <span className="font-mono text-[13px] font-bold" style={{ color: RED }}>{i.rank}</span>
                       <div>
                         <div className="mb-1 text-[16px] font-bold leading-snug tracking-[-0.01em]">{i.label}</div>
                         <div className="mb-2 font-mono text-[10.5px] uppercase tracking-[0.1em]" style={{ color: MUTE }}>
                           {i.domain} · Alerte {ALERT_LABEL[i.severity].toLowerCase()} · Horizon {i.horizon}
                         </div>
-                        <p className="m-0 text-[13px] leading-[1.6]" style={{ color: "#2b2b2b" }}>
+                        <p className="m-0 text-[13px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.82)" }}>
                           <strong>À faire.</strong> {i.action}
                         </p>
                       </div>
@@ -160,7 +162,7 @@ export function NewsletterPreview() {
 
               {/* 03 Recommandation */}
               <Row n="03" title="Recommandation de la semaine">
-                <div className="px-5 py-5" style={{ background: SOFT, borderLeft: `4px solid ${INK}` }}>
+                <div className="px-5 py-5" style={{ background: RED, color: "#fff" }}>
                   <p className="m-0 text-[14px] leading-[1.75]">{b.todo}</p>
                 </div>
               </Row>
@@ -169,7 +171,7 @@ export function NewsletterPreview() {
               <Row n="04" title="Revue par rubrique">
                 {b.rubriques.map((r) => (
                   <div key={r.name} className="mb-8 last:mb-0">
-                    <div className="mb-4 flex items-center justify-between pb-2" style={{ borderBottom: `1px solid ${INK}` }}>
+                    <div className="mb-4 flex items-center justify-between pb-2" style={{ borderBottom: `1px solid ${LINE}` }}>
                       <span className="flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.1em]">
                         <Square size={7} />
                         {r.name}
@@ -186,7 +188,7 @@ export function NewsletterPreview() {
                     {r.breves.map((x) => (
                       <article key={x.title} className="mb-7 last:mb-0">
                         <h5 className="mb-2 text-[16px] font-bold leading-snug tracking-[-0.01em]">{x.title}</h5>
-                        <p className="mb-3 text-[13.5px] leading-[1.7]" style={{ color: "#2b2b2b" }}>
+                        <p className="mb-3 text-[13.5px] leading-[1.7]" style={{ color: "rgba(255,255,255,0.82)" }}>
                           {x.body.length > 420 ? x.body.slice(0, x.body.lastIndexOf(". ", 420) + 1) : x.body}
                         </p>
                         <div className="mb-3 px-4 py-3 text-[13px] leading-[1.65]" style={{ background: SOFT }}>
@@ -199,7 +201,7 @@ export function NewsletterPreview() {
                             style={
                               x.confidence === "relayed"
                                 ? { border: `1px dashed ${RED}`, color: RED }
-                                : { background: INK, color: "#fff" }
+                                  : { background: RED, color: "#fff" }
                             }
                           >
                             {x.confidence === "relayed" ? "Relayé · à confirmer" : "Source consultée"}
@@ -215,7 +217,7 @@ export function NewsletterPreview() {
                                 rel="noopener noreferrer"
                                 title={src.label}
                                 className="font-bold underline"
-                                style={{ color: INK }}
+                                style={{ color: RED }}
                               >
                                 [{n}]
                               </a>
@@ -234,7 +236,7 @@ export function NewsletterPreview() {
                   <tbody>
                     {b.agenda.map((a) => (
                       <tr key={a.date + a.what} className="align-top" style={{ borderTop: `1px solid ${LINE}` }}>
-                        <td className="w-[124px] py-3 pr-3 font-mono text-[12px] font-bold">{a.date}</td>
+                        <td className="w-[124px] py-3 pr-3 font-mono text-[12px] font-bold" style={{ color: RED }}>{a.date}</td>
                         <td className="py-3 text-[13px] leading-snug">{a.what}</td>
                         <td className="hidden w-[110px] py-3 pl-3 text-right font-mono text-[10px] uppercase sm:table-cell" style={{ color: MUTE }}>
                           {a.who}
@@ -247,10 +249,10 @@ export function NewsletterPreview() {
 
               {/* 06 Chiffres */}
               <Row n="06" title="Chiffres clés">
-                <div className="grid gap-px sm:grid-cols-2" style={{ background: LINE }}>
+                <div className="grid gap-px sm:grid-cols-2" style={{ background: BG }}>
                   {b.figures.map((f) => (
-                    <div key={f.value} className="bg-white px-1 py-5 sm:px-5 sm:first:pl-0">
-                      <div className="text-[44px] font-bold leading-none tracking-[-0.04em]">{f.value}</div>
+                    <div key={f.value} className="px-1 py-5 sm:px-5 sm:first:pl-0">
+                      <div className="text-[44px] font-bold leading-none tracking-[-0.04em]" style={{ color: RED }}>{f.value}</div>
                       <div className="mt-3 text-[12.5px] leading-snug">{f.what}</div>
                       <div className="mt-2 font-mono text-[10px] leading-snug" style={{ color: MUTE }}>
                         {f.source}
@@ -266,15 +268,15 @@ export function NewsletterPreview() {
                   {b.sources?.map((s, i) => (
                     <li key={s.url} className="mb-1.5 flex gap-3">
                       <span className="w-7 shrink-0 font-bold">[{i + 1}]</span>
-                      <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "#2b2b2b" }}>
+                      <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "rgba(255,255,255,0.82)" }}>
                         {s.label}
                       </a>
                     </li>
                   ))}
                 </ol>
                 <p className="m-0 text-[11.5px] leading-relaxed" style={{ color: MUTE }}>
-                  <strong style={{ color: INK }}>Source consultée</strong> : la rédaction a lu la page citée.{" "}
-                  <strong style={{ color: INK }}>Relayé · à confirmer</strong> : l&apos;information vient d&apos;un tiers et
+                  <strong style={{ color: "#fff" }}>Source consultée</strong> : la rédaction a lu la page citée.{" "}
+                  <strong style={{ color: "#fff" }}>Relayé · à confirmer</strong> : l&apos;information vient d&apos;un tiers et
                   n&apos;a pas été revérifiée à la source. Un montant que la source ne publie pas est écrit « non
                   publié », jamais estimé.
                 </p>
@@ -286,7 +288,7 @@ export function NewsletterPreview() {
               <Link
                 href="/brief"
                 className="inline-block px-7 py-4 text-[12px] font-bold uppercase tracking-[0.16em] text-white no-underline"
-                style={{ background: INK }}
+                style={{ background: RED }}
               >
                 Ouvrir le journal complet →
               </Link>
