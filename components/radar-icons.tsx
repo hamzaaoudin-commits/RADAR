@@ -143,10 +143,10 @@ export function RadarMark({ size = 120, sweep = false, className }: { size?: num
         <circle cx="100" cy="100" r="14" />
         <path d="M100 2v196M2 100h196" strokeWidth="0.7" />
       </g>
-      {sweep && <path d="M100 100L100 4A96 96 0 0 1 168 32z" fill="#e63946" opacity="0.9" />}
-      <path d="M100 100L168 32" stroke="#e63946" strokeWidth="2.4" />
-      <circle cx="140" cy="62" r="5" fill="#e63946" />
-      <circle cx="140" cy="62" r="11" fill="none" stroke="#e63946" strokeWidth="1" />
+      {sweep && <path d="M100 100L100 4A96 96 0 0 1 168 32z" fill="#e8111f" opacity="0.9" />}
+      <path d="M100 100L168 32" stroke="#e8111f" strokeWidth="2.4" />
+      <circle cx="140" cy="62" r="5" fill="#e8111f" />
+      <circle cx="140" cy="62" r="11" fill="none" stroke="#e8111f" strokeWidth="1" />
     </svg>
   )
 }

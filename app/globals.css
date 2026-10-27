@@ -686,7 +686,7 @@ body::before {
   --jf-ink: #f3efe8;
   --jf-mute: #8f8b84;
   --jf-line: rgba(243, 239, 232, 0.18);
-  --jf-red: #e63946;
+  --jf-red: #e8111f;
   --jf-head: "Barlow Condensed", var(--font-sans), sans-serif;
   --jf-text: "Source Serif 4", Georgia, serif;
   position: relative;
@@ -695,7 +695,7 @@ body::before {
   outline: none;
   filter: drop-shadow(0 40px 70px rgba(0, 0, 0, 0.85)) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));
 }
-.jf-stage:focus-visible { outline: 1px solid rgba(230, 57, 70, 0.6); outline-offset: 6px; }
+.jf-stage:focus-visible { outline: 1px solid rgba(232, 17, 31, 0.6); outline-offset: 6px; }
 /* perspective doit être posé sur le PARENT DIRECT des feuilles tournées en
    3D, d'où cette couche séparée du filter. */
 .jf-inner { position: absolute; inset: 0; perspective: 2800px; overflow: hidden; }
@@ -735,11 +735,11 @@ body::before {
   font-size: 2.5cqw;
   padding: 10.5cqw var(--padx) 11cqw;
   scrollbar-width: thin;
-  scrollbar-color: rgba(230, 57, 70, 0.5) transparent;
+  scrollbar-color: rgba(232, 17, 31, 0.5) transparent;
 }
 .jf-front.is-cover .jf-content { padding: 0; overflow: hidden; }
 .jf-content::-webkit-scrollbar { width: 3px; }
-.jf-content::-webkit-scrollbar-thumb { background: rgba(230, 57, 70, 0.5); }
+.jf-content::-webkit-scrollbar-thumb { background: rgba(232, 17, 31, 0.5); }
 
 /* En-tête courant et pied de page, comme dans un document imprimé. */
 .jf-run, .jf-foot {
