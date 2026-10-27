@@ -832,13 +832,24 @@ body::before {
 .jf-facts li:first-child { border-top: none; padding-top: 0; }
 .jf-facts-n { font-family: var(--jf-head); font-weight: 800; font-size: 1.25em; line-height: 1.05; color: var(--jf-red); }
 
-.jf-band { margin: 0.7em calc(-1 * var(--padx)) 0; padding: 0.75em var(--padx) 0.85em; background: var(--jf-red); color: #fff; }
-.jf-band-k { font-family: var(--jf-head); font-weight: 800; font-size: 1.05em; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.35em; }
-.jf-band p { margin: 0; font-family: var(--jf-text); font-size: 0.8em; line-height: 1.4; font-weight: 500; }
-
-.jf-srcbox { padding-top: 0.6em; }
-.jf-conf { display: inline-block; margin-right: 0.7em; padding: 0.15em 0.6em; font-family: var(--jf-head); font-weight: 700; font-size: 0.85em; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--jf-ink); color: var(--jf-ink); }
+/* Ce que cela change : un encart clair, collé au bas de la colonne. */
+.jf-change { margin-top: auto; background: var(--jf-ink); color: #080808; padding: 0.8em 1em 0.95em; }
+.jf-change-k { display: flex; align-items: center; gap: 0.5em; font-family: var(--jf-head); font-weight: 800; font-size: 1.05em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--jf-red); margin-bottom: 0.4em; }
+.jf-change p { margin: 0; font-family: var(--jf-text); font-weight: 600; font-size: 0.82em; line-height: 1.42; }
+.jf-main > .jf-facts { margin-bottom: 0.8em; }
+.jf-conf { display: inline-block; align-self: flex-start; margin: 0 0 0.7em; padding: 0.15em 0.6em; font-family: var(--jf-head); font-weight: 700; font-size: 0.85em; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--jf-ink); color: var(--jf-ink); }
 .jf-conf.is-relayed { border-style: dashed; color: var(--jf-red); border-color: var(--jf-red); }
+
+/* Sources par article */
+.jf-sa-note { font-size: 0.8em; line-height: 1.45; color: var(--jf-mute); margin: 0 0 1em; font-style: italic; }
+.jf-sa { display: flex; flex-direction: column; gap: 0.7em; }
+.jf-sa-r { display: flex; align-items: center; gap: 0.5em; font-family: var(--jf-head); font-weight: 800; font-size: 1em; letter-spacing: 0.1em; text-transform: uppercase; color: var(--jf-red); padding-bottom: 0.25em; border-bottom: 1px solid var(--jf-ink); }
+.jf-sa-row { display: flex; justify-content: space-between; gap: 1em; padding: 0.3em 0; border-bottom: 1px solid var(--jf-line); font-size: 0.74em; line-height: 1.3; }
+.jf-sa-t em { color: var(--jf-red); font-style: normal; font-family: var(--jf-head); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.jf-sa-refs { display: flex; gap: 0.5em; flex-shrink: 0; font-family: var(--font-mono); font-size: 0.85em; font-weight: 700; }
+.jf-sa-refs a { color: var(--jf-ink); text-decoration: none; }
+.jf-sa-refs a:hover { color: var(--jf-red); }
+
 .jf-src { font-family: var(--font-mono); font-size: 0.58em; line-height: 1.5; color: var(--jf-mute); }
 .jf-refs, .jf-srclist { list-style: none; margin: 0.4em 0 0; padding: 0; }
 .jf-refs li, .jf-srclist li { font-family: var(--font-mono); font-size: 0.54em; line-height: 1.45; margin-bottom: 0.15em; color: rgba(243, 239, 232, 0.8); }

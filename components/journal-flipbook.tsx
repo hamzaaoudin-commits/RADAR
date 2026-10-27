@@ -9,7 +9,7 @@ import "@fontsource/source-serif-4/600.css"
 import { useMemo, useState, type ReactNode } from "react"
 import type { Brief, Severity } from "@/lib/brief-data"
 import { ArticleVisual } from "./article-visual"
-import { RadarMark, RubriqueIcon, IconCalendrier, IconChiffres, IconReco, IconSource, IconRisque } from "./radar-icons"
+import { RadarMark, RubriqueIcon, IconCalendrier, IconChiffres, IconReco, IconSource, IconRisque, IconArrow } from "./radar-icons"
 
 /**
  * Le numéro présenté comme l'objet qu'il deviendra réellement : un dossier
@@ -228,18 +228,15 @@ function buildPages(b: Brief): Page[] {
                     </li>
                   ))}
                 </ol>
+                {a.confidence === "relayed" && <div className="jf-conf is-relayed">Relayé · à confirmer</div>}
+                <div className="jf-change">
+                  <div className="jf-change-k">
+                    <IconArrow size={16} />
+                    Ce que cela change
+                  </div>
+                  <p>{a.implication}</p>
+                </div>
               </div>
-            </div>
-            <div className="jf-band">
-              <div className="jf-band-k">Ce que cela change</div>
-              <p>{a.implication}</p>
-            </div>
-            <div className="jf-srcbox">
-              <span className={`jf-conf ${a.confidence === "relayed" ? "is-relayed" : ""}`}>
-                {a.confidence === "relayed" ? "Relayé · à confirmer" : "Source consultée"}
-              </span>
-              {!a.refs?.length && <span className="jf-src">{a.source}</span>}
-              <Refs refs={a.refs} sources={b.sources} />
             </div>
           </div>
         ),
@@ -295,12 +292,56 @@ function buildPages(b: Brief): Page[] {
     ),
   })
 
+  /* Sources par article */
+  pages.push({
+    label: "Sources par article",
+    content: (
+      <div className="jf-page">
+        <Folio n="07" icon={<IconSource size={22} />}>Sources par article</Folio>
+        <p className="jf-sa-note">
+          Chaque article renvoie aux sources numérotées de la page suivante. Sauf mention « Relayé », la rédaction a lu
+          les pages citées.
+        </p>
+        <div className="jf-sa">
+          {b.rubriques
+            .filter((r) => r.breves.length > 0)
+            .map((r) => (
+              <div key={r.name} className="jf-sa-bloc">
+                <div className="jf-sa-r">
+                  <RubriqueIcon name={r.name} size={16} />
+                  {r.name}
+                </div>
+                {r.breves.map((a) => (
+                  <div key={a.title} className="jf-sa-row">
+                    <span className="jf-sa-t">
+                      {a.title}
+                      {a.confidence === "relayed" && <em> · relayé, à confirmer</em>}
+                    </span>
+                    <span className="jf-sa-refs">
+                      {a.refs?.map((n) => {
+                        const src = b.sources?.[n - 1]
+                        return src ? (
+                          <a key={n} href={src.url} target="_blank" rel="noopener noreferrer" title={src.label}>
+                            [{n}]
+                          </a>
+                        ) : null
+                      })}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ))}
+        </div>
+      </div>
+    ),
+  })
+
   /* Sources et méthode */
   pages.push({
     label: "Sources",
     content: (
       <div className="jf-page">
-        <Folio n="07" icon={<IconSource size={22} />}>Sources et méthode</Folio>
+        <Folio n="08" icon={<IconSource size={22} />}>Sources et méthode</Folio>
         <ol className="jf-srclist">
           {b.sources?.map((s, i) => (
             <li key={s.url}>

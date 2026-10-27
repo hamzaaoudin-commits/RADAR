@@ -95,6 +95,12 @@ export const IconSource = (p: P) => (
   </Svg>
 )
 
+export const IconArrow = (p: P) => (
+  <Svg {...p} strokeWidth={2.2}>
+    <path d="M3 12h17M14 6l6 6-6 6" />
+  </Svg>
+)
+
 export const IconChiffres = (p: P) => (
   <Svg {...p}>
     <path d="M4 4v16h16" />
