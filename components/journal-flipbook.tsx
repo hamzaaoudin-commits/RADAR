@@ -1,23 +1,36 @@
 "use client"
 
+import "@fontsource/barlow-condensed/600.css"
+import "@fontsource/barlow-condensed/700.css"
+import "@fontsource/barlow-condensed/800.css"
+import "@fontsource/source-serif-4/400.css"
+import "@fontsource/source-serif-4/400-italic.css"
+import "@fontsource/source-serif-4/600.css"
 import { useMemo, useState, type ReactNode } from "react"
 import type { Brief, Severity } from "@/lib/brief-data"
 import { ArticleVisual } from "./article-visual"
+import { RadarMark, RubriqueIcon, IconCalendrier, IconChiffres, IconReco, IconSource, IconRisque } from "./radar-icons"
 
 /**
- * Le numéro présenté comme l'objet qu'il deviendra réellement : un book
- * qu'on feuillette, pas une liste qu'on scrolle.
+ * Le numéro présenté comme l'objet qu'il deviendra réellement : un dossier
+ * imprimé qu'on feuillette, pas une liste qu'on scrolle.
  *
  * Mécanique : chaque page est une feuille positionnée en pile (perspective
  * 3D), tournée à 0° (face visible) ou -180° (retournée, dos visible) selon
  * sa position par rapport à la page courante. La feuille en cours
  * d'animation reçoit temporairement un z-index forcé au-dessus de tout,
- * levé à la fin de la transition — sans ça, la page qui arrive
- * (immobile, déjà au bon angle) s'affiche instantanément par-dessus celle
- * qui tourne, et l'animation devient invisible.
+ * levé à la fin de la transition : sans ça, la page qui arrive (immobile,
+ * déjà au bon angle) s'affiche instantanément par-dessus celle qui tourne.
+ *
+ * Direction graphique : titraille en condensé gras (Barlow Condensed), texte
+ * en serif de lecture (Source Serif 4), un pictogramme dessiné par rubrique,
+ * un bandeau rouge pleine largeur pour la conséquence, la marque radar en
+ * grand sur la couverture. Tout se dimensionne en unités de conteneur : la
+ * page garde ses proportions sur mobile.
  */
 
-type Page = { label: string; content: ReactNode }
+type Tone = "cover" | "red"
+type Page = { label: string; tone?: Tone; content: ReactNode }
 
 const ALERT_LABEL: Record<Severity, string> = {
   critical: "Critique",
@@ -25,12 +38,12 @@ const ALERT_LABEL: Record<Severity, string> = {
   watch: "Surveillance",
 }
 
-function Folio({ n, children }: { n: string; children: ReactNode }) {
+function Folio({ n, icon, children }: { n: string; icon?: ReactNode; children: ReactNode }) {
   return (
     <div className="jf-folio">
       <span className="jf-folio-n">{n}</span>
       <span className="jf-folio-t">{children}</span>
-      <span aria-hidden className="jf-folio-line" />
+      {icon && <span className="jf-folio-i">{icon}</span>}
     </div>
   )
 }
@@ -65,24 +78,23 @@ function buildPages(b: Brief): Page[] {
   /* Couverture */
   pages.push({
     label: "Couverture",
+    tone: "cover",
     content: (
       <div className="jf-cover">
-        <div className="jf-cover-head">
-          <div className="jf-cover-brand">
-            <span className="jf-sq" style={{ width: 10, height: 10 }} />
-            RADAR
-          </div>
-          <div className="jf-eyebrow">Diffusion restreinte · Abonnés</div>
+        <RadarMark size={760} sweep className="jf-cover-radar" />
+        <div className="jf-cover-top">
+          <span className="jf-cover-brand">RADAR</span>
+          <span className="jf-cover-restr">Diffusion restreinte</span>
         </div>
-        <div>
-          <div className="jf-cover-sub">Note hebdomadaire de veille stratégique</div>
+        <div className="jf-cover-mid">
+          <div className="jf-cover-kick">Note hebdomadaire de veille stratégique</div>
           <div className="jf-cover-num">{num}</div>
           <div className="jf-cover-market">{b.market}</div>
           <div className="jf-cover-period">{b.dateLabel}</div>
         </div>
         <div className="jf-cover-bot">
-          <div className="jf-eyebrow">Réf. {ref}</div>
-          <div className="jf-eyebrow">Établie le 26.10.2026</div>
+          <span>Réf. {ref}</span>
+          <span>Établie le 26.10.2026</span>
         </div>
       </div>
     ),
@@ -93,11 +105,12 @@ function buildPages(b: Brief): Page[] {
     label: "Synthèse",
     content: (
       <div className="jf-page">
-        <Folio n="01">Synthèse</Folio>
+        <Folio n="01" icon={<IconSource size={22} />}>Synthèse</Folio>
         <h3 className="jf-h1">{b.headline}</h3>
         <p className="jf-chapo">{b.summary}</p>
         <div className="jf-alert">
           <div className="jf-alert-tag">
+            <IconRisque size={26} />
             <span>Niveau d&apos;alerte</span>
             <strong>{ALERT_LABEL[une.severity]}</strong>
           </div>
@@ -110,8 +123,8 @@ function buildPages(b: Brief): Page[] {
           <div className="jf-som">
             {b.rubriques.map((r) => (
               <div key={r.name} className="jf-som-row">
+                <RubriqueIcon name={r.name} size={22} className="jf-som-i" />
                 <span className="jf-som-name">{r.name}</span>
-                <span className="jf-som-dots" />
                 <span className="jf-som-n">{r.breves.length || "—"}</span>
               </div>
             ))}
@@ -126,19 +139,21 @@ function buildPages(b: Brief): Page[] {
     label: "Sujets prioritaires",
     content: (
       <div className="jf-page">
-        <Folio n="02">Les cinq sujets de la semaine</Folio>
+        <Folio n="02" icon={<IconRisque size={22} />}>Les cinq sujets de la semaine</Folio>
         <div className="jf-sujets">
           {b.items.map((i) => (
             <div key={i.rank} className="jf-sujet">
               <div className="jf-sujet-rank">{i.rank}</div>
-              <div>
-                <div className="jf-sujet-label">{i.label}</div>
+              <div className="jf-sujet-body">
                 <div className="jf-sujet-meta">
-                  {i.domain} · Alerte {ALERT_LABEL[i.severity].toLowerCase()} · Horizon {i.horizon}
+                  <RubriqueIcon name={i.domain} size={15} />
+                  <span>
+                    {i.domain} · Alerte {ALERT_LABEL[i.severity].toLowerCase()} · {i.horizon}
+                  </span>
                 </div>
+                <div className="jf-sujet-label">{i.label}</div>
                 <p className="jf-sujet-act">
-                  <span className="jf-red">À faire. </span>
-                  {i.action}
+                  <strong>À faire.</strong> {i.action}
                 </p>
               </div>
             </div>
@@ -151,15 +166,13 @@ function buildPages(b: Brief): Page[] {
   /* Recommandation */
   pages.push({
     label: "Recommandation",
+    tone: "red",
     content: (
-      <div className="jf-page">
-        <Folio n="03">Recommandation de la semaine</Folio>
-        <div className="jf-action">
-          <div className="jf-action-q" aria-hidden>
-            &ldquo;
-          </div>
-          <p>{b.todo}</p>
-        </div>
+      <div className="jf-page jf-reco">
+        <RadarMark size={620} className="jf-reco-radar" />
+        <Folio n="03" icon={<IconReco size={22} />}>Recommandation de la semaine</Folio>
+        <p className="jf-reco-text">{b.todo}</p>
+        <div className="jf-reco-sign">RADAR — La rédaction</div>
       </div>
     ),
   })
@@ -171,7 +184,7 @@ function buildPages(b: Brief): Page[] {
         label: r.name,
         content: (
           <div className="jf-page">
-            <Folio n="04">{r.name}</Folio>
+            <Folio n="04" icon={<RubriqueIcon name={r.name} size={22} />}>{r.name}</Folio>
             <p className="jf-empty">Rien à signaler cette semaine. Balayé : {r.empty}.</p>
           </div>
         ),
@@ -183,35 +196,49 @@ function buildPages(b: Brief): Page[] {
         label: `${r.name} ${idx + 1}`,
         content: (
           <div className="jf-page">
-            <Folio n="04">
-              {r.name} · {idx + 1}/{r.breves.length}
-            </Folio>
-            <h4 className="jf-h2">{a.title}</h4>
-            <p className="jf-lead">{a.lead}</p>
-            <div className="jf-hero">
-              {a.visual ? (
-                <ArticleVisual visual={a.visual} />
-              ) : a.stat ? (
-                <div className="jf-stat">
-                  <div className="jf-stat-v">{a.stat.value}</div>
-                  <div className="jf-stat-l">{a.stat.label}</div>
+            <div className="jf-art">
+              <aside className="jf-gut">
+                <div className="jf-gut-ico">
+                  <RubriqueIcon name={r.name} size={26} />
                 </div>
-              ) : null}
+                <div className="jf-gut-txt">
+                  {r.name} · {idx + 1}/{r.breves.length}
+                </div>
+              </aside>
+              <div className="jf-main">
+                <h4 className="jf-h2">{a.title}</h4>
+                <p className="jf-lead">{a.lead}</p>
+                {(a.visual || a.stat) && (
+                  <div className="jf-hero">
+                    {a.visual ? (
+                      <ArticleVisual visual={a.visual} />
+                    ) : a.stat ? (
+                      <div className="jf-stat">
+                        <div className="jf-stat-v">{a.stat.value}</div>
+                        <div className="jf-stat-l">{a.stat.label}</div>
+                      </div>
+                    ) : null}
+                  </div>
+                )}
+                <ol className="jf-facts">
+                  {a.facts.map((f, k) => (
+                    <li key={f}>
+                      <span className="jf-facts-n">{String(k + 1).padStart(2, "0")}</span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
-            <ul className="jf-facts">
-              {a.facts.map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
-            <div className="jf-imp">
-              <div className="jf-eyebrow jf-red mb-1">Ce que cela change</div>
-              <p className="jf-imp-text">{a.implication}</p>
+            <div className="jf-band">
+              <div className="jf-band-k">Ce que cela change</div>
+              <p>{a.implication}</p>
             </div>
-            <div className="jf-srcbox jf-push">
+            <div className="jf-srcbox">
               <span className={`jf-conf ${a.confidence === "relayed" ? "is-relayed" : ""}`}>
                 {a.confidence === "relayed" ? "Relayé · à confirmer" : "Source consultée"}
               </span>
-              <div className="jf-src">{a.source}</div>
+              {!a.refs?.length && <span className="jf-src">{a.source}</span>}
               <Refs refs={a.refs} sources={b.sources} />
             </div>
           </div>
@@ -225,17 +252,23 @@ function buildPages(b: Brief): Page[] {
     label: "Calendrier",
     content: (
       <div className="jf-page">
-        <Folio n="05">Calendrier</Folio>
+        <Folio n="05" icon={<IconCalendrier size={22} />}>Calendrier</Folio>
         <div className="jf-ags">
-          {b.agenda.map((a) => (
-            <div key={a.what} className="jf-ag">
-              <div className="jf-ag-date">{a.date}</div>
-              <div>
-                <div className="jf-ag-what">{a.what}</div>
-                <div className="jf-ag-who">{a.who}</div>
+          {b.agenda.map((a) => {
+            const [day, ...rest] = a.date.split(" ")
+            return (
+              <div key={a.what} className="jf-ag">
+                <div className="jf-ag-date">
+                  <span className="jf-ag-d">{day}</span>
+                  <span className="jf-ag-m">{rest.join(" ")}</span>
+                </div>
+                <div>
+                  <div className="jf-ag-what">{a.what}</div>
+                  <div className="jf-ag-who">{a.who}</div>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     ),
@@ -246,7 +279,7 @@ function buildPages(b: Brief): Page[] {
     label: "Chiffres clés",
     content: (
       <div className="jf-page">
-        <Folio n="06">Chiffres clés</Folio>
+        <Folio n="06" icon={<IconChiffres size={22} />}>Chiffres clés</Folio>
         <div className="jf-figs">
           {b.figures.map((f) => (
             <div key={f.what} className="jf-fig">
@@ -267,7 +300,7 @@ function buildPages(b: Brief): Page[] {
     label: "Sources",
     content: (
       <div className="jf-page">
-        <Folio n="07">Sources et méthode</Folio>
+        <Folio n="07" icon={<IconSource size={22} />}>Sources et méthode</Folio>
         <ol className="jf-srclist">
           {b.sources?.map((s, i) => (
             <li key={s.url}>
@@ -279,17 +312,13 @@ function buildPages(b: Brief): Page[] {
           ))}
         </ol>
         <div className="jf-method jf-push">
-          <div className="jf-eyebrow jf-red mb-1.5">Comment lire ce numéro</div>
+          <div className="jf-method-k">Comment lire ce numéro</div>
           <p>
             <strong>Source consultée</strong> : la rédaction a lu la page citée. <strong>Relayé · à confirmer</strong> :
             l&apos;information vient d&apos;un tiers et n&apos;a pas été revérifiée à la source. Un montant que la source ne
             publie pas est écrit « non publié », jamais estimé. Ce document informe ; il ne remplace ni un conseil juridique
             ni un conseil fiscal.
           </p>
-        </div>
-        <div className="jf-sign">
-          <span className="jf-sq" style={{ width: 7, height: 7 }} />
-          RADAR — La rédaction
         </div>
       </div>
     ),
@@ -347,10 +376,23 @@ export function JournalFlipbook({ brief }: { brief: Brief }) {
                   if (e.propertyName === "transform" && turning === i) setTurning(null)
                 }}
               >
-                <div className="jf-face jf-front">
+                <div className={`jf-face jf-front ${p.tone ? `is-${p.tone}` : ""}`}>
+                  {p.tone !== "cover" && (
+                    <div className="jf-run" aria-hidden>
+                      <span className="jf-run-l">
+                        <RadarMark size={14} className="jf-run-mark" />
+                        RADAR · N° {brief.week.replace("Semaine ", "")}
+                      </span>
+                      <span>{brief.market} · 26.10.2026</span>
+                    </div>
+                  )}
                   <div className="jf-content">{p.content}</div>
-                  <div aria-hidden className="jf-page-rule" />
-                  <div className="jf-page-num">{String(i + 1).padStart(2, "0")}</div>
+                  {p.tone !== "cover" && (
+                    <div className="jf-foot" aria-hidden>
+                      <span className="jf-foot-n">{String(i + 1).padStart(2, "0")}</span>
+                      <span>Diffusion restreinte</span>
+                    </div>
+                  )}
                 </div>
                 <div className="jf-face jf-back" />
               </div>
