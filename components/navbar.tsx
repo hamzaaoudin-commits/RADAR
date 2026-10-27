@@ -60,7 +60,7 @@ export function NavBar() {
             </Link>
           ))}
 
-          <div className="relative inline-block">
+          <div className="relative inline-flex shrink-0">
             <span
               aria-hidden
               className="absolute -inset-1 rounded-full border border-brand/50"
@@ -68,7 +68,7 @@ export function NavBar() {
             />
             <Link
               href="/pricing"
-              className="relative rounded-full px-5 py-2.5 font-sans text-[13px] font-semibold tracking-[0.04em] text-white no-underline"
+              className="relative inline-flex items-center whitespace-nowrap rounded-full px-5 py-2.5 font-sans text-[13px] font-semibold tracking-[0.04em] text-white no-underline"
               style={{ background: "linear-gradient(135deg,#e63946,#ff1a1a)" }}
             >
               20€/mois · S'abonner →
@@ -93,7 +93,7 @@ export function NavBar() {
             <Link
               href="/pricing"
               onClick={() => setMobileOpen(false)}
-              className="rounded-full px-6 py-3 text-center font-sans text-sm font-semibold text-white no-underline"
+              className="whitespace-nowrap rounded-full px-6 py-3 text-center font-sans text-sm font-semibold text-white no-underline"
               style={{ background: "linear-gradient(135deg,#e63946,#ff1a1a)" }}
             >
               20€/mois · S'abonner →

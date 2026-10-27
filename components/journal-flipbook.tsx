@@ -62,6 +62,7 @@ function buildPages(b: Brief): Page[] {
           <div className="jf-market">{b.week}</div>
           <div className="mt-2 font-mono text-[10px] tracking-[0.06em] text-white/40">
             {b.dateLabel}
+            {b.market ? ` · ${b.market}` : ""}
           </div>
         </div>
       </div>

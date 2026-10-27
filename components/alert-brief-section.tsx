@@ -1,4 +1,8 @@
+import { BRIEFS } from "@/lib/brief-data"
+
 export function AlertBriefSection() {
+  const b = BRIEFS[0]
+  const une = b.items[0]
   return (
     <section className="section">
       <div className="shell-md">
@@ -10,17 +14,16 @@ export function AlertBriefSection() {
         <div className="flex flex-col gap-6">
           <div className="card card-hover border-l-2 border-l-[#ff1a1a] px-6 py-6">
             <div className="mb-2 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-[#ff1a1a]">
-              LA UNE DE LA SEMAINE
+              LA UNE · {b.week.toUpperCase()}
             </div>
             <h3 className="mb-1 font-serif text-base font-bold text-white">
-              OpenAI — nouvelle capacité d&apos;agent autonome
+              {une.label}
             </h3>
             <p className="mb-3 font-sans text-[13px] text-chalk-55">
-              Impact potentiel : <span className="text-[#ff1a1a]">élevé</span> · Horizon : 6–18 mois
+              Impact potentiel : <span className="text-[#ff1a1a]">élevé</span> · Horizon : {une.horizon}
             </p>
             <p className="m-0 body-sm">
-              Cette technologie pourrait automatiser une partie de votre processus.
-              Action recommandée : tester sur un flux pilote.
+              {une.why} Action recommandée : {une.action}
             </p>
           </div>
 

@@ -21,7 +21,7 @@ export default function BriefPage() {
         <div className="glow-top" aria-hidden />
         <div className="grain-layer" aria-hidden />
         <div className="shell-lg relative">
-          <div className="mb-3 kicker">Aperçu — données d&apos;exemple</div>
+          <div className="mb-3 kicker">Numéro réel — semaine 43 · expertise comptable</div>
           <h1 className="mb-4 font-serif text-[clamp(1.8rem,3.6vw,2.8rem)] font-bold leading-[1.12] tracking-[-0.02em] text-white">
             Le journal hebdomadaire.
           </h1>
@@ -31,8 +31,10 @@ export default function BriefPage() {
             semaine. Feuilletez-le ci-dessous exactement comme vous le recevrez.
           </p>
           <p className="mt-4 max-w-[620px] font-sans text-[13px] leading-relaxed text-chalk-40">
-            Ceci est une démonstration : le numéro ci-dessous est illustratif et
-            porte sur un marché fictif.
+            Ce numéro est réel : il couvre la semaine du 19 au 25 octobre 2026
+            sur le marché de l&apos;expertise comptable. Chaque article renvoie à
+            sa source ; un montant que la source ne publie pas est écrit « non
+            publié », jamais estimé.
           </p>
         </div>
       </section>
@@ -41,6 +43,23 @@ export default function BriefPage() {
 
       <section className="px-gutter pb-24">
         <JournalFlipbook brief={BRIEFS[0]} />
+        <div className="shell-lg mt-14">
+          <div className="mb-3 kicker">Sources du numéro</div>
+          <ul className="m-0 flex list-none flex-col gap-2 p-0 font-sans text-[13px] leading-relaxed text-chalk-55">
+            {BRIEFS[0].sources?.map((src) => (
+              <li key={src.url}>
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-hair-strong underline-offset-4 transition-colors hover:text-white"
+                >
+                  {src.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <section className="section">
