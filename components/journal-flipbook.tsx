@@ -57,7 +57,8 @@ function Refs({ refs, sources }: { refs?: number[]; sources?: Brief["sources"] }
 
 function buildPages(b: Brief): Page[] {
   const pages: Page[] = []
-  const ref = `RADAR/EC/2026-${b.week.replace("Semaine ", "")}`
+  const num = b.week.replace("Semaine ", "")
+  const ref = `RADAR/EC/2026-${num}`
   const nb = b.rubriques.reduce((n, r) => n + r.breves.length, 0)
   const une = b.items[0]
 
@@ -75,7 +76,7 @@ function buildPages(b: Brief): Page[] {
         </div>
         <div>
           <div className="jf-cover-sub">Note hebdomadaire de veille stratégique</div>
-          <div className="jf-cover-num">{b.week.replace("Semaine ", "")}</div>
+          <div className="jf-cover-num">{num}</div>
           <div className="jf-cover-market">{b.market}</div>
           <div className="jf-cover-period">{b.dateLabel}</div>
         </div>
@@ -91,7 +92,7 @@ function buildPages(b: Brief): Page[] {
   pages.push({
     label: "Synthèse",
     content: (
-      <div>
+      <div className="jf-page">
         <Folio n="01">Synthèse</Folio>
         <h3 className="jf-h1">{b.headline}</h3>
         <p className="jf-chapo">{b.summary}</p>
@@ -104,15 +105,17 @@ function buildPages(b: Brief): Page[] {
             <strong>{une.label}.</strong> {une.why}
           </div>
         </div>
-        <div className="jf-sommaire-h">Au sommaire — {nb} articles</div>
-        <div className="flex flex-col gap-1.5">
-          {b.rubriques.map((r) => (
-            <div key={r.name} className="flex items-baseline gap-2">
-              <span className="jf-som-name">{r.name}</span>
-              <span className="jf-som-dots" />
-              <span className="jf-som-n">{r.breves.length || "—"}</span>
-            </div>
-          ))}
+        <div className="jf-push">
+          <div className="jf-sommaire-h">Au sommaire · {nb} articles</div>
+          <div className="jf-som">
+            {b.rubriques.map((r) => (
+              <div key={r.name} className="jf-som-row">
+                <span className="jf-som-name">{r.name}</span>
+                <span className="jf-som-dots" />
+                <span className="jf-som-n">{r.breves.length || "—"}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     ),
@@ -122,9 +125,9 @@ function buildPages(b: Brief): Page[] {
   pages.push({
     label: "Sujets prioritaires",
     content: (
-      <div>
-        <Folio n="02">Sujets prioritaires</Folio>
-        <div className="flex flex-col">
+      <div className="jf-page">
+        <Folio n="02">Les cinq sujets de la semaine</Folio>
+        <div className="jf-sujets">
           {b.items.map((i) => (
             <div key={i.rank} className="jf-sujet">
               <div className="jf-sujet-rank">{i.rank}</div>
@@ -134,7 +137,7 @@ function buildPages(b: Brief): Page[] {
                   {i.domain} · Alerte {ALERT_LABEL[i.severity].toLowerCase()} · Horizon {i.horizon}
                 </div>
                 <p className="jf-sujet-act">
-                  <span className="jf-red">À faire : </span>
+                  <span className="jf-red">À faire. </span>
                   {i.action}
                 </p>
               </div>
@@ -149,9 +152,14 @@ function buildPages(b: Brief): Page[] {
   pages.push({
     label: "Recommandation",
     content: (
-      <div className="flex h-full flex-col">
+      <div className="jf-page">
         <Folio n="03">Recommandation de la semaine</Folio>
-        <div className="jf-action">{b.todo}</div>
+        <div className="jf-action">
+          <div className="jf-action-q" aria-hidden>
+            &ldquo;
+          </div>
+          <p>{b.todo}</p>
+        </div>
       </div>
     ),
   })
@@ -162,7 +170,7 @@ function buildPages(b: Brief): Page[] {
       pages.push({
         label: r.name,
         content: (
-          <div>
+          <div className="jf-page">
             <Folio n="04">{r.name}</Folio>
             <p className="jf-empty">Rien à signaler cette semaine. Balayé : {r.empty}.</p>
           </div>
@@ -174,18 +182,32 @@ function buildPages(b: Brief): Page[] {
       pages.push({
         label: `${r.name} ${idx + 1}`,
         content: (
-          <div>
+          <div className="jf-page">
             <Folio n="04">
               {r.name} · {idx + 1}/{r.breves.length}
             </Folio>
             <h4 className="jf-h2">{a.title}</h4>
-            <p className="jf-body">{a.body}</p>
-            {a.visual && <ArticleVisual visual={a.visual} />}
+            <p className="jf-lead">{a.lead}</p>
+            <div className="jf-hero">
+              {a.visual ? (
+                <ArticleVisual visual={a.visual} />
+              ) : a.stat ? (
+                <div className="jf-stat">
+                  <div className="jf-stat-v">{a.stat.value}</div>
+                  <div className="jf-stat-l">{a.stat.label}</div>
+                </div>
+              ) : null}
+            </div>
+            <ul className="jf-facts">
+              {a.facts.map((f) => (
+                <li key={f}>{f}</li>
+              ))}
+            </ul>
             <div className="jf-imp">
               <div className="jf-eyebrow jf-red mb-1">Ce que cela change</div>
               <p className="jf-imp-text">{a.implication}</p>
             </div>
-            <div className="jf-srcbox">
+            <div className="jf-srcbox jf-push">
               <span className={`jf-conf ${a.confidence === "relayed" ? "is-relayed" : ""}`}>
                 {a.confidence === "relayed" ? "Relayé · à confirmer" : "Source consultée"}
               </span>
@@ -202,9 +224,9 @@ function buildPages(b: Brief): Page[] {
   pages.push({
     label: "Calendrier",
     content: (
-      <div>
+      <div className="jf-page">
         <Folio n="05">Calendrier</Folio>
-        <div className="flex flex-col">
+        <div className="jf-ags">
           {b.agenda.map((a) => (
             <div key={a.what} className="jf-ag">
               <div className="jf-ag-date">{a.date}</div>
@@ -223,9 +245,9 @@ function buildPages(b: Brief): Page[] {
   pages.push({
     label: "Chiffres clés",
     content: (
-      <div>
+      <div className="jf-page">
         <Folio n="06">Chiffres clés</Folio>
-        <div className="flex flex-col">
+        <div className="jf-figs">
           {b.figures.map((f) => (
             <div key={f.what} className="jf-fig">
               <div className="jf-fig-val">{f.value}</div>
@@ -244,7 +266,7 @@ function buildPages(b: Brief): Page[] {
   pages.push({
     label: "Sources",
     content: (
-      <div>
+      <div className="jf-page">
         <Folio n="07">Sources et méthode</Folio>
         <ol className="jf-srclist">
           {b.sources?.map((s, i) => (
@@ -256,7 +278,7 @@ function buildPages(b: Brief): Page[] {
             </li>
           ))}
         </ol>
-        <div className="jf-method">
+        <div className="jf-method jf-push">
           <div className="jf-eyebrow jf-red mb-1.5">Comment lire ce numéro</div>
           <p>
             <strong>Source consultée</strong> : la rédaction a lu la page citée. <strong>Relayé · à confirmer</strong> :
@@ -265,7 +287,10 @@ function buildPages(b: Brief): Page[] {
             ni un conseil fiscal.
           </p>
         </div>
-        <div className="jf-sign"><span className="jf-sq" style={{ width: 7, height: 7 }} />RADAR — La rédaction</div>
+        <div className="jf-sign">
+          <span className="jf-sq" style={{ width: 7, height: 7 }} />
+          RADAR — La rédaction
+        </div>
       </div>
     ),
   })
@@ -294,7 +319,7 @@ export function JournalFlipbook({ brief }: { brief: Brief }) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-[580px]">
+    <div className="mx-auto w-full max-w-[640px]">
       <div
         className="jf-stage"
         tabIndex={0}

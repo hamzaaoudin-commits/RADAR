@@ -120,8 +120,13 @@ export function NewsletterPreview() {
                   <h4 className="m-0 mt-1 text-[12px] font-bold uppercase tracking-[0.12em]">Synthèse</h4>
                 </div>
                 <div className="min-w-0">
-                  <h3 className="mb-4 text-[30px] font-bold leading-[1.1] tracking-[-0.03em]">{b.headline}</h3>
-                  <p className="mb-6 text-[14.5px] leading-[1.7]" style={{ color: "rgba(255,255,255,0.82)" }}>
+                  <h3
+                    className="mb-4 text-[32px] font-bold leading-[1.12] tracking-[-0.015em]"
+                    style={{ fontFamily: "var(--font-serif)" }}
+                  >
+                    {b.headline}
+                  </h3>
+                  <p className="mb-6 text-[15.5px] leading-[1.65]" style={{ color: "rgba(255,255,255,0.86)" }}>
                     {b.summary}
                   </p>
                   <div className="flex items-stretch" style={{ background: "rgba(230,57,70,0.1)", border: `1px solid rgba(230,57,70,0.45)`, color: "#fff" }}>
@@ -147,7 +152,7 @@ export function NewsletterPreview() {
                     >
                       <span className="font-mono text-[13px] font-bold" style={{ color: RED }}>{i.rank}</span>
                       <div>
-                        <div className="mb-1 text-[16px] font-bold leading-snug tracking-[-0.01em]">{i.label}</div>
+                        <div className="mb-1 text-[19px] font-bold leading-[1.25]" style={{ fontFamily: "var(--font-serif)" }}>{i.label}</div>
                         <div className="mb-2 font-mono text-[10.5px] uppercase tracking-[0.1em]" style={{ color: MUTE }}>
                           {i.domain} · Alerte {ALERT_LABEL[i.severity].toLowerCase()} · Horizon {i.horizon}
                         </div>
@@ -187,10 +192,33 @@ export function NewsletterPreview() {
                     )}
                     {r.breves.map((x) => (
                       <article key={x.title} className="mb-7 last:mb-0">
-                        <h5 className="mb-2 text-[16px] font-bold leading-snug tracking-[-0.01em]">{x.title}</h5>
-                        <p className="mb-3 text-[13.5px] leading-[1.7]" style={{ color: "rgba(255,255,255,0.82)" }}>
-                          {x.body.length > 420 ? x.body.slice(0, x.body.lastIndexOf(". ", 420) + 1) : x.body}
+                        <h5
+                          className="mb-2 text-[21px] font-bold leading-[1.2] tracking-[-0.01em]"
+                          style={{ fontFamily: "var(--font-serif)" }}
+                        >
+                          {x.title}
+                        </h5>
+                        <p className="mb-4 text-[14.5px] font-medium leading-[1.55]" style={{ color: "rgba(255,255,255,0.9)" }}>
+                          {x.lead}
                         </p>
+                        {x.stat && (
+                          <div className="mb-4 flex items-baseline gap-4 border-y py-3" style={{ borderColor: LINE }}>
+                            <span className="text-[40px] font-bold leading-none tracking-[-0.05em]" style={{ color: RED }}>
+                              {x.stat.value}
+                            </span>
+                            <span className="text-[12.5px] leading-snug" style={{ color: MUTE }}>
+                              {x.stat.label}
+                            </span>
+                          </div>
+                        )}
+                        <ul className="mb-4 flex list-none flex-col gap-2 p-0">
+                          {x.facts.map((f) => (
+                            <li key={f} className="relative pl-4 text-[13.5px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.8)" }}>
+                              <span aria-hidden className="absolute left-0 top-[0.6em] h-[6px] w-[6px]" style={{ background: RED }} />
+                              {f}
+                            </li>
+                          ))}
+                        </ul>
                         <div className="mb-3 px-4 py-3 text-[13px] leading-[1.65]" style={{ background: SOFT }}>
                           <span className="font-bold">Ce que cela change. </span>
                           {x.implication}

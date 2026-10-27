@@ -77,6 +77,12 @@ export type Visual =
 
 export type Breve = {
   title: string
+  /** Accroche : l'enjeu en une ou deux phrases. */
+  lead: string
+  /** Une grande donnée, affichée seule quand l'article n'a pas de visuel. */
+  stat?: { value: string; label: string }
+  /** Les faits, un par ligne. Chacun reste attaché à la source de l'article. */
+  facts: string[]
   /** Le corps développé de l'article : le fait, ses modalités, ses chiffres. */
   body: string
   /** Ce que ça implique pour une entreprise du marché. Jamais une action datée. */
@@ -136,7 +142,7 @@ export const BRIEFS: Brief[] = [
     read: false,
     headline: "Le budget 2027 prend du retard : le vote des recettes passe au 3 novembre",
     summary:
-      "Le vote de la partie recettes, prévu le 20 octobre, a été reporté au 3 novembre : à la fin de la séance du 19, les députés n'avaient examiné que 15 articles sur 58. Pendant ce temps, la facture électronique entre dans sa phase d'exploitation (75 % des assujettis à la TVA ont désigné une plateforme, et le ministre a annoncé qu'aucune sanction ne serait prononcée avant la fin de 2026) et la profession voisine des avocats lance sa propre plateforme d'IA hébergée en France.",
+      "Le vote des recettes, prévu le 20 octobre, glisse au 3 novembre : 15 articles examinés sur 58. Pendant ce temps, la facture électronique entre en exploitation (75 % des assujettis ont désigné une plateforme, aucune sanction avant fin 2026) et les avocats lancent leur propre IA hébergée en France.",
     todo:
       "Ne figez aucun conseil de clôture qui repose sur une mesure du projet de budget avant le 3 novembre : préparez deux versions, avec et sans la mesure. En parallèle, listez les clients qui n'ont pas encore désigné de plateforme de réception : ce sont les 25 % restants, et l'absence de sanction jusqu'à la fin de 2026 est une tolérance annoncée, pas un report des dates légales. Enfin, demandez à chaque prestataire qui héberge un site ou un extranet la version de PHP en service : les correctifs du 21 octobre existent pour les branches 8.2 à 8.5 uniquement.",
     sources: [
@@ -213,17 +219,33 @@ export const BRIEFS: Brief[] = [
         name: "IA",
         breves: [
           {
-            title: "Les avocats lancent Avocat+, une plateforme d'IA hébergée en France",
+            title: "Les avocats ont leur IA souveraine. Et les experts-comptables ?",
+            lead: "Le Conseil national des barreaux lance Avocat+ : une IA de branche, hébergée en France, qui n'apprend pas des documents de ses utilisateurs.",
+            stat: { value: "≈ 50", label: "assistants métiers préconfigurés, en plus de 10 assistants juridiques" },
+            facts: [
+              "Lancée le 23 octobre sur le Legal Data Space, qui joue le rôle de tiers de confiance et d'intermédiaire de données.",
+              "Dix assistants spécialisés dans les grands domaines du droit français, et près de 50 assistants métiers préconfigurés par des avocats.",
+              "Modèles exploités sur une infrastructure hébergée en France ; les documents déposés ne servent pas à les entraîner.",
+              "Aucun tarif n'est mentionné sur la page.",
+            ],
             body: "Le Conseil national des barreaux a lancé le 23 octobre Avocat+, sa plateforme d'IA juridique, bâtie sur l'infrastructure du Legal Data Space, qui agit comme tiers de confiance et intermédiaire de données. Le lancement comprend dix assistants spécialisés dans les principaux domaines du droit français, et près de 50 assistants métiers déjà préconfigurés par des avocats. Les modèles sont exploités sur une infrastructure hébergée en France, et les documents déposés par les avocats ne servent pas à entraîner les modèles. Aucun tarif n'est mentionné sur la page.",
-            implication: "Une profession réglementée voisine obtient une plateforme de branche, avec deux engagements que vos clients et vos collaborateurs sauront désormais nommer : l'hébergement en France et la non-réutilisation des documents. Ce que vous utilisez aujourd'hui doit pouvoir répondre à ces deux questions. Aucune annonce équivalente côté experts-comptables n'a été relevée cette semaine.",
+            implication: "Une profession réglementée voisine obtient une plateforme de branche, avec deux engagements que vos clients sauront bientôt nommer : l'hébergement en France et la non-réutilisation des documents. Vos outils actuels doivent pouvoir répondre aux deux. Aucune annonce équivalente côté experts-comptables cette semaine.",
             source: "CNB, communiqué du 23 octobre",
             confidence: "direct",
             refs: [10],
           },
           {
             title: "Cegid met des agents de contrôle dans ses logiciels de finance",
+            lead: "Un agent note chaque virement d'un lot ; un autre traque les marges négatives dans l'ERP. Un humain valide toujours.",
+            stat: { value: "2", label: "agents présentés le 8 octobre : un en trésorerie, un dans l'ERP" },
+            facts: [
+              "Présentés le 8 octobre à Cegid Connections Enterprise (Paris), détaillés par Daf-Mag le 22 octobre.",
+              "Trésorerie : un score de risque pour chaque virement d'un lot. ERP : repérage des incohérences, dont les marges négatives.",
+              "Le contrôleur examine les cas signalés ; le score aide au contrôle mais ne garantit pas l'absence de fraude.",
+              "Produits, calendrier et clients visés non précisés ; les cabinets d'expertise comptable ne sont pas mentionnés.",
+            ],
             body: "Présentés le 8 octobre à Cegid Connections Enterprise (Paris) et détaillés par Daf-Mag le 22 octobre : en trésorerie, un agent attribue un score de risque à chaque virement d'un lot ; dans l'ERP, un agent repère les incohérences, notamment les marges négatives, et le contrôleur examine ensuite les cas signalés. La validation reste une étape distincte de la détection, et le score est une aide au contrôle, non une garantie d'absence de fraude. Les produits concernés, le calendrier de disponibilité et les clients visés ne sont pas précisés ; les cabinets d'expertise comptable ne sont pas mentionnés.",
-            implication: "Ces agents s'adressent aux directions financières, pas aux cabinets. Un client équipé pourra néanmoins vous demander comment votre revue s'articule avec un score produit par un agent. Daf-Mag note que la gouvernance — qui définit les règles, valide, documente — reste à définir.",
+            implication: "Ces agents visent les directions financières, pas les cabinets. Mais un client équipé pourra vous demander comment votre revue s'articule avec un score produit par un agent. Qui fixe les règles, valide et documente reste à définir, note Daf-Mag.",
             source: "Daf-Mag, 22 octobre ; présentation du 8 octobre",
             confidence: "direct",
             refs: [11],
@@ -234,17 +256,33 @@ export const BRIEFS: Brief[] = [
         name: "Technologies",
         breves: [
           {
-            title: "Un pilote Visa, BILL et Billtrust fait régler des factures approuvées par un agent",
+            title: "Un agent IA règle des factures fournisseurs, pour de vrai",
+            lead: "Visa, BILL et Billtrust testent un agent qui paie des factures déjà approuvées. La décision de payer reste à l'acheteur.",
+            stat: { value: "20 oct.", label: "premier pilote en conditions réelles, annoncé par Visa" },
+            facts: [
+              "L'agent de BILL, enregistré auprès de Visa, paie pour le compte de ses clients selon leurs instructions approuvées.",
+              "Billtrust, côté fournisseur, l'authentifie et lui ouvre le portail ; aucun identifiant de portail n'est partagé.",
+              "Chaque chemin de paiement est lié à une facture ; seuls des paiements admissibles déjà approuvés sont exécutés.",
+              "Le Trusted Agent Protocol de Visa peut remplacer les protections anti-robots comme les CAPTCHA.",
+            ],
             body: "Visa, BILL et Billtrust ont annoncé le 20 octobre un premier pilote en conditions réelles : un agent IA initie et finalise le paiement de factures fournisseurs déjà approuvées par l'acheteur, via les portails fournisseurs. L'agent de BILL, enregistré auprès de Visa, paie pour le compte de ses clients selon leurs instructions approuvées ; Billtrust, côté fournisseur, l'authentifie et lui donne accès au portail. L'agent n'exécute que des paiements admissibles déjà approuvés, aucun identifiant de portail n'est partagé et chaque chemin de paiement est lié à une facture. Le Trusted Agent Protocol de Visa peut remplacer les protections anti-robots comme les CAPTCHA. Périmètre géographique et calendrier ne sont pas précisés dans le communiqué.",
-            implication: "Le paiement d'une facture approuvée sans intervention humaine est démontré en conditions réelles, avec la décision de payer laissée à l'acheteur. Rien n'annonce son arrivée en France ; il montre vers quoi la facture électronique peut conduire du côté des paiements.",
+            implication: "Payer une facture approuvée sans intervention humaine est démontré en conditions réelles. Périmètre géographique et calendrier ne sont pas précisés, et rien n'annonce la France ; mais cela montre où la facture électronique peut conduire côté paiements.",
             source: "Visa, communiqué du 20 octobre",
             confidence: "direct",
             refs: [12],
           },
           {
-            title: "Thomson Reuters publie la nouvelle version de CoCounsel pour la fiscalité, l'audit et la comptabilité",
+            title: "Thomson Reuters : une IA qui calcule avec du code, pas à l'intuition",
+            lead: "CoCounsel produit des classeurs Excel à formules vivantes et un onglet d'hypothèses documenté. Pour l'instant, aux États-Unis seulement.",
+            stat: { value: "22 oct.", label: "annonce, disponible immédiatement pour les clients américains" },
+            facts: [
+              "Écrit et exécute du code pour les calculs : amortissements, distributions minimales obligatoires, revenu qualifié d'entreprise, seuils, scénarios multiples.",
+              "Sort des classeurs Excel multi-onglets à formules dynamiques, avec un onglet d'hypothèses, ainsi que des mémos Word et PDF.",
+              "Conçu pour fonctionner sur n'importe quel modèle d'IA de pointe ; protocole MCP pris en charge.",
+              "Prix non publié.",
+            ],
             body: "Annoncée le 22 octobre et disponible immédiatement pour les clients aux États-Unis uniquement, la plateforme écrit et exécute du code pour les calculs (amortissements, distributions minimales obligatoires, revenu qualifié d'entreprise, contrôles de seuils, comparaisons multi-scénarios). Elle produit des classeurs Excel multi-onglets à formules dynamiques, avec un onglet d'hypothèses documenté, ainsi que des mémos en Word et PDF. Elle est conçue pour fonctionner sur n'importe quel modèle d'IA de pointe et prend en charge le protocole MCP. Le prix n'est pas publié.",
-            implication: "Ce que l'éditeur met en avant, c'est un classeur dont les hypothèses sont visibles et des calculs refaits par du code plutôt que « devinés » : c'est l'exigence que vos propres revues de travaux produits par IA devraient avoir. L'offre ne concerne pas la France.",
+            implication: "L'éditeur met en avant des hypothèses visibles et des calculs refaits par du code plutôt que « devinés ». C'est l'exigence que vos propres revues de travaux produits par IA devraient avoir. L'offre ne concerne pas la France.",
             source: "CPA Practice Advisor, 22 octobre (modifié le 23)",
             confidence: "direct",
             refs: [13],
@@ -255,9 +293,17 @@ export const BRIEFS: Brief[] = [
         name: "Réglementation",
         breves: [
           {
-            title: "Budget 2027 : le vote des recettes est reporté au 3 novembre",
+            title: "Budget 2027 : le vote des recettes glisse au 3 novembre",
+            lead: "Il reste 43 articles et plus de 2 600 amendements à examiner. Rien n'est acquis pour vos conseils de clôture.",
+            stat: { value: "15 / 58", label: "articles de la première partie examinés au 19 octobre" },
+            facts: [
+              "Si la partie recettes est rejetée : Sénat, commission mixte paritaire, puis possible ordonnance. Sans budget voté au 17 décembre, une loi spéciale prend le relais.",
+              "Précédent : l'an dernier, la première partie avait été rejetée par 404 voix contre 1 ; le budget 2026 n'a été adopté qu'en février, par le 49.3.",
+              "Déjà votés : indexation du barème de l'impôt sur le revenu sur l'inflation (96 contre 0) ; suppression de la baisse de l'abattement sur les pensions (116 contre 30).",
+              "Le report est relevé par NosParlementaires ; la page de l'Assemblée consultée n'en fait pas état.",
+            ],
             body: "Le projet de loi de finances (n° 3210) a été déposé le 1er octobre et sa discussion en séance a débuté le 13 octobre (Assemblée nationale). À la fin de la séance du 19 octobre, les députés n'avaient examiné que 15 articles sur 58 de la première partie ; 43 restent à examiner, avec plus de 2 600 amendements. Le vote prévu le 20 octobre est repoussé au mardi 3 novembre ; l'examen reprend le 27 octobre jusqu'au 2 novembre, et le vote sur l'ensemble du budget reste fixé au 17 novembre. Si la partie recettes est rejetée, le texte part au Sénat, une commission mixte paritaire cherche un accord et le gouvernement pourrait ensuite agir par ordonnance ; la date limite du Parlement est le 17 décembre, faute de quoi une loi spéciale permettrait à l'État de continuer à percevoir les impôts. L'an dernier, la première partie avait été rejetée par 404 voix contre 1 et le budget 2026 n'a été adopté qu'en février 2026, par le 49.3. Votes adoptés à ce stade : indexation du barème de l'impôt sur le revenu sur l'inflation (96 voix contre 0) et suppression de la baisse de l'abattement fiscal sur les pensions (116 contre 30). Le report est relevé par NosParlementaires ; la page de l'Assemblée consultée n'en fait pas état.",
-            implication: "Aucune mesure fiscale du projet n'est acquise, et rien ne garantit que la première partie sera adoptée. Les conseils de clôture qui supposent une mesure du projet doivent être livrés en deux versions.",
+            implication: "Aucune mesure fiscale du projet n'est acquise, et rien ne garantit que la première partie sera adoptée. Tout conseil de clôture qui en dépend doit être livré en deux versions.",
             source: "NosParlementaires (mis à jour le 24 octobre) ; Assemblée nationale, dossier législatif",
             confidence: "direct",
             refs: [1, 2],
@@ -274,9 +320,16 @@ export const BRIEFS: Brief[] = [
             },
           },
           {
-            title: "Facture électronique : amendes relevées, mais aucune sanction avant la fin de 2026",
+            title: "Facture électronique : amendes relevées, mais aucune sanction avant 2027",
+            lead: "Le ministre a annoncé zéro sanction jusqu'à fin 2026. Cette tolérance ne reporte aucune date légale.",
+            facts: [
+              "Les deux amendes sont plafonnées à 15 000 € par année civile.",
+              "Absence de plateforme : 500 € après une mise en demeure restée sans effet pendant trois mois, puis 1 000 € après une seconde.",
+              "Première infraction réparée spontanément, ou dans les 30 jours d'une première demande de l'administration : pas de sanction.",
+              "Émission obligatoire pour les PME, TPE et micro-entreprises le 1er septembre 2027.",
+            ],
             body: "Selon la loi de finances 2026, l'émission d'une facture non électronique est sanctionnée de 50 € par facture (15 € auparavant), plafonnée à 15 000 € par année civile ; le défaut de transmission des données de transaction coûte 500 € par transmission (250 € auparavant), avec le même plafond ; l'absence de plateforme est sanctionnée de 500 € après une mise en demeure restée sans effet pendant trois mois, puis 1 000 € après une seconde. Une première infraction réparée spontanément ou dans les 30 jours suivant une première demande de l'administration n'est pas sanctionnée. Au comité de suivi du 8 octobre, le ministre a annoncé qu'aucune sanction ne serait prononcée jusqu'à la fin de 2026, et qu'un guide actualisé serait publié sous deux semaines ; cette tolérance ne reporte pas les dates légales. L'émission devient obligatoire pour les PME, TPE et micro-entreprises le 1er septembre 2027.",
-            implication: "L'absence de sanction jusqu'à fin 2026 est une tolérance annoncée par le ministre, pas un report : la réception est obligatoire depuis le 1er septembre, et les montants ci-dessus s'appliqueront ensuite. Un dossier de preuve (plateforme choisie, date, difficultés, corrections) reste le meilleur appui pour un client en difficulté.",
+            implication: "L'absence de sanction jusqu'à fin 2026 est une tolérance annoncée, pas un report : la réception est obligatoire depuis le 1er septembre. Un dossier de preuve (plateforme choisie, date, difficultés, corrections) protège un client en difficulté.",
             source: "MoneyVox (loi de finances 2026) ; Legifiscal, 15 octobre ; Village de la Justice, mis à jour le 9 octobre",
             confidence: "direct",
             refs: [6, 7, 5],
@@ -293,9 +346,16 @@ export const BRIEFS: Brief[] = [
             },
           },
           {
-            title: "Sécurité sociale : les députés rejettent la partie recettes",
+            title: "Sécurité sociale : la partie recettes rejetée par 115 voix contre 1",
+            lead: "Le vote prévu le 27 octobre ne s'applique plus. Le texte poursuit son parcours.",
+            stat: { value: "115 – 1", label: "voix : rejet de la partie recettes par l'Assemblée, le 23 octobre" },
+            facts: [
+              "Vote du 23 octobre à l'Assemblée nationale, sur la partie recettes du budget de la Sécurité sociale.",
+              "Le vote initialement prévu le 27 octobre devient sans objet.",
+              "Aucune règle nouvelle de cotisations n'est acquise à ce stade.",
+            ],
             body: "Le 23 octobre, l'Assemblée a rejeté la partie recettes du budget de la Sécurité sociale par 115 voix contre 1. Le vote prévu le 27 octobre ne s'applique donc plus.",
-            implication: "Aucune règle nouvelle de cotisations n'est acquise pour vos clients employeurs : le texte poursuit son parcours et son calendrier est à suivre semaine après semaine.",
+            implication: "Rien n'est acquis côté cotisations pour vos clients employeurs. Le calendrier est à suivre semaine après semaine.",
             source: "NosParlementaires, mis à jour le 24 octobre",
             confidence: "direct",
             refs: [1],
@@ -306,9 +366,16 @@ export const BRIEFS: Brief[] = [
         name: "Marché",
         breves: [
           {
-            title: "Facture électronique : 75 % des assujettis ont désigné une plateforme",
+            title: "Facture électronique : un quart des entreprises sans plateforme",
+            lead: "75 % des assujettis ont désigné une plateforme. Le travail se déplace vers les retardataires.",
+            facts: [
+              "Plus de 20 millions de factures échangées depuis le 1er septembre, pour plus de 70 Md€ de valeur.",
+              "155 plateformes sur la liste officielle au 13 octobre, dont 9 en attente de tests d'interopérabilité.",
+              "Sur 57 offres relevées au 25 octobre : 14 gratuites, prix d'entrée payant médian de 29 € HT par mois (comparateur rémunéré par affiliation).",
+              "Les 75 % mesurent une désignation, pas le bon fonctionnement de la chaîne de facturation.",
+            ],
             body: "Au comité de suivi du 8 octobre, présidé par le ministre de l'Action et des Comptes publics, le premier bilan faisait état de 75 % des entreprises assujetties à la TVA ayant désigné une plateforme de réception — un indicateur de désignation, non de bon fonctionnement de la chaîne de facturation —, de plus de 20 millions de factures échangées depuis le 1er septembre et de plus de 70 milliards d'euros de valeur de factures. Environ un quart des assujettis n'a pas encore désigné de plateforme. Au 13 octobre, la liste officielle comptait 155 plateformes, dont 9 en attente de tests d'interopérabilité. Sur 57 offres relevées au 25 octobre, 14 sont gratuites et le prix d'entrée payant médian est de 29 € HT par mois (comparateur rémunéré par commissions d'affiliation).",
-            implication: "Le sujet n'est plus de convaincre mais de raccorder les retardataires. Un quart des assujettis n'a pas désigné de plateforme : c'est le travail d'accompagnement le plus immédiat de votre portefeuille.",
+            implication: "Le sujet n'est plus de convaincre mais de raccorder. Un quart des assujettis n'a pas désigné de plateforme : c'est l'accompagnement le plus immédiat de votre portefeuille.",
             source: "Communiqué du ministère (9 octobre) repris par TPE Actu (10 octobre) et Legifiscal (15 octobre) ; Observatoire, 25 octobre",
             confidence: "direct",
             refs: [8, 7, 9],
@@ -326,17 +393,32 @@ export const BRIEFS: Brief[] = [
         name: "Concurrence",
         breves: [
           {
-            title: "Numeris, adossé à un fonds, rachète le cabinet de conseil FCS Consulting",
+            title: "Numeris, adossé à un fonds, rachète un cabinet de M&A",
+            lead: "Un groupe de 350 collaborateurs ajoute le conseil en cession à son offre d'expertise comptable.",
+            stat: { value: "42 M€", label: "de chiffre d'affaires pour Numeris, environ 350 collaborateurs" },
+            facts: [
+              "Numeris reprend l'intégralité des titres de FCS Consulting, cabinet de conseil en fusions-acquisitions ; opération publiée le 13 octobre.",
+              "Numeris est financé en LBO par Strada Partners.",
+              "Prix et chiffre d'affaires de la cible : non publiés.",
+              "Opération de la semaine précédente ; aucune nouvelle opération équivalente retenue cette semaine.",
+            ],
             body: "Le groupe parisien d'expertise comptable Numeris, environ 350 collaborateurs et 42 M€ de chiffre d'affaires, a repris l'intégralité des titres de FCS Consulting, un cabinet de conseil en fusions-acquisitions. Numeris est financé en LBO par Strada Partners. Opération publiée le 13 octobre ; le prix et le chiffre d'affaires de la cible ne sont pas publiés. Cette opération date de la semaine précédente : aucune nouvelle opération équivalente n'a été retenue cette semaine.",
-            implication: "Un cabinet capitalisé ajoute à son offre le conseil en cession, qui est une porte d'entrée vers les clients dirigeants. Cela renforce l'intérêt de savoir ce que vous répondez à un dirigeant qui prépare une cession.",
+            implication: "Un cabinet capitalisé ajoute le conseil en cession, porte d'entrée vers les clients dirigeants. Sachez ce que vous répondez à un dirigeant qui prépare une cession.",
             source: "CFNEWS, 13 octobre (extrait accessible)",
             confidence: "direct",
             refs: [18],
           },
           {
-            title: "Audit CPA veut tripler de taille et se tourne vers le capital-investissement",
+            title: "Audit CPA veut tripler de taille avec du capital-investissement",
+            lead: "Deuxième cabinet parisien en moins d'une semaine à annoncer une croissance appuyée sur des capitaux.",
+            stat: { value: "> 80 M€", label: "de chiffre d'affaires attendu cette année, cabinet fondé en 2005" },
+            facts: [
+              "Cabinet parisien fondé en 2005, qui se tourne vers le private equity pour tripler de taille.",
+              "Opération de financement datée du 6 octobre ; montant de la dette et financeurs non publiés.",
+              "Article du 8 octobre, mis à jour le 9.",
+            ],
             body: "Le cabinet parisien, fondé en 2005, attend plus de 80 M€ de chiffre d'affaires cette année et se tourne vers le private equity pour tripler de taille. Une opération de financement est datée du 6 octobre ; le montant de la dette et les financeurs ne sont pas publiés. Article du 8 octobre.",
-            implication: "Deux cabinets parisiens annoncent une croissance appuyée sur des capitaux en moins d'une semaine : la consolidation du segment se poursuit.",
+            implication: "Deux cabinets parisiens sur des capitaux en moins d'une semaine : la consolidation du segment se poursuit.",
             source: "CFNEWS, 8 octobre, mis à jour le 9 octobre (extrait accessible)",
             confidence: "direct",
             refs: [19],
@@ -347,17 +429,33 @@ export const BRIEFS: Brief[] = [
         name: "Opportunités",
         breves: [
           {
-            title: "Le « Pacte Papin » : abattement doublé et droits de mutation à 0,1 % pour la transmission",
+            title: "Transmission : abattement doublé et droits à 0,1 %, en projet",
+            lead: "Pour les cessions de 2027 à 2029. Rien n'est voté : la première partie du budget ne passe qu'au 3 novembre.",
+            stat: { value: "1 M€", label: "abattement fixe du dirigeant, contre 500 000 € aujourd'hui" },
+            facts: [
+              "Cessions réalisées entre le 1er janvier 2027 et le 31 décembre 2029.",
+              "Suramortissement de 30 % pour les PME et de 60 % pour les microentreprises.",
+              "Droits de mutation à 0,1 % sur fonds de commerce et parts sociales, sous conditions d'ancienneté du salarié repreneur (cinq ans de contrat sur les dix dernières années).",
+              "Amendement adopté : abattement de 500 000 € étendu aux associés de sociétés d'exercice libéral partant en retraite, cessions à compter de 2027.",
+            ],
             body: "Pour les cessions réalisées entre le 1er janvier 2027 et le 31 décembre 2029, le projet de loi prévoit un abattement fixe du dirigeant porté de 500 000 € à 1 M€, un suramortissement de 30 % pour les PME et de 60 % pour les microentreprises, et des droits de mutation réduits à 0,1 % sur les fonds de commerce et les parts sociales, sous conditions d'ancienneté du salarié repreneur (cinq ans de contrat sur les dix dernières années). En parallèle, un amendement adopté par les députés étend l'abattement de 500 000 € aux associés de sociétés d'exercice libéral partant en retraite, pour les cessions à compter de 2027. Rien n'est définitivement voté : le vote de la première partie est repoussé au 3 novembre.",
-            implication: "Une mesure de transmission en discussion crée un motif de conversation avec chaque dirigeant proche d'une cession, même si le texte final peut différer. Elle justifie un point de situation avant la fin de l'année plutôt qu'un conseil ferme.",
+            implication: "Un motif de conversation avec chaque dirigeant proche d'une cession, même si le texte final peut différer. Il justifie un point de situation avant la fin de l'année plutôt qu'un conseil ferme.",
             source: "KPMG, 2 octobre ; Legifiscal, 21 octobre",
             confidence: "direct",
             refs: [3, 4],
           },
           {
-            title: "Un cabinet australien fait écrire par l'IA des scripts qu'il exécute en local",
+            title: "Un cabinet australien fait écrire ses scripts par l'IA, puis les exécute chez lui",
+            lead: "Écrire une fois, exécuter sans coût par appel. Le vrai coût passe à la maintenance et au contrôle.",
+            stat: { value: "2", label: "logiciels comptables reliés en local : QuickBooks et Xero" },
+            facts: [
+              "Cabinet de Townsville dirigé par Trent Yesberg : scripts écrits par Claude et ChatGPT, exécutés en local.",
+              "Un script local n'entraîne pas d'appel facturé au modèle à chaque traitement ; infrastructure, maintenance et contrôle restent à la charge du cabinet.",
+              "La démarche a donné Twine Biller, un outil de refacturation des abonnements.",
+              "Article du 16 octobre, relayé : non revérifié à la source.",
+            ],
             body: "Le cabinet de Townsville dirigé par Trent Yesberg fait écrire des scripts par Claude et ChatGPT, puis les exécute en local, reliés à QuickBooks et Xero. Un script exécuté en local n'entraîne pas d'appel facturé au modèle à chaque traitement ; les coûts d'infrastructure, de maintenance et de contrôle restent à la charge du cabinet. La démarche a donné naissance à Twine Biller, un outil de refacturation des abonnements. Article du 16 octobre.",
-            implication: "Une autre façon d'industrialiser un traitement répétitif : écrire une fois, exécuter sans coût par appel. Le coût réel se déplace vers la maintenance et le contrôle du script.",
+            implication: "Autre façon d'industrialiser un traitement répétitif : écrire une fois, exécuter sans coût par appel. Le coût se déplace vers la maintenance et le contrôle du script.",
             source: "CPA Trendlines, 16 octobre, relayé par Le Brief IA du 26 octobre (non revérifié à la source)",
             confidence: "relayed",
             refs: [20],
@@ -368,17 +466,32 @@ export const BRIEFS: Brief[] = [
         name: "Risques",
         breves: [
           {
-            title: "Deux failles critiques de PHP corrigées le 21 octobre",
+            title: "PHP2Shell : deux failles critiques, corrigées le 21 octobre",
+            lead: "Exécution de code à distance, sans authentification. Pas de correctif officiel pour PHP 8.1 et antérieur.",
+            stat: { value: "9,2", label: "note CVSS v4.0 des deux failles, CVE-2026-109618 et -109619" },
+            facts: [
+              "Correctifs dans PHP 8.5.12, 8.4.27, 8.3.36 et 8.2.35.",
+              "Touchent PHP-FPM, Apache mod_php, php-cgi, FrankenPHP et LiteSpeed ; mod_php a un chemin d'attaque démontré.",
+              "Kaspersky rapporte des tentatives d'exploitation avant les correctifs ; une source du 21 octobre, écrite avant la sortie, n'en relevait aucune.",
+              "Correctifs minimaux pour compilation manuelle : branches 7.4, 8.0 et 8.1.",
+            ],
             body: "Les correctifs des failles CVE-2026-109618 et CVE-2026-109619 (« PHP2Shell »), toutes deux notées 9,2 sur l'échelle CVSS v4.0, ont été publiés le 21 octobre dans les versions 8.5.12, 8.4.27, 8.3.36 et 8.2.35. Elles permettent une exécution de code à distance sans authentification et touchent PHP-FPM, Apache avec mod_php, php-cgi, FrankenPHP et LiteSpeed, mod_php présentant un chemin d'attaque démontré. Il n'existe pas de correctif officiel pour les branches 8.1 et antérieures ; des correctifs minimaux pour compilation manuelle sont disponibles pour les branches 7.4, 8.0 et 8.1. Kaspersky rapporte des premières tentatives d'exploitation avant la publication des correctifs, alors qu'une source du 21 octobre, rédigée avant la sortie, n'en relevait aucune. Une source indique que les chercheurs ont été aidés par l'IA, sans nommer le modèle.",
-            implication: "Votre site, votre extranet ou ceux d'un prestataire peuvent tourner sous PHP. Demandez la version en service et la confirmation écrite du correctif : chez un hébergeur, le numéro de version peut rester identique, il faut consulter le journal des modifications du paquet. Kaspersky recommande de vérifier les journaux depuis le 20 octobre.",
+            implication: "Votre site, votre extranet ou ceux d'un prestataire peuvent tourner sous PHP. Demandez la version en service et la confirmation écrite du correctif (chez un hébergeur, le numéro de version peut rester identique : voir le journal du paquet). Kaspersky conseille de vérifier les journaux depuis le 20 octobre.",
             source: "Kaspersky, 21 octobre ; The Hacker News, 21 octobre ; LetsDataScience, 23 octobre",
             confidence: "direct",
             refs: [14, 15, 16],
           },
           {
-            title: "Rappel : 80 % des réponses erronées d'une IA sont acceptées par les utilisateurs",
+            title: "Rappel : 80 % des réponses fausses d'une IA sont acceptées",
+            lead: "Une étude sur 1 372 participants décrit une « reddition cognitive ». Ce n'est pas une nouveauté de la semaine.",
+            stat: { value: "80 %", label: "des réponses erronées de l'IA acceptées, sur 1 372 participants" },
+            facts: [
+              "Chercheurs de la Wharton School : Steven Shaw et Gideon Nave.",
+              "Date de l'étude non indiquée ; l'article consulté date du 29 juin 2026 (mis à jour le 15 août).",
+              "Le Brief IA du 26 octobre la cite d'après Business Insider, non consulté.",
+            ],
             body: "Les chercheurs de la Wharton School Steven Shaw et Gideon Nave décrivent une « reddition cognitive » : sur 1 372 participants, 80 % des réponses erronées de l'IA ont été acceptées. La date de l'étude n'est pas indiquée ; l'article consulté date du 29 juin 2026 (mis à jour le 15 août) : ce n'est donc pas établi comme une nouveauté de la semaine. Le Brief IA du 26 octobre la cite d'après un article de Business Insider, non consulté.",
-            implication: "Une revue qui se contente de valider ce que l'IA propose est exposée à ce biais. Une procédure de revue doit prévoir un contrôle avant la consultation de l'outil, sur les écritures et estimations à enjeu.",
+            implication: "Une revue qui se contente de valider ce que l'IA propose est exposée à ce biais. Prévoyez un contrôle avant de consulter l'outil, sur les écritures et estimations à enjeu.",
             source: "AI Weekly, 29 juin, mis à jour le 15 août",
             confidence: "direct",
             refs: [17],
