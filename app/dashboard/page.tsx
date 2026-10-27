@@ -44,7 +44,7 @@ export default function DashboardPage() {
             Votre entreprise
           </h1>
           <p className="mb-10 font-sans text-[14px] text-chalk-55">
-            Ceci est une démonstration du dashboard RADAR PRO, avec des données d&apos;illustration.
+            Ceci est une démonstration du dashboard RADAR, avec des données d&apos;illustration.
           </p>
 
           <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">

@@ -6,11 +6,8 @@ const EXPLORE = [
   { label: "Le journal (démo)", href: "/brief" },
 ]
 const OFFERS = [
-  { label: "Tarifs", href: "/pricing" },
-  { label: "RADAR", href: "/pricing#radar" },
-  { label: "RADAR PRO", href: "/pricing#pro" },
-  { label: "RADAR ADVISORY", href: "/pricing#advisory" },
-  { label: "RADAR ENTERPRISE", href: "/pricing#enterprise" },
+  { label: "RADAR · 20€/mois", href: "/pricing" },
+  { label: "Recevoir le numéro", href: "/pricing#radar" },
 ]
 const REACH = [
   { label: "Nous écrire", href: "mailto:contact@radar-intelligence.fr" },

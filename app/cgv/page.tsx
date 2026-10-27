@@ -89,32 +89,18 @@ const ARTICLES: LegalSection[] = [
     body: (
       <>
         <p>
-          Le Prestataire propose les formules suivantes, décrites en détail sur
-          la page tarifs du site :
+          Le Prestataire propose une offre unique, décrite sur la page tarifs
+          du site :
         </p>
         <LegalList
           items={[
             <>
-              <strong>RADAR</strong> — 49 € par mois. Un marché suivi, brief
-              hebdomadaire, alertes hors cycle, rapport mensuel.
-            </>,
-            <>
-              <strong>RADAR PRO</strong> — 199 € par mois. Les sept radars, le
-              suivi des sujets jusqu&apos;à leur résolution, la surveillance
-              nominative des acteurs structurants du marché, les scénarios et la
-              feuille de route à 36 mois, l&apos;archive complète des briefs.
-            </>,
-            <>
-              <strong>RADAR ADVISORY</strong> — 999 € par mois. Les prestations
-              de RADAR PRO, complétées par l&apos;intervention d&apos;un analyste
-              qui applique le marché à la situation de l&apos;Abonné : réunions,
-              audits ponctuels et recommandations propres à sa configuration.
-            </>,
-            <>
-              <strong>RADAR ENTERPRISE</strong> — à partir de 5 000 € par mois.
-              Plusieurs marchés suivis en parallèle ou un marché créé sur mesure,
-              équipe dédiée, intégrations et interface applicative, analystes
-              attitrés.
+              <strong>RADAR</strong> — 20 € par mois, pour tous les marchés
+              couverts. Le numéro RADAR de la semaine est envoyé à
+              l&apos;Abonné par courriel chaque lundi : la une, les sept
+              rubriques du marché choisi, l&apos;agenda des échéances, les
+              chiffres de la semaine, les alertes hors numéro et l&apos;accès à
+              l&apos;archive des numéros.
             </>,
           ]}
         />
@@ -164,14 +150,8 @@ const ARTICLES: LegalSection[] = [
     body: (
       <>
         <p>
-          Les formules RADAR et RADAR PRO sont souscrites pour une durée
-          mensuelle, reconduite tacitement à chaque échéance, sans engagement de
-          durée.
-        </p>
-        <p>
-          Les formules RADAR ADVISORY et RADAR ENTERPRISE font l&apos;objet
-          d&apos;un contrat particulier, dont la durée et les modalités de
-          résiliation sont convenues à la mise en place.
+          L&apos;abonnement RADAR est souscrit pour une durée mensuelle,
+          reconduite tacitement à chaque échéance, sans engagement de durée.
         </p>
         <LegalBox>
           <p>

@@ -91,7 +91,7 @@ export function ManifestoSection() {
               à votre place.
             </p>
             <div className="flex flex-wrap items-center gap-5">
-              <Link href="/pricing" className="btn-primary">Voir les tarifs</Link>
+              <Link href="/pricing" className="btn-primary">20€/mois · Recevoir le numéro</Link>
               <span className="font-sans text-[13px] text-chalk-40">
                 Sans engagement. Résiliable à tout moment.
               </span>

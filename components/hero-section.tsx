@@ -25,7 +25,7 @@ export function HeroSection() {
         </p>
 
         <div className="flex flex-col items-center gap-3">
-          <a href="/pricing" className="btn-primary">Voir les tarifs</a>
+          <a href="/pricing" className="btn-primary">20€/mois · Recevoir le numéro</a>
           <a href="/brief" className="font-sans text-[13px] text-chalk-40 underline decoration-hair-strong underline-offset-4 hover:text-white">
             ou lire un numéro complet
           </a>

@@ -20,7 +20,7 @@ export function ClosingCTA() {
           Chaque semaine sans RADAR est une semaine où quelque chose a changé sans
           que vous le sachiez.
         </p>
-        <Link href="/pricing" className="btn-primary">Voir les tarifs</Link>
+        <Link href="/pricing" className="btn-primary">Recevoir le numéro · 20€/mois</Link>
         <p className="mt-4 font-sans text-[13px] text-chalk-40">
           Sans engagement. Résiliable à tout moment.
         </p>
