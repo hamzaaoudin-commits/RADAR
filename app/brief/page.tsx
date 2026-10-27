@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { NavBar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { NewsletterPreview } from "@/components/newsletter-preview"
 import { JournalFlipbook } from "@/components/journal-flipbook"
 import { ThreadTracker } from "@/components/brief-view"
 import { BRIEFS } from "@/lib/brief-data"
@@ -38,8 +37,6 @@ export default function BriefPage() {
           </p>
         </div>
       </section>
-
-      <NewsletterPreview />
 
       <section className="px-gutter pb-24">
         <JournalFlipbook brief={BRIEFS[0]} />

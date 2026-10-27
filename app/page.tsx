@@ -9,7 +9,8 @@ import { ContentsSection } from "@/components/contents-section"
 import { SevenRadars } from "@/components/seven-radars"
 import { PipelineGrid } from "@/components/pipeline-grid"
 import { AlertBriefSection } from "@/components/alert-brief-section"
-import { NewsletterPreview } from "@/components/newsletter-preview"
+import { JournalFlipbook } from "@/components/journal-flipbook"
+import { BRIEFS } from "@/lib/brief-data"
 import { PricingPreview } from "@/components/pricing-preview"
 import { BridgeSection } from "@/components/bridge-section"
 import { FaqSection } from "@/components/faq-section"
@@ -36,7 +37,22 @@ export default function Home() {
       <SevenRadars />
       <PipelineGrid />
       <AlertBriefSection />
-      <NewsletterPreview />
+      <section className="section">
+        <div className="shell-md">
+          <div className="mb-12 text-center">
+            <div className="kicker mb-5">Le livrable</div>
+            <h2 className="h-section mb-5">Chaque lundi à 7h, le journal de votre marché.</h2>
+            <p className="lede mx-auto max-w-[640px]">
+              Voici le vrai numéro de la semaine 43 ({BRIEFS[0].dateLabel}), marché :{" "}
+              {BRIEFS[0].market?.toLowerCase()}. Feuilletez-le : chaque information renvoie à sa source.
+            </p>
+          </div>
+          <JournalFlipbook brief={BRIEFS[0]} />
+          <div className="mt-10 text-center">
+            <Link href="/pricing" className="btn-primary">20€/mois · Recevoir le journal chaque lundi</Link>
+          </div>
+        </div>
+      </section>
       <PricingPreview />
 
       <BridgeSection />
