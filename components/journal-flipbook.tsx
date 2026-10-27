@@ -66,21 +66,22 @@ function buildPages(b: Brief): Page[] {
     label: "Couverture",
     content: (
       <div className="jf-cover">
-        <div aria-hidden className="jf-cover-rings" />
-        <div className="jf-cover-top">
-          <div className="jf-eyebrow jf-red">Diffusion restreinte · Abonnés</div>
+        <div className="jf-cover-head">
+          <div className="jf-cover-brand">
+            <span className="jf-sq" style={{ width: 10, height: 10 }} />
+            RADAR
+          </div>
+          <div className="jf-eyebrow">Diffusion restreinte · Abonnés</div>
         </div>
-        <div className="jf-cover-mid">
-          <div className="jf-mast">RADAR</div>
+        <div>
           <div className="jf-cover-sub">Note hebdomadaire de veille stratégique</div>
-          <div aria-hidden className="jf-cover-rule" />
-          <div className="jf-cover-num">N° {b.week.replace("Semaine ", "")}</div>
+          <div className="jf-cover-num">{b.week.replace("Semaine ", "")}</div>
           <div className="jf-cover-market">{b.market}</div>
           <div className="jf-cover-period">{b.dateLabel}</div>
         </div>
         <div className="jf-cover-bot">
-          <div className="jf-eyebrow">Référence {ref}</div>
-          <div className="jf-eyebrow">Établie le lundi 26 octobre 2026</div>
+          <div className="jf-eyebrow">Réf. {ref}</div>
+          <div className="jf-eyebrow">Établie le 26.10.2026</div>
         </div>
       </div>
     ),
@@ -91,7 +92,7 @@ function buildPages(b: Brief): Page[] {
     label: "Synthèse",
     content: (
       <div>
-        <Folio n="I.">Synthèse</Folio>
+        <Folio n="01">Synthèse</Folio>
         <h3 className="jf-h1">{b.headline}</h3>
         <p className="jf-chapo">{b.summary}</p>
         <div className="jf-alert">
@@ -122,7 +123,7 @@ function buildPages(b: Brief): Page[] {
     label: "Sujets prioritaires",
     content: (
       <div>
-        <Folio n="II.">Sujets prioritaires</Folio>
+        <Folio n="02">Sujets prioritaires</Folio>
         <div className="flex flex-col">
           {b.items.map((i) => (
             <div key={i.rank} className="jf-sujet">
@@ -149,7 +150,7 @@ function buildPages(b: Brief): Page[] {
     label: "Recommandation",
     content: (
       <div className="flex h-full flex-col">
-        <Folio n="III.">Recommandation de la semaine</Folio>
+        <Folio n="03">Recommandation de la semaine</Folio>
         <div className="jf-action">{b.todo}</div>
       </div>
     ),
@@ -162,7 +163,7 @@ function buildPages(b: Brief): Page[] {
         label: r.name,
         content: (
           <div>
-            <Folio n="IV.">{r.name}</Folio>
+            <Folio n="04">{r.name}</Folio>
             <p className="jf-empty">Rien à signaler cette semaine. Balayé : {r.empty}.</p>
           </div>
         ),
@@ -174,7 +175,7 @@ function buildPages(b: Brief): Page[] {
         label: `${r.name} ${idx + 1}`,
         content: (
           <div>
-            <Folio n="IV.">
+            <Folio n="04">
               {r.name} · {idx + 1}/{r.breves.length}
             </Folio>
             <h4 className="jf-h2">{a.title}</h4>
@@ -202,7 +203,7 @@ function buildPages(b: Brief): Page[] {
     label: "Calendrier",
     content: (
       <div>
-        <Folio n="V.">Calendrier</Folio>
+        <Folio n="05">Calendrier</Folio>
         <div className="flex flex-col">
           {b.agenda.map((a) => (
             <div key={a.what} className="jf-ag">
@@ -223,7 +224,7 @@ function buildPages(b: Brief): Page[] {
     label: "Chiffres clés",
     content: (
       <div>
-        <Folio n="VI.">Chiffres clés</Folio>
+        <Folio n="06">Chiffres clés</Folio>
         <div className="flex flex-col">
           {b.figures.map((f) => (
             <div key={f.what} className="jf-fig">
@@ -244,7 +245,7 @@ function buildPages(b: Brief): Page[] {
     label: "Sources",
     content: (
       <div>
-        <Folio n="VII.">Sources et méthode</Folio>
+        <Folio n="07">Sources et méthode</Folio>
         <ol className="jf-srclist">
           {b.sources?.map((s, i) => (
             <li key={s.url}>
@@ -264,7 +265,7 @@ function buildPages(b: Brief): Page[] {
             ni un conseil fiscal.
           </p>
         </div>
-        <div className="jf-sign">La rédaction RADAR</div>
+        <div className="jf-sign"><span className="jf-sq" style={{ width: 7, height: 7 }} />RADAR — La rédaction</div>
       </div>
     ),
   })
