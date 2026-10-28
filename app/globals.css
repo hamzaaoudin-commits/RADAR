@@ -753,7 +753,17 @@ body::before {
 .jf-folio-n { font-weight: 500; font-size: 1.05em; letter-spacing: 0.08em; color: var(--jf-red); min-width: 2.4em; }
 .jf-folio-t { font-weight: 600; font-size: 1.05em; letter-spacing: 0.26em; text-transform: uppercase; }
 .jf-sec { font-weight: 600; font-size: 0.78em; letter-spacing: 0.24em; text-transform: uppercase; color: var(--jf-mute); padding-bottom: 0.4em; margin: 0 0 0.6em; border-bottom: 1px solid var(--jf-line); }
-.jf-sec-push { margin-top: 0.8em; }
+.jf-folio-i { margin-left: auto; color: var(--jf-red); display: inline-flex; align-self: center; }
+.jf-folio-i { margin-top: -0.5em; margin-bottom: -0.3em; }
+.jf-folio-i svg { width: 1.7em; height: 1.7em; }
+.jf-ic { display: flex; align-items: center; gap: 0.6em; }
+.jf-ic svg { color: var(--jf-red); flex-shrink: 0; width: 1.5em; height: 1.5em; }
+.jf-toc-name { display: inline-flex; align-items: center; gap: 0.55em; }
+.jf-toc-name { line-height: 1; }
+.jf-toc-name svg { color: var(--jf-red); width: 0.95em; height: 0.95em; flex-shrink: 0; }
+.jf-ag-date { display: flex; flex-direction: column; align-items: flex-start; gap: 0.4em; }
+.jf-ag-date svg { color: var(--jf-red); width: 1.5em; height: 1.5em; }
+.jf-sec-push { margin-top: 0.55em; }
 
 /* Couverture */
 .jf-cover {
@@ -785,7 +795,7 @@ body::before {
 .jf-judg-lvl { color: var(--jf-red); }
 .jf-judg p { margin: 0; font-size: 0.98em; line-height: 1.5; }
 .jf-toc { display: flex; flex-direction: column; }
-.jf-toc-row { display: flex; align-items: baseline; gap: 0.6em; padding: 0.1em 0; font-size: 0.94em; }
+.jf-toc-row { display: flex; align-items: center; gap: 0.6em; padding: 0.02em 0; font-size: 0.94em; }
 .jf-toc-row.is-sub { padding-left: 1.6em; font-size: 0.86em; color: rgba(236, 231, 221, 0.8); }
 .jf-toc-n { min-width: 2.6em; font-size: 0.8em; letter-spacing: 0.08em; color: var(--jf-red); }
 .jf-toc-row.is-sub .jf-toc-n { min-width: 2.2em; }
@@ -827,7 +837,7 @@ body::before {
 .jf-facts li { display: grid; grid-template-columns: 2.6em 1fr; gap: 0.3em; padding: 0.24em 0; font-size: 0.98em; line-height: 1.38; color: rgba(236, 231, 221, 0.9); }
 .jf-facts-n { font-size: 0.82em; letter-spacing: 0.08em; color: var(--jf-red); padding-top: 0.12em; }
 .jf-conseq { margin: 0 0 0.8em; font-size: 1.02em; line-height: 1.42; font-weight: 500; text-align: justify; hyphens: auto; }
-.jf-fiab { display: flex; align-items: baseline; gap: 0.8em; padding-top: 0.6em; border-top: 1px solid var(--jf-line); font-size: 0.78em; letter-spacing: 0.04em; color: rgba(236, 231, 221, 0.78); }
+.jf-fiab { display: flex; align-items: center; gap: 0.8em; padding-top: 0.45em; border-top: 1px solid var(--jf-line); font-size: 0.78em; letter-spacing: 0.04em; color: rgba(236, 231, 221, 0.78); }
 .jf-fiab > span:first-child { font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--jf-mute); }
 .jf-fiab.is-relayed { color: var(--jf-red); }
 .jf-fiab-p { margin-left: auto; font-style: italic; color: var(--jf-mute); }

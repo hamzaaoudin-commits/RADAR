@@ -7,7 +7,19 @@ import "@fontsource/eb-garamond/600.css"
 import { useMemo, useState, type ReactNode } from "react"
 import type { Brief, Severity } from "@/lib/brief-data"
 import { ArticleVisual } from "./article-visual"
-import { RubriqueIcon, Seal } from "./radar-icons"
+import {
+  RubriqueIcon,
+  Seal,
+  IconSynthese,
+  IconCible,
+  IconReco,
+  IconCalendrier,
+  IconChiffres,
+  IconSource,
+  IconFiabilite,
+  IconConsequence,
+  IconRisque,
+} from "./radar-icons"
 
 /**
  * Le numéro présenté comme l'objet qu'il est : une note remise à un décideur,
@@ -36,11 +48,12 @@ const ALERT_LABEL: Record<Severity, string> = {
   watch: "Surveillance",
 }
 
-function Folio({ n, children }: { n: string; children: ReactNode }) {
+function Folio({ n, children, icon }: { n: string; children: ReactNode; icon?: ReactNode }) {
   return (
     <div className="jf-folio">
       <span className="jf-folio-n">{n}</span>
       <span className="jf-folio-t">{children}</span>
+      {icon && <span className="jf-folio-i">{icon}</span>}
     </div>
   )
 }
@@ -105,25 +118,25 @@ function buildPages(b: Brief): Page[] {
   })
 
   /* Synthèse */
-  const toc: { n: string; name: string; page: number; sub?: boolean }[] = [
-    { n: "I", name: "Synthèse", page: 2 },
-    { n: "II", name: "Sujets prioritaires", page: 3 },
-    { n: "III", name: "Recommandation", page: 4 },
-    ...b.rubriques.map((r, k) => ({ n: `IV.${k + 1}`, name: r.name, page: starts[r.name], sub: true })),
-    { n: "V", name: "Calendrier", page: pAgenda },
-    { n: "VI", name: "Chiffres clés", page: pFigures },
-    { n: "VII", name: "Sources", page: pSA },
+  const toc: { n: string; name: string; page: number; sub?: boolean; icon?: ReactNode }[] = [
+    { n: "I", name: "Synthèse", page: 2, icon: <IconSynthese size={14} /> },
+    { n: "II", name: "Sujets prioritaires", page: 3, icon: <IconCible size={14} /> },
+    { n: "III", name: "Recommandation", page: 4, icon: <IconReco size={14} /> },
+    ...b.rubriques.map((r, k) => ({ n: `IV.${k + 1}`, name: r.name, page: starts[r.name], sub: true, icon: <RubriqueIcon name={r.name} size={14} /> })),
+    { n: "V", name: "Calendrier", page: pAgenda, icon: <IconCalendrier size={14} /> },
+    { n: "VI", name: "Chiffres clés", page: pFigures, icon: <IconChiffres size={14} /> },
+    { n: "VII", name: "Sources", page: pSA, icon: <IconSource size={14} /> },
   ]
   pages.push({
     label: "Synthèse",
     content: (
       <div className="jf-page">
-        <Folio n="I">Synthèse</Folio>
+        <Folio n="I" icon={<IconSynthese size={26} />}>Synthèse</Folio>
         <h3 className="jf-h1">{b.headline}</h3>
         <p className="jf-chapo">{b.summary}</p>
         <div className="jf-judg">
           <div className="jf-judg-k">
-            <span>Jugement principal</span>
+            <span className="jf-ic"><IconRisque size={15} />Jugement principal</span>
             <span className="jf-judg-lvl">Niveau d&apos;alerte : {ALERT_LABEL[une.severity]}</span>
           </div>
           <p>
@@ -136,7 +149,10 @@ function buildPages(b: Brief): Page[] {
             {toc.map((t) => (
               <div key={t.n + t.name} className={`jf-toc-row ${t.sub ? "is-sub" : ""}`}>
                 <span className="jf-toc-n">{t.n}</span>
-                <span className="jf-toc-name">{t.name}</span>
+                <span className="jf-toc-name">
+                  {t.icon}
+                  {t.name}
+                </span>
                 <span className="jf-toc-dots" />
                 <span className="jf-toc-p">{t.page}</span>
               </div>
@@ -152,7 +168,7 @@ function buildPages(b: Brief): Page[] {
     label: "Sujets prioritaires",
     content: (
       <div className="jf-page">
-        <Folio n="II">Sujets prioritaires</Folio>
+        <Folio n="II" icon={<IconCible size={26} />}>Sujets prioritaires</Folio>
         <div className="jf-sujets">
           {b.items.map((i) => (
             <div key={i.rank} className="jf-sujet">
@@ -181,7 +197,7 @@ function buildPages(b: Brief): Page[] {
     label: "Recommandation",
     content: (
       <div className="jf-page jf-reco">
-        <Folio n="III">Recommandation</Folio>
+        <Folio n="III" icon={<IconReco size={26} />}>Recommandation</Folio>
         <div className="jf-reco-k">À l&apos;attention du destinataire</div>
         <ol className="jf-reco-list">
           {b.todo
@@ -210,7 +226,7 @@ function buildPages(b: Brief): Page[] {
         label: r.name,
         content: (
           <div className="jf-page">
-            <Folio n={`IV.${ri + 1}`}>{r.name}</Folio>
+            <Folio n={`IV.${ri + 1}`} icon={<RubriqueIcon name={r.name} size={26} />}>{r.name}</Folio>
             <p className="jf-empty">Rien à signaler cette semaine. Balayé : {r.empty}.</p>
           </div>
         ),
@@ -248,7 +264,7 @@ function buildPages(b: Brief): Page[] {
                 ) : null}
               </div>
             )}
-            <div className="jf-sec">Faits établis</div>
+            <div className="jf-sec jf-ic"><IconSource size={14} />Faits établis</div>
             <ol className="jf-facts">
               {a.facts.map((f, k) => (
                 <li key={f}>
@@ -259,10 +275,10 @@ function buildPages(b: Brief): Page[] {
                 </li>
               ))}
             </ol>
-            <div className="jf-sec jf-sec-push">Conséquence pour votre activité</div>
+            <div className="jf-sec jf-sec-push jf-ic"><IconConsequence size={14} />Conséquence pour votre activité</div>
             <p className="jf-conseq">{a.implication}</p>
             <div className={`jf-fiab ${a.confidence === "relayed" ? "is-relayed" : ""}`}>
-              <span>Fiabilité</span>
+              <span className="jf-ic"><IconFiabilite size={15} />Fiabilité</span>
               {a.confidence === "relayed" ? "Information relayée · à confirmer avant d'agir" : "Source consultée par la rédaction"}
               <span className="jf-fiab-p">Sources p. {pSA}</span>
             </div>
@@ -277,11 +293,11 @@ function buildPages(b: Brief): Page[] {
     label: "Calendrier",
     content: (
       <div className="jf-page">
-        <Folio n="V">Calendrier</Folio>
+        <Folio n="V" icon={<IconCalendrier size={26} />}>Calendrier</Folio>
         <div className="jf-ags">
           {b.agenda.map((a) => (
             <div key={a.what} className="jf-ag">
-              <div className="jf-ag-date">{a.date}</div>
+              <div className="jf-ag-date"><IconCalendrier size={18} />{a.date}</div>
               <div>
                 <div className="jf-ag-what">{a.what}</div>
                 <div className="jf-ag-who">{a.who}</div>
@@ -298,7 +314,7 @@ function buildPages(b: Brief): Page[] {
     label: "Chiffres clés",
     content: (
       <div className="jf-page">
-        <Folio n="VI">Chiffres clés</Folio>
+        <Folio n="VI" icon={<IconChiffres size={26} />}>Chiffres clés</Folio>
         <div className="jf-figs">
           {b.figures.map((f) => (
             <div key={f.what} className="jf-fig">
@@ -319,7 +335,7 @@ function buildPages(b: Brief): Page[] {
     label: "Sources par article",
     content: (
       <div className="jf-page">
-        <Folio n="VII">Sources par article</Folio>
+        <Folio n="VII" icon={<IconSource size={26} />}>Sources par article</Folio>
         <p className="jf-sa-note">
           Chaque article renvoie aux sources numérotées de la page suivante. Sauf mention « relayé », la rédaction a lu
           les pages citées.
@@ -363,7 +379,7 @@ function buildPages(b: Brief): Page[] {
     label: "Sources",
     content: (
       <div className="jf-page">
-        <Folio n="VIII">Sources et méthode</Folio>
+        <Folio n="VIII" icon={<IconSource size={26} />}>Sources et méthode</Folio>
         <ol className="jf-srclist">
           {b.sources?.map((s, i) => (
             <li key={s.url}>

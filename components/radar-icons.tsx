@@ -114,6 +114,38 @@ export const IconReco = (p: P) => (
   </Svg>
 )
 
+/** Synthèse : un feuillet à lignes. */
+export const IconSynthese = (p: P) => (
+  <Svg {...p}>
+    <rect x="4" y="3" width="16" height="18" />
+    <path d="M8 8h8M8 12h8M8 16h5" />
+  </Svg>
+)
+
+/** Sujets prioritaires : une cible. */
+export const IconCible = (p: P) => (
+  <Svg {...p}>
+    <circle cx="12" cy="12" r="8" />
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 1v5M12 18v5M1 12h5M18 12h5" />
+  </Svg>
+)
+
+/** Fiabilité : un écusson validé. */
+export const IconFiabilite = (p: P) => (
+  <Svg {...p}>
+    <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />
+    <path d="M8.5 12l2.6 2.6L16 9.5" />
+  </Svg>
+)
+
+/** Conséquence : une flèche qui bifurque. */
+export const IconConsequence = (p: P) => (
+  <Svg {...p}>
+    <path d="M4 12h9M13 12l6-6M13 12l6 6M16 6h3v3M16 18h3v-3" />
+  </Svg>
+)
+
 const BY_RUBRIQUE: Record<string, (p: P) => React.ReactElement> = {
   IA: IconIA,
   Technologies: IconTech,
