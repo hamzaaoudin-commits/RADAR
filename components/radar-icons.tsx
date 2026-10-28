@@ -150,3 +150,33 @@ export function RadarMark({ size = 120, sweep = false, className }: { size?: num
     </svg>
   )
 }
+
+/**
+ * Le sceau : double cercle, légende circulaire, balayage radar au centre.
+ * Sert de signe d'autorité sur la couverture, sans effet décoratif.
+ */
+export function Seal({ size = 180, className }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 200 200" className={className} aria-hidden>
+      <defs>
+        <path id="radar-seal-arc" d="M100 100 m-74 0 a74 74 0 1 1 148 0 a74 74 0 1 1 -148 0" />
+      </defs>
+      <g fill="none" stroke="currentColor">
+        <circle cx="100" cy="100" r="96" strokeWidth="1.6" />
+        <circle cx="100" cy="100" r="90" strokeWidth="0.6" />
+        <circle cx="100" cy="100" r="58" strokeWidth="0.6" />
+        <circle cx="100" cy="100" r="40" strokeWidth="1" />
+        <circle cx="100" cy="100" r="22" strokeWidth="1" />
+        <circle cx="100" cy="100" r="6" strokeWidth="1" />
+        <path d="M100 56v88M56 100h88" strokeWidth="0.5" />
+      </g>
+      <text fill="currentColor" fontSize="9.5" letterSpacing="3.4" fontFamily="EB Garamond, serif">
+        <textPath href="#radar-seal-arc" startOffset="0">
+          VEILLE STRATÉGIQUE · DIFFUSION RESTREINTE · VEILLE STRATÉGIQUE · DIFFUSION RESTREINTE ·
+        </textPath>
+      </text>
+      <path d="M100 100L132 68" stroke="#e8111f" strokeWidth="1.8" />
+      <circle cx="119" cy="81" r="3.4" fill="#e8111f" />
+    </svg>
+  )
+}

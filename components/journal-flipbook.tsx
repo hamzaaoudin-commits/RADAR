@@ -1,19 +1,17 @@
 "use client"
 
-import "@fontsource/barlow-condensed/600.css"
-import "@fontsource/barlow-condensed/700.css"
-import "@fontsource/barlow-condensed/800.css"
-import "@fontsource/source-serif-4/400.css"
-import "@fontsource/source-serif-4/400-italic.css"
-import "@fontsource/source-serif-4/600.css"
+import "@fontsource/eb-garamond/400.css"
+import "@fontsource/eb-garamond/400-italic.css"
+import "@fontsource/eb-garamond/500.css"
+import "@fontsource/eb-garamond/600.css"
 import { useMemo, useState, type ReactNode } from "react"
 import type { Brief, Severity } from "@/lib/brief-data"
 import { ArticleVisual } from "./article-visual"
-import { RadarMark, RubriqueIcon, IconCalendrier, IconChiffres, IconReco, IconSource, IconRisque, IconArrow } from "./radar-icons"
+import { RubriqueIcon, Seal } from "./radar-icons"
 
 /**
- * Le numéro présenté comme l'objet qu'il deviendra réellement : un dossier
- * imprimé qu'on feuillette, pas une liste qu'on scrolle.
+ * Le numéro présenté comme l'objet qu'il est : une note remise à un décideur,
+ * qu'on feuillette comme un dossier imprimé.
  *
  * Mécanique : chaque page est une feuille positionnée en pile (perspective
  * 3D), tournée à 0° (face visible) ou -180° (retournée, dos visible) selon
@@ -22,14 +20,14 @@ import { RadarMark, RubriqueIcon, IconCalendrier, IconChiffres, IconReco, IconSo
  * levé à la fin de la transition : sans ça, la page qui arrive (immobile,
  * déjà au bon angle) s'affiche instantanément par-dessus celle qui tourne.
  *
- * Direction graphique : titraille en condensé gras (Barlow Condensed), texte
- * en serif de lecture (Source Serif 4), un pictogramme dessiné par rubrique,
- * un bandeau rouge pleine largeur pour la conséquence, la marque radar en
- * grand sur la couverture. Tout se dimensionne en unités de conteneur : la
- * page garde ses proportions sur mobile.
+ * Codes empruntés aux notes de service destinées aux décideurs : marquage de
+ * diffusion en tête et en pied de chaque page, sceau et bloc de contrôle sur
+ * la couverture, sommaire paginé, paragraphes numérotés (« 5.2 »), niveau de
+ * fiabilité des sources en clair. Un seul serif classique (EB Garamond), des
+ * filets fins, et le rouge réservé aux marquages.
  */
 
-type Tone = "cover" | "red"
+type Tone = "cover"
 type Page = { label: string; tone?: Tone; content: ReactNode }
 
 const ALERT_LABEL: Record<Severity, string> = {
@@ -38,33 +36,12 @@ const ALERT_LABEL: Record<Severity, string> = {
   watch: "Surveillance",
 }
 
-function Folio({ n, icon, children }: { n: string; icon?: ReactNode; children: ReactNode }) {
+function Folio({ n, children }: { n: string; children: ReactNode }) {
   return (
     <div className="jf-folio">
       <span className="jf-folio-n">{n}</span>
       <span className="jf-folio-t">{children}</span>
-      {icon && <span className="jf-folio-i">{icon}</span>}
     </div>
-  )
-}
-
-function Refs({ refs, sources }: { refs?: number[]; sources?: Brief["sources"] }) {
-  if (!refs?.length || !sources) return null
-  return (
-    <ul className="jf-refs">
-      {refs.map((n) => {
-        const src = sources[n - 1]
-        if (!src) return null
-        return (
-          <li key={n}>
-            <span className="jf-ref-n">[{n}]</span>{" "}
-            <a href={src.url} target="_blank" rel="noopener noreferrer">
-              {src.label}
-            </a>
-          </li>
-        )
-      })}
-    </ul>
   )
 }
 
@@ -75,57 +52,93 @@ function buildPages(b: Brief): Page[] {
   const nb = b.rubriques.reduce((n, r) => n + r.breves.length, 0)
   const une = b.items[0]
 
+  /* Pagination : 4 pages avant les articles (couverture, synthèse, sujets, recommandation). */
+  const FIRST_ARTICLE_PAGE = 5
+  const starts: Record<string, number> = {}
+  let cursor = FIRST_ARTICLE_PAGE
+  for (const r of b.rubriques) {
+    starts[r.name] = cursor
+    cursor += Math.max(1, r.breves.length)
+  }
+  const pAgenda = cursor
+  const pFigures = cursor + 1
+  const pSA = cursor + 2
+  const pSources = cursor + 3
+
   /* Couverture */
   pages.push({
     label: "Couverture",
     tone: "cover",
     content: (
       <div className="jf-cover">
-        <RadarMark size={760} sweep className="jf-cover-radar" />
-        <div className="jf-cover-top">
-          <span className="jf-cover-brand">RADAR</span>
-          <span className="jf-cover-restr">Diffusion restreinte</span>
-        </div>
-        <div className="jf-cover-mid">
-          <div className="jf-cover-kick">Note hebdomadaire de veille stratégique</div>
-          <div className="jf-cover-num">{num}</div>
+        <div className="jf-cover-class">Diffusion restreinte</div>
+        <div className="jf-cover-center">
+          <Seal size={190} className="jf-cover-seal" />
+          <div className="jf-cover-brand">RADAR</div>
+          <div className="jf-cover-sub">Note de veille stratégique</div>
+          <div className="jf-cover-rule" aria-hidden />
+          <div className="jf-cover-no">Note n° {num}</div>
           <div className="jf-cover-market">{b.market}</div>
-          <div className="jf-cover-period">{b.dateLabel}</div>
+          <div className="jf-cover-period">Semaine du {b.dateLabel}</div>
         </div>
-        <div className="jf-cover-bot">
-          <span>Réf. {ref}</span>
-          <span>Établie le 26.10.2026</span>
-        </div>
+        <dl className="jf-ctrl">
+          <div>
+            <dt>Destinataire</dt>
+            <dd>Abonné</dd>
+          </div>
+          <div>
+            <dt>Établie le</dt>
+            <dd>26 octobre 2026</dd>
+          </div>
+          <div>
+            <dt>Référence</dt>
+            <dd>{ref}</dd>
+          </div>
+          <div>
+            <dt>Diffusion</dt>
+            <dd>Nominative</dd>
+          </div>
+        </dl>
+        <div className="jf-cover-class">Ne pas diffuser</div>
       </div>
     ),
   })
 
   /* Synthèse */
+  const toc: { n: string; name: string; page: number; sub?: boolean }[] = [
+    { n: "I", name: "Synthèse", page: 2 },
+    { n: "II", name: "Sujets prioritaires", page: 3 },
+    { n: "III", name: "Recommandation", page: 4 },
+    ...b.rubriques.map((r, k) => ({ n: `IV.${k + 1}`, name: r.name, page: starts[r.name], sub: true })),
+    { n: "V", name: "Calendrier", page: pAgenda },
+    { n: "VI", name: "Chiffres clés", page: pFigures },
+    { n: "VII", name: "Sources", page: pSA },
+  ]
   pages.push({
     label: "Synthèse",
     content: (
       <div className="jf-page">
-        <Folio n="01" icon={<IconSource size={22} />}>Synthèse</Folio>
+        <Folio n="I">Synthèse</Folio>
         <h3 className="jf-h1">{b.headline}</h3>
         <p className="jf-chapo">{b.summary}</p>
-        <div className="jf-alert">
-          <div className="jf-alert-tag">
-            <IconRisque size={26} />
-            <span>Niveau d&apos;alerte</span>
-            <strong>{ALERT_LABEL[une.severity]}</strong>
+        <div className="jf-judg">
+          <div className="jf-judg-k">
+            <span>Jugement principal</span>
+            <span className="jf-judg-lvl">Niveau d&apos;alerte : {ALERT_LABEL[une.severity]}</span>
           </div>
-          <div className="jf-alert-txt">
+          <p>
             <strong>{une.label}.</strong> {une.why}
-          </div>
+          </p>
         </div>
         <div className="jf-push">
-          <div className="jf-sommaire-h">Au sommaire · {nb} articles</div>
-          <div className="jf-som">
-            {b.rubriques.map((r) => (
-              <div key={r.name} className="jf-som-row">
-                <RubriqueIcon name={r.name} size={22} className="jf-som-i" />
-                <span className="jf-som-name">{r.name}</span>
-                <span className="jf-som-n">{r.breves.length || "—"}</span>
+          <div className="jf-sec">Sommaire · {nb} articles</div>
+          <div className="jf-toc">
+            {toc.map((t) => (
+              <div key={t.n + t.name} className={`jf-toc-row ${t.sub ? "is-sub" : ""}`}>
+                <span className="jf-toc-n">{t.n}</span>
+                <span className="jf-toc-name">{t.name}</span>
+                <span className="jf-toc-dots" />
+                <span className="jf-toc-p">{t.page}</span>
               </div>
             ))}
           </div>
@@ -139,21 +152,21 @@ function buildPages(b: Brief): Page[] {
     label: "Sujets prioritaires",
     content: (
       <div className="jf-page">
-        <Folio n="02" icon={<IconRisque size={22} />}>Les cinq sujets de la semaine</Folio>
+        <Folio n="II">Sujets prioritaires</Folio>
         <div className="jf-sujets">
           {b.items.map((i) => (
             <div key={i.rank} className="jf-sujet">
               <div className="jf-sujet-rank">{i.rank}</div>
               <div className="jf-sujet-body">
                 <div className="jf-sujet-meta">
-                  <RubriqueIcon name={i.domain} size={15} />
+                  <RubriqueIcon name={i.domain} size={14} />
                   <span>
-                    {i.domain} · Alerte {ALERT_LABEL[i.severity].toLowerCase()} · {i.horizon}
+                    {i.domain} · Alerte {ALERT_LABEL[i.severity].toLowerCase()} · Horizon {i.horizon}
                   </span>
                 </div>
                 <div className="jf-sujet-label">{i.label}</div>
                 <p className="jf-sujet-act">
-                  <strong>À faire.</strong> {i.action}
+                  <em>À faire.</em> {i.action}
                 </p>
               </div>
             </div>
@@ -166,106 +179,115 @@ function buildPages(b: Brief): Page[] {
   /* Recommandation */
   pages.push({
     label: "Recommandation",
-    tone: "red",
     content: (
       <div className="jf-page jf-reco">
-        <RadarMark size={620} className="jf-reco-radar" />
-        <Folio n="03" icon={<IconReco size={22} />}>Recommandation de la semaine</Folio>
-        <p className="jf-reco-text">{b.todo}</p>
-        <div className="jf-reco-sign">RADAR — La rédaction</div>
+        <Folio n="III">Recommandation</Folio>
+        <div className="jf-reco-k">À l&apos;attention du destinataire</div>
+        <ol className="jf-reco-list">
+          {b.todo
+            .split(/\s(?=En parallèle, |Enfin, )/)
+            .map((x) => x.replace(/^(En parallèle, |Enfin, )/, ""))
+            .map((x, k) => (
+              <li key={k}>
+                <span className="jf-reco-n">{k + 1}</span>
+                <span>{x.charAt(0).toUpperCase() + x.slice(1)}</span>
+              </li>
+            ))}
+        </ol>
+        <div className="jf-reco-sign">
+          <span>La rédaction</span>
+          <span>RADAR</span>
+        </div>
       </div>
     ),
   })
 
   /* Articles : une page par article */
-  for (const r of b.rubriques) {
+  let art = 0
+  b.rubriques.forEach((r, ri) => {
     if (r.breves.length === 0) {
       pages.push({
         label: r.name,
         content: (
           <div className="jf-page">
-            <Folio n="04" icon={<RubriqueIcon name={r.name} size={22} />}>{r.name}</Folio>
+            <Folio n={`IV.${ri + 1}`}>{r.name}</Folio>
             <p className="jf-empty">Rien à signaler cette semaine. Balayé : {r.empty}.</p>
           </div>
         ),
       })
-      continue
+      return
     }
     r.breves.forEach((a, idx) => {
+      art += 1
+      const n = art
       pages.push({
         label: `${r.name} ${idx + 1}`,
         content: (
           <div className="jf-page">
-            <div className="jf-art">
-              <aside className="jf-gut">
-                <div className="jf-gut-ico">
-                  <RubriqueIcon name={r.name} size={26} />
-                </div>
-                <div className="jf-gut-txt">
-                  {r.name} · {idx + 1}/{r.breves.length}
-                </div>
-              </aside>
-              <div className="jf-main">
-                <h4 className="jf-h2">{a.title}</h4>
-                <p className="jf-lead">{a.lead}</p>
-                {(a.visual || a.stat) && (
-                  <div className="jf-hero">
-                    {a.visual ? (
-                      <ArticleVisual visual={a.visual} />
-                    ) : a.stat ? (
-                      <div className="jf-stat">
-                        <div className="jf-stat-v">{a.stat.value}</div>
-                        <div className="jf-stat-l">{a.stat.label}</div>
-                      </div>
-                    ) : null}
+            <div className="jf-kicker">
+              <span className="jf-kicker-l">
+                <RubriqueIcon name={r.name} size={17} />
+                IV.{ri + 1} — {r.name}
+              </span>
+              <span>
+                {idx + 1} / {r.breves.length}
+              </span>
+            </div>
+            <h4 className="jf-h2">{a.title}</h4>
+            <p className="jf-lead">{a.lead}</p>
+            {(a.visual || a.stat) && (
+              <div className="jf-hero">
+                {a.visual ? (
+                  <ArticleVisual visual={a.visual} />
+                ) : a.stat ? (
+                  <div className="jf-stat">
+                    <div className="jf-stat-k">Donnée clé</div>
+                    <div className="jf-stat-v">{a.stat.value}</div>
+                    <div className="jf-stat-l">{a.stat.label}</div>
                   </div>
-                )}
-                <ol className="jf-facts">
-                  {a.facts.map((f, k) => (
-                    <li key={f}>
-                      <span className="jf-facts-n">{String(k + 1).padStart(2, "0")}</span>
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ol>
-                {a.confidence === "relayed" && <div className="jf-conf is-relayed">Relayé · à confirmer</div>}
-                <div className="jf-change">
-                  <div className="jf-change-k">
-                    <IconArrow size={16} />
-                    Ce que cela change
-                  </div>
-                  <p>{a.implication}</p>
-                </div>
+                ) : null}
               </div>
+            )}
+            <div className="jf-sec">Faits établis</div>
+            <ol className="jf-facts">
+              {a.facts.map((f, k) => (
+                <li key={f}>
+                  <span className="jf-facts-n">
+                    {n}.{k + 1}
+                  </span>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ol>
+            <div className="jf-sec jf-sec-push">Conséquence pour votre activité</div>
+            <p className="jf-conseq">{a.implication}</p>
+            <div className={`jf-fiab ${a.confidence === "relayed" ? "is-relayed" : ""}`}>
+              <span>Fiabilité</span>
+              {a.confidence === "relayed" ? "Information relayée · à confirmer avant d'agir" : "Source consultée par la rédaction"}
+              <span className="jf-fiab-p">Sources p. {pSA}</span>
             </div>
           </div>
         ),
       })
     })
-  }
+  })
 
   /* Calendrier */
   pages.push({
     label: "Calendrier",
     content: (
       <div className="jf-page">
-        <Folio n="05" icon={<IconCalendrier size={22} />}>Calendrier</Folio>
+        <Folio n="V">Calendrier</Folio>
         <div className="jf-ags">
-          {b.agenda.map((a) => {
-            const [day, ...rest] = a.date.split(" ")
-            return (
-              <div key={a.what} className="jf-ag">
-                <div className="jf-ag-date">
-                  <span className="jf-ag-d">{day}</span>
-                  <span className="jf-ag-m">{rest.join(" ")}</span>
-                </div>
-                <div>
-                  <div className="jf-ag-what">{a.what}</div>
-                  <div className="jf-ag-who">{a.who}</div>
-                </div>
+          {b.agenda.map((a) => (
+            <div key={a.what} className="jf-ag">
+              <div className="jf-ag-date">{a.date}</div>
+              <div>
+                <div className="jf-ag-what">{a.what}</div>
+                <div className="jf-ag-who">{a.who}</div>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
       </div>
     ),
@@ -276,7 +298,7 @@ function buildPages(b: Brief): Page[] {
     label: "Chiffres clés",
     content: (
       <div className="jf-page">
-        <Folio n="06" icon={<IconChiffres size={22} />}>Chiffres clés</Folio>
+        <Folio n="VI">Chiffres clés</Folio>
         <div className="jf-figs">
           {b.figures.map((f) => (
             <div key={f.what} className="jf-fig">
@@ -297,9 +319,9 @@ function buildPages(b: Brief): Page[] {
     label: "Sources par article",
     content: (
       <div className="jf-page">
-        <Folio n="07" icon={<IconSource size={22} />}>Sources par article</Folio>
+        <Folio n="VII">Sources par article</Folio>
         <p className="jf-sa-note">
-          Chaque article renvoie aux sources numérotées de la page suivante. Sauf mention « Relayé », la rédaction a lu
+          Chaque article renvoie aux sources numérotées de la page suivante. Sauf mention « relayé », la rédaction a lu
           les pages citées.
         </p>
         <div className="jf-sa">
@@ -308,7 +330,7 @@ function buildPages(b: Brief): Page[] {
             .map((r) => (
               <div key={r.name} className="jf-sa-bloc">
                 <div className="jf-sa-r">
-                  <RubriqueIcon name={r.name} size={16} />
+                  <RubriqueIcon name={r.name} size={15} />
                   {r.name}
                 </div>
                 {r.breves.map((a) => (
@@ -341,7 +363,7 @@ function buildPages(b: Brief): Page[] {
     label: "Sources",
     content: (
       <div className="jf-page">
-        <Folio n="08" icon={<IconSource size={22} />}>Sources et méthode</Folio>
+        <Folio n="VIII">Sources et méthode</Folio>
         <ol className="jf-srclist">
           {b.sources?.map((s, i) => (
             <li key={s.url}>
@@ -420,18 +442,15 @@ export function JournalFlipbook({ brief }: { brief: Brief }) {
                 <div className={`jf-face jf-front ${p.tone ? `is-${p.tone}` : ""}`}>
                   {p.tone !== "cover" && (
                     <div className="jf-run" aria-hidden>
-                      <span className="jf-run-l">
-                        <RadarMark size={14} className="jf-run-mark" />
-                        RADAR · N° {brief.week.replace("Semaine ", "")}
-                      </span>
-                      <span>{brief.market} · 26.10.2026</span>
+                      Diffusion restreinte · Abonnés
                     </div>
                   )}
                   <div className="jf-content">{p.content}</div>
                   {p.tone !== "cover" && (
                     <div className="jf-foot" aria-hidden>
+                      <span>RADAR · Note n° {brief.week.replace("Semaine ", "")}</span>
                       <span className="jf-foot-n">{String(i + 1).padStart(2, "0")}</span>
-                      <span>Diffusion restreinte</span>
+                      <span>{brief.market}</span>
                     </div>
                   )}
                 </div>
